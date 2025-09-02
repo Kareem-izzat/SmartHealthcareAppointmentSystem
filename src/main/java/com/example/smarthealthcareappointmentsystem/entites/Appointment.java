@@ -2,30 +2,38 @@ package com.example.smarthealthcareappointmentsystem.entites;
 
 import jakarta.persistence.*;
 import lombok.*;
+
 import java.time.LocalDateTime;
+
 @Entity
+@Table(
+        name = "appointments",
+        uniqueConstraints = @UniqueConstraint(columnNames = {"doctor_id", "appointment_time"})
+)
+
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Inheritance(strategy = InheritanceType.JOINED) // diffrent table not one table for all users
-@Table(name = "users")
-public abstract class User {
+@Builder
+public class Appointment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String firstName;
-    private String lastName;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "doctor_id")
+    private Doctor doctor;
 
-    @Column(unique = true, nullable = false)
-    private String email;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "patient_id")
+    private Patient patient;
 
-    @Column(nullable = false)
-    private String password;
+    private LocalDateTime appointmentTime;
 
-    private String phone;
+    @Enumerated(EnumType.STRING)
+    private AppointmentStatus status = AppointmentStatus.SCHEDULED;
 
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = LocalDateTime.now();
