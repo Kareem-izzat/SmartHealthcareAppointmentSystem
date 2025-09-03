@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class DoctorMapper {
 
-    public DoctorDto toDto(Doctor doctor) {
+    public   DoctorDto toDto(Doctor doctor) {
         if (doctor == null) return null;
         return DoctorDto.builder()
                 .id(doctor.getId())
@@ -20,7 +20,7 @@ public class DoctorMapper {
                 .build();
     }
 
-    public Doctor toEntity(DoctorDto dto) {
+    public   Doctor toEntity(DoctorDto dto) {
         if (dto == null) return null;
         return Doctor.builder()
                 .id(dto.getId())
