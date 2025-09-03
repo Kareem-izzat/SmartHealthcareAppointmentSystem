@@ -2,12 +2,17 @@ package com.example.smarthealthcareappointmentsystem.entites;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
+
+
 import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@MappedSuperclass
+@SuperBuilder
 @Inheritance(strategy = InheritanceType.JOINED) // diffrent table not one table for all users
 @Table(name = "users")
 public abstract class User {
@@ -26,6 +31,9 @@ public abstract class User {
     private String password;
 
     private String phone;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = LocalDateTime.now();

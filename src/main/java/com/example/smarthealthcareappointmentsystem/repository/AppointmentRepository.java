@@ -8,5 +8,5 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 public interface AppointmentRepository extends JpaRepository<Appointment,Long> {
-    Optional<Appointment> findByDoctorAndAppointmentTime(Doctor doctor, LocalDateTime appointmentTime);
+
 }

@@ -1,0 +1,14 @@
+package com.example.smarthealthcareappointmentsystem.DTO.mongo;
+import lombok.*;
+
+import java.util.List;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class MedicalRecordDto {
+    private Long patientId;
+    private List<PrescriptionDto> prescriptions;
+    private List<String> notes;
+}
