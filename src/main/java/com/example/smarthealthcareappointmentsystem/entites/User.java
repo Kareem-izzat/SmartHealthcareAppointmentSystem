@@ -2,6 +2,7 @@ package com.example.smarthealthcareappointmentsystem.entites;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 
 import java.time.LocalDateTime;
@@ -10,6 +11,8 @@ import java.time.LocalDateTime;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@MappedSuperclass
+@SuperBuilder
 @Inheritance(strategy = InheritanceType.JOINED) // diffrent table not one table for all users
 @Table(name = "users")
 public abstract class User {

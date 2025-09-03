@@ -7,9 +7,8 @@ import java.time.LocalDateTime;
 
 @Entity
 @Table(
-        name = "appointments",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"doctor_id", "appointment_time"})
-)
+        name = "appointments")
+
 
 @Getter
 @Setter
@@ -30,7 +29,8 @@ public class Appointment {
     @JoinColumn(name = "patient_id")
     private Patient patient;
 
-    private LocalDateTime appointmentTime;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
 
     @Enumerated(EnumType.STRING)
     private AppointmentStatus status = AppointmentStatus.SCHEDULED;

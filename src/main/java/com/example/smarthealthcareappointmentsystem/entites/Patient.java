@@ -2,6 +2,7 @@ package com.example.smarthealthcareappointmentsystem.entites;
 
 import jakarta.persistence.*;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDate;
 import java.util.Date;
@@ -12,7 +13,7 @@ import java.util.Date;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
+@SuperBuilder
 public class Patient extends User {
     private LocalDate dateOfBirth;
     private String medicalHistory;
