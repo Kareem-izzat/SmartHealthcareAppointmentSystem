@@ -9,10 +9,13 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "admins")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
 public class Admin extends User {
+    public Admin() {
+        super.setRole(Role.ADMIN);
+    }
+
 
     private String department;
 }

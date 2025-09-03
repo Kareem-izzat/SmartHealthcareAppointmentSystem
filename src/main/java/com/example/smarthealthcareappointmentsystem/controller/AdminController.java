@@ -1,0 +1,62 @@
+package com.example.smarthealthcareappointmentsystem.controller;
+
+import com.example.smarthealthcareappointmentsystem.DTO.DoctorDto;
+import com.example.smarthealthcareappointmentsystem.DTO.PatientDto;
+import com.example.smarthealthcareappointmentsystem.service.AdminService;
+import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/api/admin")
+@RequiredArgsConstructor
+public class AdminController {
+    private final AdminService adminService;
+
+    @GetMapping("/doctors")
+    public ResponseEntity<List<DoctorDto>> getDoctors() {
+        return ResponseEntity.ok(adminService.getAllDoctors());
+    }
+    @GetMapping("/doctors/{id}")
+    public ResponseEntity<DoctorDto> getDoctorById(@PathVariable Long id) {
+        return ResponseEntity.ok(adminService.getDoctorById(id));
+    }
+    @PostMapping("/doctors")
+    public ResponseEntity<DoctorDto> addDoctor(@RequestBody DoctorDto doctorDto) {
+        return ResponseEntity.ok(adminService.addDoctor(doctorDto));
+    }
+    @PutMapping("/doctors/{id}")
+    public ResponseEntity<DoctorDto> updateDoctor(@PathVariable Long id, @RequestBody DoctorDto doctorDto) {
+        return ResponseEntity.ok(adminService.updateDoctorById(id, doctorDto));
+    }
+    @DeleteMapping("/doctors/{id}")
+    public ResponseEntity<Void> removeDoctor(@PathVariable Long id) {
+        adminService.RemoveDoctorById(id);
+        return ResponseEntity.noContent().build();
+    }
+
+    //---------------------------------------------------- patient
+    @GetMapping("/patients")
+    public ResponseEntity<List<PatientDto>> getPatients() {
+        return ResponseEntity.ok(adminService.getAllPatients());
+    }
+    @GetMapping("/patients/{id}")
+    public ResponseEntity<PatientDto> getPatientById(@PathVariable Long id) {
+        return ResponseEntity.ok(adminService.getPatientById(id));
+    }
+    @PostMapping("/patients")
+    public ResponseEntity<PatientDto> addPatient(@RequestBody PatientDto patientDto) {
+        return ResponseEntity.ok(adminService.addPatient(patientDto));
+    }
+    @PutMapping("/patients/{id}")
+    public ResponseEntity<PatientDto> updateDoctor(@PathVariable Long id, @RequestBody PatientDto patientDto) {
+        return ResponseEntity.ok(adminService.updatePatient(id, patientDto));
+    }
+    @DeleteMapping("/patients/{id}")
+    public ResponseEntity<Void> removePatient(@PathVariable Long id) {
+        adminService.removePatient(id);
+        return ResponseEntity.noContent().build();
+    }
+}
