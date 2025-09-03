@@ -2,6 +2,8 @@ package com.example.smarthealthcareappointmentsystem.entites;
 
 import jakarta.persistence.*;
 import lombok.*;
+
+
 import java.time.LocalDateTime;
 @Entity
 @Getter
@@ -26,6 +28,9 @@ public abstract class User {
     private String password;
 
     private String phone;
+
+    @Enumerated(EnumType.STRING)
+    private Role role;
 
     private LocalDateTime createdAt = LocalDateTime.now();
     private LocalDateTime updatedAt = LocalDateTime.now();
