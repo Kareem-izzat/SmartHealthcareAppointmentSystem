@@ -9,6 +9,6 @@ import java.util.List;
 @Builder
 public class MedicalRecordDto {
     private Long patientId;
-    private List<PrescriptionDto> prescriptions; // simplified DTO
+    private List<PrescriptionDto> prescriptions;
     private List<String> notes;
 }
