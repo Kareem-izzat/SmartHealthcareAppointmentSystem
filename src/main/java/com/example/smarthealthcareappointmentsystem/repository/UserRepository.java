@@ -14,11 +14,4 @@ import java.util.Optional;
 public interface UserRepository extends CrudRepository<User, Long> {
     Optional<User> findByEmail(String email);
 
-    interface MedicalRecordRepository extends JpaRepository<MedicalRecord,String> {
-        List<MedicalRecord> findByPatientId(Long patientId);
-    }
-
-    interface PrescriptionRepository extends JpaRepository<Prescription,String> {
-        List<Prescription> findByPatientId(Long patientId);
-    }
 }
