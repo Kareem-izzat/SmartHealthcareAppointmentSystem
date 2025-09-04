@@ -18,12 +18,14 @@ import java.util.List;
 public class RequestPrescriptionDto {
     @NotNull(message = "Patient ID is required")
     private Long patientId;
+    @NotNull(message = "Doctor ID is required")
+    private Long doctorId;
     @NotNull(message = "Appointment ID is required")
     private Long appointmentId;
 
     @NotEmpty(message = "Medicines list cannot be empty")
     private List<String> medicines;
-    @NotEmpty(message = "Notes cannot be empty")
+    @NotBlank(message = "Notes cannot be empty")
 
     private String notes;
 }

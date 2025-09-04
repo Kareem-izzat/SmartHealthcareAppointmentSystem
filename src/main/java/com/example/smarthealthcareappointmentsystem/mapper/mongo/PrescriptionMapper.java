@@ -1,5 +1,6 @@
 package com.example.smarthealthcareappointmentsystem.mapper.mongo;
 import com.example.smarthealthcareappointmentsystem.DTO.PrescriptionDto;
+import com.example.smarthealthcareappointmentsystem.DTO.request.RequestPrescriptionDto;
 import com.example.smarthealthcareappointmentsystem.entites.mongo.Prescription;
 import org.springframework.stereotype.Component;
 
@@ -35,4 +36,16 @@ public class PrescriptionMapper {
                 .notes(dto.getNotes())
                 .build();
     }
+    public Prescription toEntity(RequestPrescriptionDto dto) {
+        if (dto == null) return null;
+
+        return Prescription.builder()
+                .patientId(dto.getPatientId())
+                .doctorId(dto.getDoctorId())
+                .appointmentId(dto.getAppointmentId())
+                .medicines(dto.getMedicines())
+                .notes(dto.getNotes())
+                .build();
+    }
+
 }
