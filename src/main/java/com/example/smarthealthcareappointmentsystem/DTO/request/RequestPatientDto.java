@@ -4,16 +4,15 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
+
+import java.time.LocalDate;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class RequestDoctorDto {
+public class RequestPatientDto {
     @NotBlank(message = "First name is required")
     private String firstName;
 
@@ -31,9 +30,8 @@ public class RequestDoctorDto {
     @NotBlank(message = "Phone is required")
     private String phone;
 
-    @NotBlank(message = "speciality is required")
-    private String specialty;
-    @NotNull(message = "years of experience are required")
-    private int yearsOfExperience;
-}
+    @NotNull(message = "Date of birth is required")
+    private LocalDate dateOfBirth;
 
+    private String medicalHistory;
+}
