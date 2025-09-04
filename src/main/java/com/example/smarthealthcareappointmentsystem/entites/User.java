@@ -7,14 +7,13 @@ import lombok.experimental.SuperBuilder;
 
 import java.time.LocalDateTime;
 @Entity
+@Table(name = "users")
+@Inheritance(strategy = InheritanceType.JOINED)
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@MappedSuperclass
 @SuperBuilder
-@Inheritance(strategy = InheritanceType.JOINED) // diffrent table not one table for all users
-@Table(name = "users")
 public abstract class User {
 
     @Id
@@ -35,8 +34,14 @@ public abstract class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    private LocalDateTime createdAt = LocalDateTime.now();
-    private LocalDateTime updatedAt = LocalDateTime.now();
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = LocalDateTime.now();
+        this.updatedAt = LocalDateTime.now();
+    }
 
     @PreUpdate
     protected void onUpdate() {

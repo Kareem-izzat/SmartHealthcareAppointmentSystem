@@ -1,5 +1,5 @@
 package com.example.smarthealthcareappointmentsystem.mapper.mongo;
-import com.example.smarthealthcareappointmentsystem.DTO.mongo.PrescriptionDto;
+import com.example.smarthealthcareappointmentsystem.DTO.PrescriptionDto;
 import com.example.smarthealthcareappointmentsystem.entites.mongo.Prescription;
 import org.springframework.stereotype.Component;
 
