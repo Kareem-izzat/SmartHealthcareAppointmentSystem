@@ -1,6 +1,7 @@
 package com.example.smarthealthcareappointmentsystem.mapper;
 
 import com.example.smarthealthcareappointmentsystem.DTO.DoctorDto;
+import com.example.smarthealthcareappointmentsystem.DTO.request.RequestDoctorDto;
 import com.example.smarthealthcareappointmentsystem.entites.Doctor;
 import org.springframework.stereotype.Component;
 
@@ -32,4 +33,17 @@ public class DoctorMapper {
                 .yearsOfExperience(dto.getYearsOfExperience())
                 .build();
     }
+    public Doctor toEntity(RequestDoctorDto requestDto) {
+        if (requestDto == null) return null;
+        return Doctor.builder()
+                .firstName(requestDto.getFirstName())
+                .lastName(requestDto.getLastName())
+                .email(requestDto.getEmail())
+                .phone(requestDto.getPhone())
+                .specialty(requestDto.getSpecialty())
+                .yearsOfExperience(requestDto.getYearsOfExperience())
+                .password(requestDto.getPassword())
+                .build();
+    }
+
 }

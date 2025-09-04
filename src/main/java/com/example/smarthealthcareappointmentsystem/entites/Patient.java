@@ -10,10 +10,12 @@ import java.time.LocalDate;
 @Table(name = "patients")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
 public class Patient extends User {
+    public Patient() {
+        super.setRole(Role.PATIENT);
+    }
     private LocalDate dateOfBirth;
     private String medicalHistory;
 }

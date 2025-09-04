@@ -1,6 +1,7 @@
 package com.example.smarthealthcareappointmentsystem.mapper;
 
 import com.example.smarthealthcareappointmentsystem.DTO.PatientDto;
+import com.example.smarthealthcareappointmentsystem.DTO.request.RequestPatientDto;
 import com.example.smarthealthcareappointmentsystem.entites.Patient;
 import org.springframework.stereotype.Component;
 
@@ -25,6 +26,18 @@ public class PatientMapper {
 
         return Patient.builder()
                 .id(dto.getId())
+                .firstName(dto.getFirstName())
+                .lastName(dto.getLastName())
+                .email(dto.getEmail())
+                .phone(dto.getPhone())
+                .dateOfBirth(dto.getDateOfBirth())
+                .medicalHistory(dto.getMedicalHistory())
+                .build();
+    }
+    public Patient toEntity(RequestPatientDto dto) {
+        if (dto == null) return null;
+
+        return Patient.builder()
                 .firstName(dto.getFirstName())
                 .lastName(dto.getLastName())
                 .email(dto.getEmail())

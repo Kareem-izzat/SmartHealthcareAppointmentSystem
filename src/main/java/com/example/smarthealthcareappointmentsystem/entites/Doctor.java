@@ -9,10 +9,13 @@ import lombok.experimental.SuperBuilder;
 @Table(name = "doctors")
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
 public class Doctor extends User {
+
+    public Doctor() {
+        super.setRole(Role.DOCTOR);
+    }
 
     private String specialty;
     private int yearsOfExperience;
