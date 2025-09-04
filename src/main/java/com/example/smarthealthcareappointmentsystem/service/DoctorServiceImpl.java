@@ -11,10 +11,7 @@ import com.example.smarthealthcareappointmentsystem.entites.mongo.Prescription;
 import com.example.smarthealthcareappointmentsystem.exception.ResourceNotFoundException;
 import com.example.smarthealthcareappointmentsystem.mapper.AppointmentMapper;
 import com.example.smarthealthcareappointmentsystem.mapper.mongo.PrescriptionMapper;
-import com.example.smarthealthcareappointmentsystem.repository.AppointmentRepository;
-import com.example.smarthealthcareappointmentsystem.repository.DoctorRepository;
-import com.example.smarthealthcareappointmentsystem.repository.PatientRepository;
-import com.example.smarthealthcareappointmentsystem.repository.PrescriptionRepository;
+import com.example.smarthealthcareappointmentsystem.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +30,7 @@ public class DoctorServiceImpl implements DoctorService {
     private final PatientRepository patientRepository;
     private final PrescriptionMapper prescriptionMapper;
     private final AppointmentMapper appointmentMapper;
+    private final MedicalRecordService medicalRecordService;
 
     @Override
     public List<AppointmentDto> getAppointments(Long doctorId) {
@@ -74,12 +72,19 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     public PrescriptionDto addPrescription(RequestPrescriptionDto dto) {
         Patient patient = patientRepository.findById(dto.getPatientId())
-                .orElseThrow(() -> new ResourceNotFoundException("Patient not found with id: " + dto.getPatientId()));
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Patient not found with id: " + dto.getPatientId()));
 
         Doctor doctor = doctorRepository.findById(dto.getDoctorId())
-                .orElseThrow(() -> new ResourceNotFoundException("Doctor not found with id: " + dto.getDoctorId()));
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Doctor not found with id: " + dto.getDoctorId()));
+
+
         Appointment appointment = appointmentRepository.findByIdAndDoctorId(dto.getAppointmentId(), doctor.getId())
-                .orElseThrow(() -> new ResourceNotFoundException("Appointment not found with id: " + dto.getAppointmentId() + " for doctorId: " + doctor.getId()));
+                .orElseThrow(() -> new ResourceNotFoundException(
+                        "Appointment not found with id: " + dto.getAppointmentId() + " for doctorId: " + doctor.getId()
+                ));
+
 
         Prescription prescription = prescriptionMapper.toEntity(dto);
         prescription.setDoctorId(doctor.getId());
@@ -87,8 +92,15 @@ public class DoctorServiceImpl implements DoctorService {
         prescription.setPatientId(patient.getId());
         prescription.setPatientName(patient.getFirstName() + " " + patient.getLastName());
         prescription.setDate(LocalDateTime.now());
+        prescription.setAppointmentId(appointment.getId());
 
-        Prescription saved = prescriptionRepository.save(prescription);
-        return prescriptionMapper.toDto(saved);
+
+        Prescription savedPrescription = prescriptionRepository.save(prescription);
+
+
+        medicalRecordService.addPrescriptionToRecord(patient.getId(), savedPrescription);
+
+
+        return prescriptionMapper.toDto(savedPrescription);
     }
 }

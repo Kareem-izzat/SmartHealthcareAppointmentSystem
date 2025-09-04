@@ -75,3 +75,74 @@ Content-Type: application/json
 
 ### Admin: Remove patient by ID
 DELETE http://localhost:8080/api/admin/patients/1
+
+### Doctor: Get all appointments
+GET http://localhost:8080/api/doctor/1/appointments
+Accept: application/json
+
+### Doctor: Get appointment by ID
+GET http://localhost:8080/api/doctor/1/appointments/10
+Accept: application/json
+
+### Doctor: Mark appointment as completed
+PUT http://localhost:8080/api/doctor/1/appointments/10/complete
+Accept: application/json
+
+### Doctor: Add a new prescription
+POST http://localhost:8080/api/doctor/prescriptions
+Content-Type: application/json
+
+{
+  "patientId": 1,
+  "doctorId": 1,
+  "appointmentId": 10,
+  "medicines": ["Paracetamol 500mg", "Amoxicillin 250mg"],
+  "notes": "Take medicines after meals"
+}
+
+### Doctor: Get prescriptions by doctor
+GET http://localhost:8080/api/doctor/1/prescriptions
+Accept: application/json
+
+### Doctor: Get prescriptions by patient
+GET http://localhost:8080/api/doctor/prescriptions/patient/1
+Accept: application/json
+### Add a doctor
+POST http://localhost:8080/api/admin/doctors
+Content-Type: application/json
+
+{
+  "firstName": "Emily",
+  "lastName": "Smith",
+  "email": "emily.smith@example.com",
+  "phone": "+1234567890",
+  "specialty": "Cardiology",
+  "yearsOfExperience": 5,
+  "password": "Doctor123!"
+}
+
+### Add a patient
+POST http://localhost:8080/api/admin/patients
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com",
+  "phone": "+1987654321",
+  "dateOfBirth": "1990-05-15",
+  "medicalHistory": "No allergies",
+  "password": "Patient123!"
+}
+
+### Doctor: Add a new prescription
+POST http://localhost:8080/api/doctor/prescriptions
+Content-Type: application/json
+
+{
+  "patientId": 2,
+  "doctorId": 1,
+  "appointmentId": 10,
+  "medicines": ["Paracetamol 500mg", "Vitamin D 1000IU"],
+  "notes": "Take medicines after meals for 7 days"
+}
