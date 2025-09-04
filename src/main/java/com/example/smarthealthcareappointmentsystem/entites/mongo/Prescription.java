@@ -1,6 +1,7 @@
 package com.example.smarthealthcareappointmentsystem.entites.mongo;
 
-import jakarta.persistence.Id;
+import org.springframework.data.annotation.Id;
+
 import lombok.*;
 import org.springframework.data.mongodb.core.mapping.Document;
 
