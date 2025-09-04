@@ -1,0 +1,77 @@
+### Admin: Get all doctors
+GET http://localhost:8080/api/admin/doctors
+Accept: application/json
+
+### Admin: Get doctor by ID
+GET http://localhost:8080/api/admin/doctors/1
+Accept: application/json
+
+### Admin: Add a new doctor
+POST http://localhost:8080/api/admin/doctors
+Content-Type: application/json
+
+{
+  "firstName": "Emily",
+  "lastName": "Smith",
+  "email": "emily.smith@example.com",
+  "phone": "+1234567890",
+  "specialty": "Cardiology",
+  "yearsOfExperience": 5,
+  "password": "Doctor123!"
+}
+
+### Admin: Update doctor by ID
+PUT http://localhost:8080/api/admin/doctors/1
+Content-Type: application/json
+
+{
+  "firstName": "Emily",
+  "lastName": "Smith",
+  "email": "emily.smith@hospital.com",
+  "phone": "+1234567899",
+  "specialty": "Cardiology",
+  "yearsOfExperience": 6,
+  "password": "NewPass123!"
+}
+
+### Admin: Remove doctor by ID
+DELETE http://localhost:8080/api/admin/doctors/1
+
+### Admin: Get all patients
+GET http://localhost:8080/api/admin/patients
+Accept: application/json
+
+### Admin: Get patient by ID
+GET http://localhost:8080/api/admin/patients/1
+Accept: application/json
+
+### Admin: Add a new patient
+POST http://localhost:8080/api/admin/patients
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com",
+  "phone": "+1987654321",
+  "dateOfBirth": "1990-05-15",
+  "medicalHistory": "No allergies",
+  "password": "Patient123!"
+}
+
+### Admin: Update patient by ID
+PUT http://localhost:8080/api/admin/patients/1
+Content-Type: application/json
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@hospital.com",
+  "phone": "+1987654322",
+  "dateOfBirth": "1990-05-15",
+  "medicalHistory": "Allergic to penicillin",
+  "password": "NewPatient123!"
+}
+
+### Admin: Remove patient by ID
+DELETE http://localhost:8080/api/admin/patients/1

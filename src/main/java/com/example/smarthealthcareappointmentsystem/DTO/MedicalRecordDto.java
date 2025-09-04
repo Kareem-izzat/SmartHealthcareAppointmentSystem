@@ -1,4 +1,4 @@
-package com.example.smarthealthcareappointmentsystem.DTO.mongo;
+package com.example.smarthealthcareappointmentsystem.DTO;
 import lombok.*;
 
 import java.util.List;

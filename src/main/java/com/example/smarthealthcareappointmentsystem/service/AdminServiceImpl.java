@@ -2,6 +2,8 @@ package com.example.smarthealthcareappointmentsystem.service;
 
 import com.example.smarthealthcareappointmentsystem.DTO.DoctorDto;
 import com.example.smarthealthcareappointmentsystem.DTO.PatientDto;
+import com.example.smarthealthcareappointmentsystem.DTO.request.RequestDoctorDto;
+import com.example.smarthealthcareappointmentsystem.DTO.request.RequestPatientDto;
 import com.example.smarthealthcareappointmentsystem.entites.Doctor;
 import com.example.smarthealthcareappointmentsystem.entites.Patient;
 import com.example.smarthealthcareappointmentsystem.exception.ResourceNotFoundException;
@@ -10,13 +12,17 @@ import com.example.smarthealthcareappointmentsystem.mapper.PatientMapper;
 import com.example.smarthealthcareappointmentsystem.repository.DoctorRepository;
 import com.example.smarthealthcareappointmentsystem.repository.PatientRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.stream.Collectors;
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class AdminServiceImpl implements AdminService {
+    private final PasswordEncoder passwordEncoder;
     private final DoctorRepository doctorRepository;
     private final PatientRepository patientRepository;
     private final DoctorMapper doctorMapper;
@@ -28,7 +34,7 @@ public class AdminServiceImpl implements AdminService {
                .collect(Collectors.toList());
    }
     @Override
-    public DoctorDto updateDoctorById(Long doctorId, DoctorDto doctorDto){
+    public DoctorDto updateDoctorById(Long doctorId, RequestDoctorDto doctorDto){
         Doctor doctor = doctorRepository.findById(doctorId)
                 .orElseThrow(() -> new ResourceNotFoundException("Doctor not found with id " + doctorId));
         doctor.setFirstName(doctorDto.getFirstName());
@@ -37,8 +43,12 @@ public class AdminServiceImpl implements AdminService {
         doctor.setPhone(doctorDto.getPhone());
         doctor.setSpecialty(doctorDto.getSpecialty());
         doctor.setYearsOfExperience(doctorDto.getYearsOfExperience());
-        Doctor updatedDoctor = doctorRepository.save(doctor);
-        return doctorMapper.toDto(updatedDoctor);
+        // only encode when provided
+        if (doctorDto.getPassword() != null && !doctorDto.getPassword().isBlank()) {
+            doctor.setPassword(passwordEncoder.encode(doctorDto.getPassword()));
+        }
+        return doctorMapper.toDto(doctorRepository.save(doctor));
+
 
     }
     @Override
@@ -48,8 +58,9 @@ public class AdminServiceImpl implements AdminService {
        return doctorMapper.toDto(doctor);
     }
     @Override
-    public DoctorDto addDoctor(DoctorDto doctorDto) {
+    public DoctorDto addDoctor(RequestDoctorDto doctorDto) {
         Doctor doctor = doctorMapper.toEntity(doctorDto);
+        doctor.setPassword(passwordEncoder.encode(doctorDto.getPassword()));
         Doctor savedDoctor = doctorRepository.save(doctor);
         return doctorMapper.toDto(savedDoctor);
     }
@@ -68,19 +79,25 @@ public class AdminServiceImpl implements AdminService {
                 .collect(Collectors.toList());
     }
     @Override
-    public PatientDto updatePatient(Long patientId, PatientDto patientDto){
+    public PatientDto updatePatient(Long patientId, RequestPatientDto patientDto){
         Patient patient = patientRepository.findById(patientId)
                 .orElseThrow(() -> new ResourceNotFoundException("Patient not found with id " + patientId));
+
         patient.setFirstName(patientDto.getFirstName());
         patient.setLastName(patientDto.getLastName());
         patient.setEmail(patientDto.getEmail());
         patient.setPhone(patientDto.getPhone());
         patient.setDateOfBirth(patientDto.getDateOfBirth());
         patient.setMedicalHistory(patientDto.getMedicalHistory());
+        // only encode when provided
+        if (patientDto.getPassword() != null && !patientDto.getPassword().isBlank()) {
+            patient.setPassword(passwordEncoder.encode(patientDto.getPassword()));
+        }
+
         Patient updatedPatient = patientRepository.save(patient);
         return patientMapper.toDto(updatedPatient);
-
     }
+
     @Override
     public PatientDto getPatientById(Long patientId) {
         Patient patient = patientRepository.findById(patientId)
@@ -88,8 +105,9 @@ public class AdminServiceImpl implements AdminService {
         return patientMapper.toDto(patient);
     }
     @Override
-    public PatientDto addPatient(PatientDto patientDto) {
+    public PatientDto addPatient(RequestPatientDto patientDto) {
         Patient patient = patientMapper.toEntity(patientDto);
+        patient.setPassword(passwordEncoder.encode(patientDto.getPassword()));
         Patient saved = patientRepository.save(patient);
         return patientMapper.toDto(saved);
     }
