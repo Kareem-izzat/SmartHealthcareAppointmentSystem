@@ -6,10 +6,7 @@ import lombok.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(
-        name = "appointments")
-
-
+@Table(name = "appointments")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -22,15 +19,12 @@ public class Appointment {
     private Long id;
 
     @ManyToOne(optional = false)
-    @JoinColumn(name = "doctor_id")
-    private Doctor doctor;
+    @JoinColumn(name = "slot_id")
+    private Slot slot;
 
     @ManyToOne(optional = false)
     @JoinColumn(name = "patient_id")
     private Patient patient;
-
-    private LocalDateTime startTime;
-    private LocalDateTime endTime;
 
     @Enumerated(EnumType.STRING)
     private AppointmentStatus status = AppointmentStatus.SCHEDULED;
