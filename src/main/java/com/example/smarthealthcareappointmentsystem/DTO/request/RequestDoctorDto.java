@@ -9,6 +9,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
@@ -35,5 +37,6 @@ public class RequestDoctorDto {
     private String specialty;
     @NotNull(message = "years of experience are required")
     private int yearsOfExperience;
+    private List<RequestSlotDto> slots;
 }
 
