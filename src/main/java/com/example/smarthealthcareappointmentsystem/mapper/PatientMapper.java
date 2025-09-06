@@ -6,6 +6,7 @@ import com.example.smarthealthcareappointmentsystem.entites.Patient;
 import org.springframework.stereotype.Component;
 
 @Component
+// mapper between dto and entity
 public class PatientMapper {
     public PatientDto toDto(Patient patient) {
         if (patient == null) return null;
@@ -18,20 +19,6 @@ public class PatientMapper {
                 .phone(patient.getPhone())
                 .dateOfBirth(patient.getDateOfBirth())
                 .medicalHistory(patient.getMedicalHistory())
-                .build();
-    }
-
-    public Patient toEntity(PatientDto dto) {
-        if (dto == null) return null;
-
-        return Patient.builder()
-                .id(dto.getId())
-                .firstName(dto.getFirstName())
-                .lastName(dto.getLastName())
-                .email(dto.getEmail())
-                .phone(dto.getPhone())
-                .dateOfBirth(dto.getDateOfBirth())
-                .medicalHistory(dto.getMedicalHistory())
                 .build();
     }
     public Patient toEntity(RequestPatientDto dto) {

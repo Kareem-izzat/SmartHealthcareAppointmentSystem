@@ -3,13 +3,13 @@ package com.example.smarthealthcareappointmentsystem.mapper.mongo;
 import com.example.smarthealthcareappointmentsystem.DTO.MedicalRecordDto;
 import com.example.smarthealthcareappointmentsystem.DTO.PrescriptionDto;
 import com.example.smarthealthcareappointmentsystem.entites.mongo.MedicalRecord;
-import com.example.smarthealthcareappointmentsystem.entites.mongo.Prescription;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
+// mapper between dto and entity
 public class MedicalRecordMapper {
 
     private final PrescriptionMapper prescriptionMapper;
@@ -31,20 +31,6 @@ public class MedicalRecordMapper {
                 .build();
     }
 
-    public MedicalRecord toEntity(MedicalRecordDto dto) {
-        if (dto == null) return null;
-
-        List<Prescription> prescriptions = dto.getPrescriptions() != null
-                ? dto.getPrescriptions().stream()
-                .map(prescriptionMapper::toEntity)
-                .collect(Collectors.toList()) : null;
-
-        return MedicalRecord.builder()
-                .patientId(dto.getPatientId())
-                .prescriptions(prescriptions)
-                .notes(dto.getNotes())
-                .build();
-    }
 
 
 }

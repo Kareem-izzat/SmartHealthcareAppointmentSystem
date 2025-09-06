@@ -1,0 +1,72 @@
+
+
+# Get all appointments for a doctor
+GET http://localhost:8080/api/doctor/4/appointments
+
+###
+
+# Get appointment by ID
+GET http://localhost:8080/api/doctor/1/appointments/1
+
+###
+
+# Mark appointment as completed
+PUT http://localhost:8080/api/doctor/4/appointments/1/complete
+
+###
+
+# Add prescription
+POST http://localhost:8080/api/doctor/4/prescriptions
+Content-Type: application/json
+
+{
+  "patientId": 6,
+  "doctorId": 4,
+  "appointmentId": 1,
+  "medicines": ["Paracetamol 500mg", "Ibuprofen 200mg"],
+  "notes": "Take medicines after meals"
+}
+
+###
+
+# Get all prescriptions for a doctor
+GET http://localhost:8080/api/doctor/4/prescriptions
+
+###
+
+# Get prescriptions for a patient
+GET http://localhost:8080/api/doctor/4/prescriptions/patient/6
+
+###
+
+# Create slot
+POST http://localhost:8080/api/doctor/4/slots
+Content-Type: application/json
+
+{
+  "startTime": "2025-09-07T09:00:00",
+  "endTime": "2025-09-07T09:30:00",
+  "available": true
+}
+
+###
+
+# Get all slots for a doctor
+GET http://localhost:8080/api/doctor/4/slots
+
+###
+
+# Update slot
+PUT http://localhost:8080/api/doctor/1/slots/1
+Content-Type: application/json
+
+{
+  "startTime": "2025-09-07T09:15:00",
+  "endTime": "2025-09-07T09:45:00",
+  "available": true
+}
+
+###
+
+# Delete slot
+DELETE http://localhost:8080/api/doctor/1/slots/1

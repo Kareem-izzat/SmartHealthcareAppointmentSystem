@@ -1,148 +1,100 @@
-### Admin: Get all doctors
+
+
+# Get all doctors
 GET http://localhost:8080/api/admin/doctors
-Accept: application/json
+Content-Type: application/json
 
-### Admin: Get doctor by ID
+###
+
+# Get doctor by ID
 GET http://localhost:8080/api/admin/doctors/1
-Accept: application/json
+Content-Type: application/json
 
-### Admin: Add a new doctor
+###
+
+# Create doctor
 POST http://localhost:8080/api/admin/doctors
 Content-Type: application/json
 
 {
-  "firstName": "Emily",
-  "lastName": "Smith",
-  "email": "emily.smith@example.com",
-  "phone": "+1234567890",
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com",
+  "password": "Doctor123!",
+  "phone": "123456789",
   "specialty": "Cardiology",
-  "yearsOfExperience": 5,
-  "password": "Doctor123!"
+  "yearsOfExperience": 10,
+  "slots": []
 }
 
-### Admin: Update doctor by ID
+###
+
+# Update doctor
 PUT http://localhost:8080/api/admin/doctors/1
 Content-Type: application/json
 
 {
-  "firstName": "Emily",
-  "lastName": "Smith",
-  "email": "emily.smith@hospital.com",
-  "phone": "+1234567899",
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe@example.com",
+  "password": "Doctor123!",
+  "phone": "987654321",
   "specialty": "Cardiology",
-  "yearsOfExperience": 6,
-  "password": "NewPass123!"
+  "yearsOfExperience": 12,
+  "slots": []
 }
 
-### Admin: Remove doctor by ID
+###
+
+# Delete doctor
 DELETE http://localhost:8080/api/admin/doctors/1
 
-### Admin: Get all patients
+###
+
+# Get all patients
 GET http://localhost:8080/api/admin/patients
-Accept: application/json
+Content-Type: application/json
 
-### Admin: Get patient by ID
-GET http://localhost:8080/api/admin/patients/1
-Accept: application/json
+###
 
-### Admin: Add a new patient
+# Get patient by ID
+GET http://localhost:8080/api/admin/patients/6
+Content-Type: application/json
+
+###
+
+# Create patient
 POST http://localhost:8080/api/admin/patients
 Content-Type: application/json
 
 {
-  "firstName": "John",
-  "lastName": "Doe",
-  "email": "john.doe@example.com",
-  "phone": "+1987654321",
-  "dateOfBirth": "1990-05-15",
-  "medicalHistory": "No allergies",
-  "password": "Patient123!"
+  "firstName": "Alice",
+  "lastName": "Brown",
+  "email": "alice.brown@example.com",
+  "password": "Patient123!",
+  "phone": "555123456",
+  "dateOfBirth": "1990-05-20",
+  "medicalHistory": "No known allergies"
 }
 
-### Admin: Update patient by ID
-PUT http://localhost:8080/api/admin/patients/1
+###
+
+# Update patient
+PUT http://localhost:8080/api/admin/patients/6
 Content-Type: application/json
 
 {
-  "firstName": "John",
-  "lastName": "Doe",
-  "email": "john.doe@hospital.com",
-  "phone": "+1987654322",
-  "dateOfBirth": "1990-05-15",
-  "medicalHistory": "Allergic to penicillin",
-  "password": "NewPatient123!"
+  "firstName": "Alice",
+  "lastName": "Brown",
+  "email": "alice.brown@example.com",
+  "password": "Patient123!",
+  "phone": "555987654",
+  "dateOfBirth": "1990-05-20",
+  "medicalHistory": "Allergic to penicillin"
 }
 
-### Admin: Remove patient by ID
-DELETE http://localhost:8080/api/admin/patients/1
+###
 
-### Doctor: Get all appointments
-GET http://localhost:8080/api/doctor/1/appointments
-Accept: application/json
+# Delete patient
+DELETE http://localhost:8080/api/admin/patients/5
 
-### Doctor: Get appointment by ID
-GET http://localhost:8080/api/doctor/1/appointments/10
-Accept: application/json
-
-### Doctor: Mark appointment as completed
-PUT http://localhost:8080/api/doctor/1/appointments/10/complete
-Accept: application/json
-
-### Doctor: Add a new prescription
-POST http://localhost:8080/api/doctor/prescriptions
-Content-Type: application/json
-
-{
-  "patientId": 1,
-  "doctorId": 1,
-  "appointmentId": 10,
-  "medicines": ["Paracetamol 500mg", "Amoxicillin 250mg"],
-  "notes": "Take medicines after meals"
-}
-
-### Doctor: Get prescriptions by doctor
-GET http://localhost:8080/api/doctor/1/prescriptions
-Accept: application/json
-
-### Doctor: Get prescriptions by patient
-GET http://localhost:8080/api/doctor/prescriptions/patient/1
-Accept: application/json
-### Add a doctor
-POST http://localhost:8080/api/admin/doctors
-Content-Type: application/json
-
-{
-  "firstName": "Emily",
-  "lastName": "Smith",
-  "email": "emily.smith@example.com",
-  "phone": "+1234567890",
-  "specialty": "Cardiology",
-  "yearsOfExperience": 5,
-  "password": "Doctor123!"
-}
-
-### Add a patient
-POST http://localhost:8080/api/admin/patients
-Content-Type: application/json
-
-{
-  "firstName": "John",
-  "lastName": "Doe",
-  "email": "john.doe@example.com",
-  "phone": "+1987654321",
-  "dateOfBirth": "1990-05-15",
-  "medicalHistory": "No allergies",
-  "password": "Patient123!"
-}
-
-### Doctor: Add a new prescription
-POST http://localhost:8080/api/doctor/prescriptions
-Content-Type: application/json
-
-{
-  "patientId": 2,
-  "doctorId": 1,
-  "appointmentId": 10,
-  "medicines": ["Paracetamol 500mg", "Vitamin D 1000IU"],
-  "notes": "Take medicines after meals for 7 days"
-}

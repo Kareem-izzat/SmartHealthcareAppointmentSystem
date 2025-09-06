@@ -10,12 +10,16 @@ import java.time.LocalDateTime;
 @Builder
 public class AppointmentDto {
     private Long id;
-    private Long doctorId;
-    private String doctorName;
-    private Long patientId;
-    private String patientName;
+
+    private Long slotId;
     private LocalDateTime startTime;
     private LocalDateTime endTime;
+
+    private Long doctorId;
+    private String doctorName;
+
+    private Long patientId;
+    private String patientName;
 
     private AppointmentStatus status;
 }
