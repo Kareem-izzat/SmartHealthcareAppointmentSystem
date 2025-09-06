@@ -17,4 +17,6 @@ public class RequestSlotDto {
 
     @NotNull(message = "End time is required")
     private LocalDateTime endTime;
+
+    private boolean Available;
 }

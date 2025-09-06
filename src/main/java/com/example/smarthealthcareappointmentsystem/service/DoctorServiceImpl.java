@@ -2,14 +2,14 @@ package com.example.smarthealthcareappointmentsystem.service;
 
 import com.example.smarthealthcareappointmentsystem.DTO.AppointmentDto;
 import com.example.smarthealthcareappointmentsystem.DTO.PrescriptionDto;
+import com.example.smarthealthcareappointmentsystem.DTO.SlotDto;
 import com.example.smarthealthcareappointmentsystem.DTO.request.RequestPrescriptionDto;
-import com.example.smarthealthcareappointmentsystem.entites.Appointment;
-import com.example.smarthealthcareappointmentsystem.entites.AppointmentStatus;
-import com.example.smarthealthcareappointmentsystem.entites.Doctor;
-import com.example.smarthealthcareappointmentsystem.entites.Patient;
+import com.example.smarthealthcareappointmentsystem.DTO.request.RequestSlotDto;
+import com.example.smarthealthcareappointmentsystem.entites.*;
 import com.example.smarthealthcareappointmentsystem.entites.mongo.Prescription;
 import com.example.smarthealthcareappointmentsystem.exception.ResourceNotFoundException;
 import com.example.smarthealthcareappointmentsystem.mapper.AppointmentMapper;
+import com.example.smarthealthcareappointmentsystem.mapper.SlotMapper;
 import com.example.smarthealthcareappointmentsystem.mapper.mongo.PrescriptionMapper;
 import com.example.smarthealthcareappointmentsystem.repository.*;
 import lombok.RequiredArgsConstructor;
@@ -31,6 +31,8 @@ public class DoctorServiceImpl implements DoctorService {
     private final PrescriptionMapper prescriptionMapper;
     private final AppointmentMapper appointmentMapper;
     private final MedicalRecordService medicalRecordService;
+    private final SlotRepository slotRepository;
+    private final SlotMapper slotMapper;
 
     @Override
     public List<AppointmentDto> getAppointments(Long doctorId) {
@@ -102,5 +104,47 @@ public class DoctorServiceImpl implements DoctorService {
 
 
         return prescriptionMapper.toDto(savedPrescription);
+    }
+    @Override
+    public SlotDto createSlot(Long doctorId, RequestSlotDto requestSlotDto) {
+        Doctor doctor = doctorRepository.findById(doctorId)
+                .orElseThrow(() -> new ResourceNotFoundException("Doctor not found with id "+ doctorId));
+
+        Slot slot = Slot.builder()
+                .doctor(doctor)
+                .startTime(requestSlotDto.getStartTime())
+                .endTime(requestSlotDto.getEndTime())
+                .available(true)
+                .build();
+
+        slot = slotRepository.save(slot);
+        return slotMapper.toSlotDto(slot);
+    }
+    @Override
+    public List<SlotDto> getAllSlots(Long doctorId) {
+        return slotRepository.findByDoctorId(doctorId)
+                .stream()
+                .map(slotMapper::toSlotDto)
+                .collect(Collectors.toList());
+    }
+    @Override
+    public SlotDto updateSlot(Long slotId, RequestSlotDto requestSlotDto) {
+        Slot slot = slotRepository.findById(slotId)
+                .orElseThrow(() -> new ResourceNotFoundException("Slot not found with id: " + slotId));
+
+        slot.setStartTime(requestSlotDto.getStartTime());
+        slot.setEndTime(requestSlotDto.getEndTime());
+        slot.setAvailable(requestSlotDto.isAvailable());
+
+        slotRepository.save(slot);
+
+        return slotMapper.toSlotDto(slot);
+    }
+
+    @Override
+    public void deleteSlot(Long slotId) {
+        Slot slot = slotRepository.findById(slotId)
+                .orElseThrow(() -> new ResourceNotFoundException("Slot not found with id: " + slotId));
+        slotRepository.delete(slot);
     }
 }
