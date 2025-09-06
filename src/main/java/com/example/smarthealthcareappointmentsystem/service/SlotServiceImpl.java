@@ -83,4 +83,11 @@ public class SlotServiceImpl implements  SlotService {
                 .orElseThrow(() -> new ResourceNotFoundException("Slot not found with id: " + slotId));
         slotRepository.delete(slot);
     }
+    @Override
+    public List<SlotDto> getAvailableSlots(Long doctorId) {
+        return slotRepository.findByDoctorId(doctorId).stream()
+                .filter(Slot::isAvailable)
+                .map(slotMapper::toSlotDto)
+                .toList();
+    }
 }

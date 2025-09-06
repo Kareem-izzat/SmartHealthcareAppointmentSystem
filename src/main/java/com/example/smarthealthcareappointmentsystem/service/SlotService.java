@@ -10,4 +10,5 @@ public interface SlotService {
     List<SlotDto> getAllSlots(Long doctorId);
     SlotDto updateSlot(Long slotId, RequestSlotDto requestSlotDto);
     void deleteSlot(Long slotId);
+    List<SlotDto> getAvailableSlots(Long doctorId);
 }

@@ -30,6 +30,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
     @Override
     public List<PrescriptionDto> getPrescriptionsByDoctor(Long doctorId) {
+        Doctor doctor = doctorRepository.findById(doctorId).orElseThrow(()-> new ResourceNotFoundException("Doctor not found with id" + doctorId));
         return prescriptionRepository.findByDoctorId(doctorId).stream()
                 .map(prescriptionMapper::toDto)
                 .collect(Collectors.toList());
@@ -37,6 +38,9 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
     @Override
     public List<PrescriptionDto> getPrescriptionsByPatient(Long patientId) {
+        Patient patient = patientRepository.findById(patientId)
+                .orElseThrow(() -> new ResourceNotFoundException("Patient not found with id " + patientId));
+
         return prescriptionRepository.findByPatientId(patientId).stream()
                 .map(prescriptionMapper::toDto)
                 .collect(Collectors.toList());

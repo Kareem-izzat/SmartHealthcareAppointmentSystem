@@ -79,5 +79,12 @@ public class DoctorServiceImpl implements DoctorService {
         }
         doctorRepository.deleteById(doctorId);
     }
+    @Override
+    public List<DoctorDto> searchDoctorsBySpecialty(String specialty) {
+        return doctorRepository.findBySpecialty(specialty).stream()
+                .map(doctorMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
 
 }
