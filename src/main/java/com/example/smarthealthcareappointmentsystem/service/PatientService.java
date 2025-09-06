@@ -1,24 +1,17 @@
 package com.example.smarthealthcareappointmentsystem.service;
 
-import com.example.smarthealthcareappointmentsystem.DTO.MedicalRecordDto;
-import com.example.smarthealthcareappointmentsystem.DTO.PatientDto;
-import com.example.smarthealthcareappointmentsystem.DTO.PrescriptionDto;
+
+import com.example.smarthealthcareappointmentsystem.DTO.*;
 import com.example.smarthealthcareappointmentsystem.DTO.request.RequestPatientDto;
 
 import java.util.List;
 
 public interface PatientService {
 
-    PatientDto getProfile(Long patientId);
+    List<PatientDto> getAllPatients();
+    PatientDto getPatientById(Long patientId);
+    PatientDto addPatient(RequestPatientDto patientDto);
+    PatientDto updatePatient(Long patientId, RequestPatientDto patientDto);
+    void removePatient(Long patientId);
 
-    PatientDto updateProfile(Long patientId, RequestPatientDto requestPatientDto);
-
-
-    MedicalRecordDto viewMedicalRecord(Long patientId);
-
-    List<PrescriptionDto> viewPrescriptions(Long patientId);
-
-    void bookAppointment(Long patientId, Long doctorId, Long appointmentId);
-
-    void cancelAppointment(Long patientId, Long appointmentId);
 }

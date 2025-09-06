@@ -1,18 +1,23 @@
 package com.example.smarthealthcareappointmentsystem.service;
 
 import com.example.smarthealthcareappointmentsystem.DTO.AppointmentDto;
+import com.example.smarthealthcareappointmentsystem.DTO.DoctorDto;
 import com.example.smarthealthcareappointmentsystem.DTO.PrescriptionDto;
 import com.example.smarthealthcareappointmentsystem.DTO.SlotDto;
+import com.example.smarthealthcareappointmentsystem.DTO.request.RequestDoctorDto;
 import com.example.smarthealthcareappointmentsystem.DTO.request.RequestPrescriptionDto;
 import com.example.smarthealthcareappointmentsystem.DTO.request.RequestSlotDto;
 import com.example.smarthealthcareappointmentsystem.entites.*;
 import com.example.smarthealthcareappointmentsystem.entites.mongo.Prescription;
+import com.example.smarthealthcareappointmentsystem.exception.BadRequestException;
 import com.example.smarthealthcareappointmentsystem.exception.ResourceNotFoundException;
 import com.example.smarthealthcareappointmentsystem.mapper.AppointmentMapper;
+import com.example.smarthealthcareappointmentsystem.mapper.DoctorMapper;
 import com.example.smarthealthcareappointmentsystem.mapper.SlotMapper;
 import com.example.smarthealthcareappointmentsystem.mapper.mongo.PrescriptionMapper;
 import com.example.smarthealthcareappointmentsystem.repository.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -24,144 +29,55 @@ import java.util.stream.Collectors;
 @Transactional
 @RequiredArgsConstructor
 public class DoctorServiceImpl implements DoctorService {
-    private final AppointmentRepository appointmentRepository;
-    private final PrescriptionRepository prescriptionRepository;
+
+    private final DoctorMapper doctorMapper;
     private final DoctorRepository doctorRepository;
-    private final PatientRepository patientRepository;
-    private final PrescriptionMapper prescriptionMapper;
-    private final AppointmentMapper appointmentMapper;
-    private final MedicalRecordService medicalRecordService;
-    private final SlotRepository slotRepository;
-    private final SlotMapper slotMapper;
+    private final PasswordEncoder passwordEncoder;
+
 
     @Override
-    public List<AppointmentDto> getAppointments(Long doctorId) {
-        return appointmentRepository.findByDoctorId(doctorId).stream()
-                .map(appointmentMapper::toDto)
+    public List<DoctorDto> getAllDoctors() {
+        return doctorRepository.findAll().stream()
+                .map(doctorMapper::toDto)
                 .collect(Collectors.toList());
     }
-
     @Override
-    public AppointmentDto getAppointmentById(Long doctorId, Long appointmentId) {
-        Appointment appointment = appointmentRepository.findByIdAndDoctorId(appointmentId, doctorId)
-                .orElseThrow(() -> new ResourceNotFoundException("Appointment not found for doctorId: " + doctorId));
-        return appointmentMapper.toDto(appointment);
-    }
-
-    @Override
-    public AppointmentDto markAppointmentAsCompleted(Long doctorId, Long appointmentId) {
-        Appointment appointment = appointmentRepository.findByIdAndDoctorId(appointmentId, doctorId)
-                .orElseThrow(() -> new ResourceNotFoundException("Appointment not found for doctorId: " + doctorId));
-        appointment.setStatus(AppointmentStatus.COMPLETED);
-        appointmentRepository.save(appointment);
-        return appointmentMapper.toDto(appointment);
-    }
-
-    @Override
-    public List<PrescriptionDto> getPrescriptionsByDoctor(Long doctorId) {
-        return prescriptionRepository.findByDoctorId(doctorId).stream()
-                .map(prescriptionMapper::toDto)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public List<PrescriptionDto> getPrescriptionsByPatient(Long patientId) {
-        return prescriptionRepository.findByPatientId(patientId).stream()
-                .map(prescriptionMapper::toDto)
-                .collect(Collectors.toList());
-    }
-
-    @Override
-    public PrescriptionDto addPrescription(RequestPrescriptionDto dto) {
-        Patient patient = patientRepository.findById(dto.getPatientId())
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "Patient not found with id: " + dto.getPatientId()));
-
-        Doctor doctor = doctorRepository.findById(dto.getDoctorId())
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "Doctor not found with id: " + dto.getDoctorId()));
-
-
-        Appointment appointment = appointmentRepository.findByIdAndDoctorId(dto.getAppointmentId(), doctor.getId())
-                .orElseThrow(() -> new ResourceNotFoundException(
-                        "Appointment not found with id: " + dto.getAppointmentId() + " for doctorId: " + doctor.getId()
-                ));
-
-
-        Prescription prescription = prescriptionMapper.toEntity(dto);
-        prescription.setDoctorId(doctor.getId());
-        prescription.setDoctorName(doctor.getFirstName() + " " + doctor.getLastName());
-        prescription.setPatientId(patient.getId());
-        prescription.setPatientName(patient.getFirstName() + " " + patient.getLastName());
-        prescription.setDate(LocalDateTime.now());
-        prescription.setAppointmentId(appointment.getId());
-
-
-        Prescription savedPrescription = prescriptionRepository.save(prescription);
-
-
-        medicalRecordService.addPrescriptionToRecord(patient.getId(), savedPrescription);
-
-
-        return prescriptionMapper.toDto(savedPrescription);
-    }
-    @Override
-    public SlotDto createSlot(Long doctorId, RequestSlotDto requestSlotDto) {
+    public DoctorDto updateDoctorById(Long doctorId, RequestDoctorDto doctorDto){
         Doctor doctor = doctorRepository.findById(doctorId)
-                .orElseThrow(() -> new ResourceNotFoundException("Doctor not found with id "+ doctorId));
-
-        List<Slot> overlappingSlots=slotRepository.findOverlappingSlots( doctorId,
-                requestSlotDto.getStartTime(),
-                requestSlotDto.getEndTime());
-        if (!overlappingSlots.isEmpty()) {
-            throw new IllegalArgumentException("Slot overlaps with an existing slot.");
+                .orElseThrow(() -> new ResourceNotFoundException("Doctor not found with id " + doctorId));
+        doctor.setFirstName(doctorDto.getFirstName());
+        doctor.setLastName(doctorDto.getLastName());
+        doctor.setEmail(doctorDto.getEmail());
+        doctor.setPhone(doctorDto.getPhone());
+        doctor.setSpecialty(doctorDto.getSpecialty());
+        doctor.setYearsOfExperience(doctorDto.getYearsOfExperience());
+        // only encode when provided
+        if (doctorDto.getPassword() != null && !doctorDto.getPassword().isBlank()) {
+            doctor.setPassword(passwordEncoder.encode(doctorDto.getPassword()));
         }
-        Slot slot = Slot.builder()
-                .doctor(doctor)
-                .startTime(requestSlotDto.getStartTime())
-                .endTime(requestSlotDto.getEndTime())
-                .available(true)
-                .build();
+        return doctorMapper.toDto(doctorRepository.save(doctor));
 
-        slot = slotRepository.save(slot);
-        return slotMapper.toSlotDto(slot);
+
     }
     @Override
-    public List<SlotDto> getAllSlots(Long doctorId) {
-        return slotRepository.findByDoctorId(doctorId)
-                .stream()
-                .map(slotMapper::toSlotDto)
-                .collect(Collectors.toList());
+    public DoctorDto getDoctorById(Long doctorId) {
+        Doctor doctor=doctorRepository.findById(doctorId)
+                .orElseThrow(() -> new ResourceNotFoundException("Doctor not found with id " + doctorId));
+        return doctorMapper.toDto(doctor);
     }
     @Override
-    public SlotDto updateSlot(Long slotId, RequestSlotDto requestSlotDto) {
-        Slot slot = slotRepository.findById(slotId)
-                .orElseThrow(() -> new ResourceNotFoundException("Slot not found with id: " + slotId));
-
-        List<Slot> overlappingSlots = slotRepository.findOverlappingSlots(
-                        slot.getDoctor().getId(),
-                        requestSlotDto.getStartTime(),
-                        requestSlotDto.getEndTime()
-                ).stream()
-                .filter(s -> !s.getId().equals(slotId))
-                .toList();
-        if (!overlappingSlots.isEmpty()) {
-            throw new IllegalArgumentException("Updated slot overlaps with an existing slot.");
+    public DoctorDto addDoctor(RequestDoctorDto doctorDto) {
+        Doctor doctor = doctorMapper.toEntity(doctorDto);
+        doctor.setPassword(passwordEncoder.encode(doctorDto.getPassword()));
+        Doctor savedDoctor = doctorRepository.save(doctor);
+        return doctorMapper.toDto(savedDoctor);
+    }
+    @Override
+    public void RemoveDoctorById(Long doctorId) {
+        if (!doctorRepository.existsById(doctorId)) {
+            throw new ResourceNotFoundException("Doctor not found with id " + doctorId);
         }
-
-        slot.setStartTime(requestSlotDto.getStartTime());
-        slot.setEndTime(requestSlotDto.getEndTime());
-        slot.setAvailable(requestSlotDto.isAvailable());
-
-        slotRepository.save(slot);
-
-        return slotMapper.toSlotDto(slot);
+        doctorRepository.deleteById(doctorId);
     }
 
-    @Override
-    public void deleteSlot(Long slotId) {
-        Slot slot = slotRepository.findById(slotId)
-                .orElseThrow(() -> new ResourceNotFoundException("Slot not found with id: " + slotId));
-        slotRepository.delete(slot);
-    }
 }
