@@ -3,11 +3,7 @@ package com.example.smarthealthcareappointmentsystem.entites;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
-
-import java.time.LocalDateTime;
 @Entity
 @Table(name = "users")
 @Inheritance(strategy = InheritanceType.JOINED)
@@ -36,10 +32,5 @@ public abstract class User {
     @Enumerated(EnumType.STRING)
     private Role role;
 
-    @CreatedDate
-    @Column(updatable = false)
-    private LocalDateTime createdAt;
 
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
 }

@@ -57,7 +57,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
                         "Doctor not found with id: " + dto.getDoctorId()));
 
 
-        Appointment appointment = appointmentRepository.findByIdAndDoctorId(dto.getAppointmentId(), doctor.getId())
+        Appointment appointment = appointmentRepository.findByIdAndSlot_Doctor_Id(dto.getAppointmentId(), doctor.getId())
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Appointment not found with id: " + dto.getAppointmentId() + " for doctorId: " + doctor.getId()
                 ));

@@ -29,21 +29,21 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     public List<AppointmentDto> getAppointments(Long doctorId) {
-        return appointmentRepository.findByDoctorId(doctorId).stream()
+        return appointmentRepository.findBySlot_Doctor_Id(doctorId).stream()
                 .map(appointmentMapper::toDto)
                 .collect(Collectors.toList());
     }
 
     @Override
     public AppointmentDto getAppointmentById(Long doctorId, Long appointmentId) {
-        Appointment appointment = appointmentRepository.findByIdAndDoctorId(appointmentId, doctorId)
+        Appointment appointment = appointmentRepository.findByIdAndSlot_Doctor_Id(appointmentId, doctorId)
                 .orElseThrow(() -> new ResourceNotFoundException("Appointment not found for doctorId: " + doctorId));
         return appointmentMapper.toDto(appointment);
     }
 
     @Override
     public AppointmentDto markAppointmentAsCompleted(Long doctorId, Long appointmentId) {
-        Appointment appointment = appointmentRepository.findByIdAndDoctorId(appointmentId, doctorId)
+        Appointment appointment = appointmentRepository.findByIdAndSlot_Doctor_Id(appointmentId, doctorId)
                 .orElseThrow(() -> new ResourceNotFoundException("Appointment not found for doctorId: " + doctorId));
         appointment.setStatus(AppointmentStatus.COMPLETED);
         appointmentRepository.save(appointment);

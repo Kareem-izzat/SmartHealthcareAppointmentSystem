@@ -2,10 +2,7 @@ package com.example.smarthealthcareappointmentsystem.entites;
 
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.data.annotation.LastModifiedDate;
 
-import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "appointments")
@@ -31,10 +28,5 @@ public class Appointment {
     @Enumerated(EnumType.STRING)
     private AppointmentStatus status = AppointmentStatus.SCHEDULED;
 
-    @CreatedDate
-    @Column(updatable = false)
-    private LocalDateTime createdAt;
 
-    @LastModifiedDate
-    private LocalDateTime updatedAt;
 }
