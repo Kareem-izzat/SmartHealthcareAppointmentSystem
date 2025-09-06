@@ -110,6 +110,12 @@ public class DoctorServiceImpl implements DoctorService {
         Doctor doctor = doctorRepository.findById(doctorId)
                 .orElseThrow(() -> new ResourceNotFoundException("Doctor not found with id "+ doctorId));
 
+        List<Slot> overlappingSlots=slotRepository.findOverlappingSlots( doctorId,
+                requestSlotDto.getStartTime(),
+                requestSlotDto.getEndTime());
+        if (!overlappingSlots.isEmpty()) {
+            throw new IllegalArgumentException("Slot overlaps with an existing slot.");
+        }
         Slot slot = Slot.builder()
                 .doctor(doctor)
                 .startTime(requestSlotDto.getStartTime())
@@ -131,6 +137,17 @@ public class DoctorServiceImpl implements DoctorService {
     public SlotDto updateSlot(Long slotId, RequestSlotDto requestSlotDto) {
         Slot slot = slotRepository.findById(slotId)
                 .orElseThrow(() -> new ResourceNotFoundException("Slot not found with id: " + slotId));
+
+        List<Slot> overlappingSlots = slotRepository.findOverlappingSlots(
+                        slot.getDoctor().getId(),
+                        requestSlotDto.getStartTime(),
+                        requestSlotDto.getEndTime()
+                ).stream()
+                .filter(s -> !s.getId().equals(slotId))
+                .toList();
+        if (!overlappingSlots.isEmpty()) {
+            throw new IllegalArgumentException("Updated slot overlaps with an existing slot.");
+        }
 
         slot.setStartTime(requestSlotDto.getStartTime());
         slot.setEndTime(requestSlotDto.getEndTime());

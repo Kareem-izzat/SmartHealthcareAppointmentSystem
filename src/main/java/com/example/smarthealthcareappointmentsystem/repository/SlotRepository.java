@@ -1,11 +1,19 @@
 package com.example.smarthealthcareappointmentsystem.repository;
 
-import com.example.smarthealthcareappointmentsystem.entites.Doctor;
 import com.example.smarthealthcareappointmentsystem.entites.Slot;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
+
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface SlotRepository extends JpaRepository<Slot,Long> {
     List<Slot> findByDoctorId(Long doctorId);
+    @Query("SELECT s FROM Slot s WHERE s.doctor.id = :doctorId " +
+            "AND ((:startTime < s.endTime AND :endTime > s.startTime))")
+    List<Slot> findOverlappingSlots(@Param("doctorId") Long doctorId,
+                                    @Param("startTime") LocalDateTime startTime,
+                                    @Param("endTime") LocalDateTime endTime);
 }
