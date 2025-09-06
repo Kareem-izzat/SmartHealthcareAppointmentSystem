@@ -11,6 +11,8 @@ import java.util.List;
 
 public interface SlotRepository extends JpaRepository<Slot,Long> {
     List<Slot> findByDoctorId(Long doctorId);
+    // this is a custom query to check if there are overlapping slots to prevent
+    //dr from making overlapped slots
     @Query("SELECT s FROM Slot s WHERE s.doctor.id = :doctorId " +
             "AND ((:startTime < s.endTime AND :endTime > s.startTime))")
     List<Slot> findOverlappingSlots(@Param("doctorId") Long doctorId,

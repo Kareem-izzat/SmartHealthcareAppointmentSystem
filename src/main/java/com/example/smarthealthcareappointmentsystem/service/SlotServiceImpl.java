@@ -28,7 +28,7 @@ public class SlotServiceImpl implements  SlotService {
     public SlotDto createSlot(Long doctorId, RequestSlotDto requestSlotDto) {
         Doctor doctor = doctorRepository.findById(doctorId)
                 .orElseThrow(() -> new ResourceNotFoundException("Doctor not found with id "+ doctorId));
-
+        // check overlapping
         List<Slot> overlappingSlots=slotRepository.findOverlappingSlots( doctorId,
                 requestSlotDto.getStartTime(),
                 requestSlotDto.getEndTime());
@@ -57,6 +57,7 @@ public class SlotServiceImpl implements  SlotService {
         Slot slot = slotRepository.findById(slotId)
                 .orElseThrow(() -> new ResourceNotFoundException("Slot not found with id: " + slotId));
 
+        // check overlapping excluding the updated slot
         List<Slot> overlappingSlots = slotRepository.findOverlappingSlots(
                         slot.getDoctor().getId(),
                         requestSlotDto.getStartTime(),

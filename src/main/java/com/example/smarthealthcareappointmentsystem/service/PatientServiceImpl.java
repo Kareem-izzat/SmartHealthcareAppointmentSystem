@@ -40,7 +40,7 @@ public class PatientServiceImpl implements PatientService {
         patient.setPhone(patientDto.getPhone());
         patient.setDateOfBirth(patientDto.getDateOfBirth());
         patient.setMedicalHistory(patientDto.getMedicalHistory());
-
+        // check if exist before encode
         if (patientDto.getPassword() != null && !patientDto.getPassword().isBlank()) {
             patient.setPassword(passwordEncoder.encode(patientDto.getPassword()));
         }

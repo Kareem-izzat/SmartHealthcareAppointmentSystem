@@ -1,0 +1,61 @@
+
+
+# View profile
+GET http://localhost:8080/api/patient/6
+
+###
+
+# Update profile
+PUT http://localhost:8080/api/patient/6
+Content-Type: application/json
+
+{
+  "firstName": "Alice",
+  "lastName": "Brown",
+  "email": "alice.brown@example.com",
+  "password": "Patient123!",
+  "phone": "555987654",
+  "dateOfBirth": "1990-05-26",
+  "medicalHistory": "Allergic to penicillin"
+}
+
+###
+
+# Get doctors by specialty
+GET http://localhost:8080/api/patient/doctors?specialty=Cardiology
+
+###
+
+# Get available slots for a doctor
+GET http://localhost:8080/api/patient/doctors/4/slots
+
+###
+
+# Book appointment
+POST http://localhost:8080/api/patient/6/appointments
+Content-Type: application/json
+
+{
+  "slotId": 1,
+  "patientId": 4
+}
+
+###
+
+# Get all appointments for a patient
+GET http://localhost:8080/api/patient/6/appointments
+
+###
+
+# Cancel appointment
+DELETE http://localhost:8080/api/patient/6/appointments/1
+
+###
+
+# Get prescriptions for a patient
+GET http://localhost:8080/api/patient/6/prescriptions
+
+###
+
+# Get medical record
+GET http://localhost:8080/api/patient/6/medical-record

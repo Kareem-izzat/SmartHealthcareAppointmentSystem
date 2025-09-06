@@ -16,7 +16,7 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/admin")
 @RequiredArgsConstructor
-
+// admin will create and edit patients and drs
 public class AdminController {
     private final DoctorService doctorService;
     private final PatientService patientService;

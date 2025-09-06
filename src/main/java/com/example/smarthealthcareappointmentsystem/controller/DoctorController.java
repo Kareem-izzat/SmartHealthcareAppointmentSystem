@@ -16,6 +16,8 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/doctor")
 @RequiredArgsConstructor
+
+// dr can update appointments slots for himself and view his patients and appointments
 public class DoctorController {
 
 

@@ -48,6 +48,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
     @Override
     public PrescriptionDto addPrescription(RequestPrescriptionDto dto) {
+        // check existance for params
         Patient patient = patientRepository.findById(dto.getPatientId())
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Patient not found with id: " + dto.getPatientId()));
@@ -74,7 +75,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
         Prescription savedPrescription = prescriptionRepository.save(prescription);
 
-
+        // append prescriprion to record
         medicalRecordService.addPrescriptionToRecord(patient.getId(), savedPrescription);
 
 

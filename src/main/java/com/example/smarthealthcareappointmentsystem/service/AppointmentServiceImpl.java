@@ -6,7 +6,6 @@ import com.example.smarthealthcareappointmentsystem.exception.BadRequestExceptio
 import com.example.smarthealthcareappointmentsystem.exception.ResourceNotFoundException;
 import com.example.smarthealthcareappointmentsystem.mapper.AppointmentMapper;
 import com.example.smarthealthcareappointmentsystem.repository.AppointmentRepository;
-import com.example.smarthealthcareappointmentsystem.repository.DoctorRepository;
 import com.example.smarthealthcareappointmentsystem.repository.PatientRepository;
 import com.example.smarthealthcareappointmentsystem.repository.SlotRepository;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +23,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     private final AppointmentRepository appointmentRepository;
     private final AppointmentMapper appointmentMapper;
     private final PatientRepository patientRepository;
-    private final DoctorRepository doctorRepository;
+
     private final SlotRepository slotRepository;
 
     @Override
@@ -51,13 +50,13 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
     @Override
     public AppointmentDto bookAppointment(Long patientId, Long slotId) {
-
+        // check if patient exist
         Patient patient = patientRepository.findById(patientId)
                 .orElseThrow(() -> new ResourceNotFoundException("Patient not found with id " + patientId));
-
+        // check if slot exist
         Slot slot = slotRepository.findById(slotId)
                 .orElseThrow(() -> new ResourceNotFoundException("Slot not found with id " + slotId));
-
+        // check if slot evailable
         if (!slot.isAvailable()) {
             throw new BadRequestException("Slot is already booked");
         }
@@ -67,6 +66,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         Appointment appointment = new Appointment();
         appointment.setPatient(patient);
         appointment.setSlot(slot);
+        // status is scheduled and slot isnt availabe
         appointment.setStatus(AppointmentStatus.SCHEDULED);
 
         slot.setAvailable(false);
@@ -77,6 +77,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
     @Override
     public List<AppointmentDto> getPatientAppointments(Long patientId) {
+        // check existance
         Patient patient = patientRepository.findById(patientId)
                 .orElseThrow(() -> new ResourceNotFoundException("Patient not found with id " + patientId));
 
@@ -88,12 +89,13 @@ public class AppointmentServiceImpl implements AppointmentService {
     public AppointmentDto cancelAppointment(Long patientId, Long appointmentId) {
         Appointment appointment = appointmentRepository.findById(appointmentId)
                 .orElseThrow(() -> new ResourceNotFoundException("Appointment not found with id " + appointmentId));
-
+        // check if appointment match the user
         if (!appointment.getPatient().getId().equals(patientId)) {
             throw new BadRequestException("This appointment does not belong to the patient");
         }
 
         appointment.setStatus(AppointmentStatus.CANCELLED);
+        // reset slot free
         appointment.getSlot().setAvailable(true);
         slotRepository.save(appointment.getSlot());
 

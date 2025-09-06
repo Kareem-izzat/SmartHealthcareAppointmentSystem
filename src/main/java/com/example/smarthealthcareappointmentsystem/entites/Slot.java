@@ -13,6 +13,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+// slot is made so it easier to handle booking conflict
 public class Slot {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -24,6 +25,5 @@ public class Slot {
 
     private LocalDateTime startTime;
     private LocalDateTime endTime;
-
     private boolean available = true;
 }

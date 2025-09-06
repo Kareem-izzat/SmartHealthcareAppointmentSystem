@@ -12,6 +12,7 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
+// user will be a base class of all user holding similar attributes
 public abstract class User {
 
     @Id

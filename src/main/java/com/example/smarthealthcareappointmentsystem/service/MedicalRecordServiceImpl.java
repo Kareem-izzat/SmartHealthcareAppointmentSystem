@@ -23,6 +23,8 @@ public class MedicalRecordServiceImpl implements MedicalRecordService {
     private final PatientRepository patientRepository;
     private final MedicalRecordMapper medicalRecordMapper;
 
+    // this is needed because prescription will be appended to ot so
+    // if the patient is a first time user it will automaticly create dont exist
     @Override
     public MedicalRecordDto getOrCreateRecord(Long patientId) {
         MedicalRecord record = getOrCreate(patientId);
