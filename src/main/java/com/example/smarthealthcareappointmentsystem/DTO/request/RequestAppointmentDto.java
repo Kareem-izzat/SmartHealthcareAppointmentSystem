@@ -1,15 +1,13 @@
 package com.example.smarthealthcareappointmentsystem.DTO.request;
 
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
-@Data
+
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Builder
 public class RequestAppointmentDto {
     @NotNull(message = "Slot ID is required")
     private Long slotId;

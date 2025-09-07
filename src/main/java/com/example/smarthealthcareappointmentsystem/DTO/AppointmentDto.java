@@ -4,7 +4,10 @@ import com.example.smarthealthcareappointmentsystem.entites.AppointmentStatus;
 import lombok.*;
 import java.time.LocalDateTime;
 
-@Data
+
+
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

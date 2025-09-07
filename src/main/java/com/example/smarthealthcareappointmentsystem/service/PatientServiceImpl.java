@@ -3,6 +3,7 @@ package com.example.smarthealthcareappointmentsystem.service;
 import com.example.smarthealthcareappointmentsystem.DTO.PatientDto;
 import com.example.smarthealthcareappointmentsystem.DTO.request.RequestPatientDto;
 import com.example.smarthealthcareappointmentsystem.entites.Patient;
+import com.example.smarthealthcareappointmentsystem.entites.Role;
 import com.example.smarthealthcareappointmentsystem.exception.ResourceNotFoundException;
 
 import com.example.smarthealthcareappointmentsystem.mapper.PatientMapper;
@@ -58,8 +59,8 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public PatientDto addPatient(RequestPatientDto patientDto) {
         Patient patient = patientMapper.toEntity(patientDto);
-
         patient.setPassword(passwordEncoder.encode(patientDto.getPassword()));
+        patient.setRole(Role.PATIENT);
         Patient saved = patientRepository.save(patient);
         return patientMapper.toDto(saved);
     }

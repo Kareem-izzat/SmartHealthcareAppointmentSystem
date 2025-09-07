@@ -24,8 +24,7 @@ public class Doctor extends User {
 
     @OneToMany(
             mappedBy = "doctor",
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
+            cascade = CascadeType.ALL
     )
     private List<Slot> slots;
 }
