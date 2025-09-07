@@ -58,6 +58,7 @@ public class PatientServiceImpl implements PatientService {
     @Override
     public PatientDto addPatient(RequestPatientDto patientDto) {
         Patient patient = patientMapper.toEntity(patientDto);
+
         patient.setPassword(passwordEncoder.encode(patientDto.getPassword()));
         Patient saved = patientRepository.save(patient);
         return patientMapper.toDto(saved);

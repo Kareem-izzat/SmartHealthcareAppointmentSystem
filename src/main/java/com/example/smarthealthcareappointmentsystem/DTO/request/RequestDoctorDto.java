@@ -27,7 +27,7 @@ public class RequestDoctorDto {
     private String email;
 
     @NotBlank(message = "Password is required")
-    @Size(min = 6)
+    @Size(min = 6,max=20,message = "minimum size is 6 and max is 20")
     private String password;
 
     @NotBlank(message = "Phone is required")
