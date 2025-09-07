@@ -46,6 +46,7 @@ public class SlotServiceImpl implements  SlotService {
         return slotMapper.toSlotDto(slot);
     }
     @Override
+    @Transactional(readOnly = true)
     public List<SlotDto> getAllSlots(Long doctorId) {
         return slotRepository.findByDoctorId(doctorId)
                 .stream()
@@ -85,6 +86,7 @@ public class SlotServiceImpl implements  SlotService {
         slotRepository.delete(slot);
     }
     @Override
+    @Transactional(readOnly = true)
     public List<SlotDto> getAvailableSlots(Long doctorId) {
         return slotRepository.findByDoctorId(doctorId).stream()
                 .filter(Slot::isAvailable)

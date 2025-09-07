@@ -27,6 +27,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     private final SlotRepository slotRepository;
 
     @Override
+    @Transactional(readOnly = true)
     public List<AppointmentDto> getAppointments(Long doctorId) {
         return appointmentRepository.findBySlot_Doctor_Id(doctorId).stream()
                 .map(appointmentMapper::toDto)
@@ -34,6 +35,7 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public AppointmentDto getAppointmentById(Long doctorId, Long appointmentId) {
         Appointment appointment = appointmentRepository.findByIdAndSlot_Doctor_Id(appointmentId, doctorId)
                 .orElseThrow(() -> new ResourceNotFoundException("Appointment not found for doctorId: " + doctorId));
@@ -76,6 +78,7 @@ public class AppointmentServiceImpl implements AppointmentService {
         return appointmentMapper.toDto(saved);
     }
     @Override
+    @Transactional(readOnly = true)
     public List<AppointmentDto> getPatientAppointments(Long patientId) {
         // check existance
         Patient patient = patientRepository.findById(patientId)

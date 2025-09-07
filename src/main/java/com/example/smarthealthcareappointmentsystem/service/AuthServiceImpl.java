@@ -7,6 +7,7 @@ import com.example.smarthealthcareappointmentsystem.DTO.request.RequestPatientDt
 import com.example.smarthealthcareappointmentsystem.entites.Doctor;
 import com.example.smarthealthcareappointmentsystem.entites.Patient;
 import com.example.smarthealthcareappointmentsystem.entites.Role;
+import com.example.smarthealthcareappointmentsystem.exception.BadRequestException;
 import com.example.smarthealthcareappointmentsystem.mapper.DoctorMapper;
 import com.example.smarthealthcareappointmentsystem.mapper.PatientMapper;
 import com.example.smarthealthcareappointmentsystem.repository.DoctorRepository;
@@ -20,9 +21,11 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class AuthServiceImpl implements AuthService {
     private final AuthenticationManager authenticationManager;
     private final JwtUtils jwtUtils;
@@ -48,7 +51,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public String registerPatient(RequestPatientDto dto){
         if (patientRepository.existsByEmail(dto.getEmail())) {
-            throw new IllegalArgumentException("Email is already in use by another patient.");
+            throw new BadRequestException("Email is already in use by another patient.");
         }
         Patient patient = patientMapper.toEntity(dto);
 
@@ -63,7 +66,7 @@ public class AuthServiceImpl implements AuthService {
     @Override
     public String registerDoctor(RequestDoctorDto dto){
         if (doctorRepository.existsByEmail(dto.getEmail())) {
-            throw new IllegalArgumentException("Email is already in use by another doctor.");
+            throw new BadRequestException("Email is already in use by another doctor.");
         }
 
         Doctor doctor = doctorMapper.toEntity(dto);
