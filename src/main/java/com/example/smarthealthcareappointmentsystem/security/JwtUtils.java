@@ -1,4 +1,4 @@
-package com.example.smarthealthcareappointmentsystem.config;
+package com.example.smarthealthcareappointmentsystem.security;
 
 import com.example.smarthealthcareappointmentsystem.entites.Role;
 import io.jsonwebtoken.Claims;
