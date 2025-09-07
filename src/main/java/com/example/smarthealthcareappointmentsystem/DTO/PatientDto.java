@@ -2,7 +2,10 @@ package com.example.smarthealthcareappointmentsystem.DTO;
 import lombok.*;
 import java.time.LocalDate;
 
-@Data
+
+
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder

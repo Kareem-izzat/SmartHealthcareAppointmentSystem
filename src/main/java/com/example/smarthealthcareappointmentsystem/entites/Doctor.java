@@ -22,6 +22,9 @@ public class Doctor extends User {
     private String specialty;
     private int yearsOfExperience;
 
-    @OneToMany(mappedBy = "doctor", cascade = CascadeType.ALL)
+    @OneToMany(
+            mappedBy = "doctor",
+            cascade = CascadeType.ALL
+    )
     private List<Slot> slots;
 }

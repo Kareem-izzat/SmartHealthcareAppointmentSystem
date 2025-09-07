@@ -4,14 +4,15 @@ import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
-@Data
+
+
+@Getter
+@Setter
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -27,7 +28,7 @@ public class RequestDoctorDto {
     private String email;
 
     @NotBlank(message = "Password is required")
-    @Size(min = 6)
+    @Size(min = 6,max=20,message = "minimum size is 6 and max is 20")
     private String password;
 
     @NotBlank(message = "Phone is required")

@@ -9,7 +9,7 @@ import com.example.smarthealthcareappointmentsystem.entites.mongo.Prescription;
 import com.example.smarthealthcareappointmentsystem.exception.ResourceNotFoundException;
 import com.example.smarthealthcareappointmentsystem.mapper.mongo.PrescriptionMapper;
 import com.example.smarthealthcareappointmentsystem.repository.*;
-import lombok.NoArgsConstructor;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -29,6 +29,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     private final MedicalRecordService medicalRecordService;
 
     @Override
+    @Transactional(readOnly = true)
     public List<PrescriptionDto> getPrescriptionsByDoctor(Long doctorId) {
         Doctor doctor = doctorRepository.findById(doctorId).orElseThrow(()-> new ResourceNotFoundException("Doctor not found with id" + doctorId));
         return prescriptionRepository.findByDoctorId(doctorId).stream()
@@ -37,6 +38,7 @@ public class PrescriptionServiceImpl implements PrescriptionService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<PrescriptionDto> getPrescriptionsByPatient(Long patientId) {
         Patient patient = patientRepository.findById(patientId)
                 .orElseThrow(() -> new ResourceNotFoundException("Patient not found with id " + patientId));

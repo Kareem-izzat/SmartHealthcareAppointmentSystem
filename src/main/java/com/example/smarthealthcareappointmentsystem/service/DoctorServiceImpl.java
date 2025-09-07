@@ -1,27 +1,23 @@
 package com.example.smarthealthcareappointmentsystem.service;
 
-import com.example.smarthealthcareappointmentsystem.DTO.AppointmentDto;
+
 import com.example.smarthealthcareappointmentsystem.DTO.DoctorDto;
-import com.example.smarthealthcareappointmentsystem.DTO.PrescriptionDto;
-import com.example.smarthealthcareappointmentsystem.DTO.SlotDto;
+
 import com.example.smarthealthcareappointmentsystem.DTO.request.RequestDoctorDto;
-import com.example.smarthealthcareappointmentsystem.DTO.request.RequestPrescriptionDto;
-import com.example.smarthealthcareappointmentsystem.DTO.request.RequestSlotDto;
+
 import com.example.smarthealthcareappointmentsystem.entites.*;
-import com.example.smarthealthcareappointmentsystem.entites.mongo.Prescription;
+
 import com.example.smarthealthcareappointmentsystem.exception.BadRequestException;
 import com.example.smarthealthcareappointmentsystem.exception.ResourceNotFoundException;
-import com.example.smarthealthcareappointmentsystem.mapper.AppointmentMapper;
+
 import com.example.smarthealthcareappointmentsystem.mapper.DoctorMapper;
-import com.example.smarthealthcareappointmentsystem.mapper.SlotMapper;
-import com.example.smarthealthcareappointmentsystem.mapper.mongo.PrescriptionMapper;
+
 import com.example.smarthealthcareappointmentsystem.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -36,6 +32,7 @@ public class DoctorServiceImpl implements DoctorService {
 
 
     @Override
+    @Transactional(readOnly = true)
     public List<DoctorDto> getAllDoctors() {
         return doctorRepository.findAll().stream()
                 .map(doctorMapper::toDto)
@@ -60,6 +57,7 @@ public class DoctorServiceImpl implements DoctorService {
 
     }
     @Override
+    @Transactional(readOnly = true)
     public DoctorDto getDoctorById(Long doctorId) {
         Doctor doctor=doctorRepository.findById(doctorId)
                 .orElseThrow(() -> new ResourceNotFoundException("Doctor not found with id " + doctorId));
@@ -67,8 +65,12 @@ public class DoctorServiceImpl implements DoctorService {
     }
     @Override
     public DoctorDto addDoctor(RequestDoctorDto doctorDto) {
+        if (doctorRepository.existsByEmail(doctorDto.getEmail())) {
+            throw new BadRequestException("Email is already in use");
+        }
         Doctor doctor = doctorMapper.toEntity(doctorDto);
         doctor.setPassword(passwordEncoder.encode(doctorDto.getPassword()));
+        doctor.setRole(Role.DOCTOR);
         Doctor savedDoctor = doctorRepository.save(doctor);
         return doctorMapper.toDto(savedDoctor);
     }
@@ -80,6 +82,7 @@ public class DoctorServiceImpl implements DoctorService {
         doctorRepository.deleteById(doctorId);
     }
     @Override
+    @Transactional(readOnly = true)
     public List<DoctorDto> searchDoctorsBySpecialty(String specialty) {
         return doctorRepository.findBySpecialty(specialty).stream()
                 .map(doctorMapper::toDto)

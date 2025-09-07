@@ -3,6 +3,8 @@ package com.example.smarthealthcareappointmentsystem.service;
 import com.example.smarthealthcareappointmentsystem.DTO.PatientDto;
 import com.example.smarthealthcareappointmentsystem.DTO.request.RequestPatientDto;
 import com.example.smarthealthcareappointmentsystem.entites.Patient;
+import com.example.smarthealthcareappointmentsystem.entites.Role;
+import com.example.smarthealthcareappointmentsystem.exception.BadRequestException;
 import com.example.smarthealthcareappointmentsystem.exception.ResourceNotFoundException;
 
 import com.example.smarthealthcareappointmentsystem.mapper.PatientMapper;
@@ -24,6 +26,7 @@ public class PatientServiceImpl implements PatientService {
     private final PasswordEncoder passwordEncoder;
 
     @Override
+    @Transactional(readOnly = true)
     public List<PatientDto> getAllPatients() {
         return patientRepository.findAll().stream()
                 .map(patientMapper::toDto)
@@ -50,6 +53,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public PatientDto getPatientById(Long patientId) {
         Patient patient = patientRepository.findById(patientId)
                 .orElseThrow(() -> new ResourceNotFoundException("Patient not found with id " + patientId));
@@ -57,8 +61,12 @@ public class PatientServiceImpl implements PatientService {
     }
     @Override
     public PatientDto addPatient(RequestPatientDto patientDto) {
+        if (patientRepository.existsByEmail(patientDto.getEmail())) {
+            throw new BadRequestException("Email is already in use by another patient.");
+        }
         Patient patient = patientMapper.toEntity(patientDto);
         patient.setPassword(passwordEncoder.encode(patientDto.getPassword()));
+        patient.setRole(Role.PATIENT);
         Patient saved = patientRepository.save(patient);
         return patientMapper.toDto(saved);
     }
