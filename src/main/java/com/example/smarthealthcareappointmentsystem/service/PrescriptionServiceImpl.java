@@ -9,7 +9,7 @@ import com.example.smarthealthcareappointmentsystem.entites.mongo.Prescription;
 import com.example.smarthealthcareappointmentsystem.exception.ResourceNotFoundException;
 import com.example.smarthealthcareappointmentsystem.mapper.mongo.PrescriptionMapper;
 import com.example.smarthealthcareappointmentsystem.repository.*;
-import lombok.NoArgsConstructor;
+
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;

@@ -1,27 +1,23 @@
 package com.example.smarthealthcareappointmentsystem.service;
 
-import com.example.smarthealthcareappointmentsystem.DTO.AppointmentDto;
+
 import com.example.smarthealthcareappointmentsystem.DTO.DoctorDto;
-import com.example.smarthealthcareappointmentsystem.DTO.PrescriptionDto;
-import com.example.smarthealthcareappointmentsystem.DTO.SlotDto;
+
 import com.example.smarthealthcareappointmentsystem.DTO.request.RequestDoctorDto;
-import com.example.smarthealthcareappointmentsystem.DTO.request.RequestPrescriptionDto;
-import com.example.smarthealthcareappointmentsystem.DTO.request.RequestSlotDto;
+
 import com.example.smarthealthcareappointmentsystem.entites.*;
-import com.example.smarthealthcareappointmentsystem.entites.mongo.Prescription;
+
 import com.example.smarthealthcareappointmentsystem.exception.BadRequestException;
 import com.example.smarthealthcareappointmentsystem.exception.ResourceNotFoundException;
-import com.example.smarthealthcareappointmentsystem.mapper.AppointmentMapper;
+
 import com.example.smarthealthcareappointmentsystem.mapper.DoctorMapper;
-import com.example.smarthealthcareappointmentsystem.mapper.SlotMapper;
-import com.example.smarthealthcareappointmentsystem.mapper.mongo.PrescriptionMapper;
+
 import com.example.smarthealthcareappointmentsystem.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 

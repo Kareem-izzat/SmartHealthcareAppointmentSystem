@@ -1,12 +1,8 @@
 package com.example.smarthealthcareappointmentsystem.security;
 
-import com.example.smarthealthcareappointmentsystem.entites.Admin;
-import com.example.smarthealthcareappointmentsystem.entites.Doctor;
-import com.example.smarthealthcareappointmentsystem.entites.Patient;
+
 import com.example.smarthealthcareappointmentsystem.entites.User;
-import com.example.smarthealthcareappointmentsystem.repository.AdminRepository;
-import com.example.smarthealthcareappointmentsystem.repository.DoctorRepository;
-import com.example.smarthealthcareappointmentsystem.repository.PatientRepository;
+
 import com.example.smarthealthcareappointmentsystem.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;

@@ -1,7 +1,6 @@
 package com.example.smarthealthcareappointmentsystem.security;
 
 import com.example.smarthealthcareappointmentsystem.entites.Role;
-import com.example.smarthealthcareappointmentsystem.entites.User;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import org.springframework.security.core.GrantedAuthority;
