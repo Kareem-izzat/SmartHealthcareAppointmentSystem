@@ -1,7 +1,6 @@
 package com.example.smarthealthcareappointmentsystem.security;
 
 import com.example.smarthealthcareappointmentsystem.entites.User;
-import com.example.smarthealthcareappointmentsystem.exception.ResourceNotFoundException;
 import com.example.smarthealthcareappointmentsystem.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
