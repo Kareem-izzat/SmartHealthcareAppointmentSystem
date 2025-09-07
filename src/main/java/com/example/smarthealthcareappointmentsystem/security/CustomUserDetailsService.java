@@ -20,9 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional(readOnly = true)
 public class CustomUserDetailsService implements UserDetailsService {
     private final UserRepository userRepository;
-    private final PatientRepository patientRepository;
-    private final AdminRepository adminRepository;
-    private final DoctorRepository doctorRepository;
+
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findByEmail(email)

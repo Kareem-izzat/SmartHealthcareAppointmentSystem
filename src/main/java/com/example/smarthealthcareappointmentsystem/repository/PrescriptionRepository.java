@@ -2,7 +2,7 @@ package com.example.smarthealthcareappointmentsystem.repository;
 
 import com.example.smarthealthcareappointmentsystem.entites.mongo.Prescription;
 import org.springframework.data.mongodb.repository.MongoRepository;
-import org.springframework.stereotype.Repository;
+
 
 import java.util.List;
 
