@@ -100,14 +100,14 @@ class DoctorServiceCrudTests {
     }
 
     @Test
-    void testAddDoctor_EmailAlreadyExists() {
+    void testAddDoctorEmailAlreadyExists() {
         when(doctorRepository.existsByEmail(requestDoctorDto.getEmail())).thenReturn(true);
         assertThrows(BadRequestException.class, () -> doctorService.addDoctor(requestDoctorDto));
     }
 
-    // ===== GET DOCTOR =====
+
     @Test
-    void testGetDoctorById_Success() {
+    void testGetDoctorById() {
         when(doctorRepository.findById(1L)).thenReturn(Optional.of(doctor));
         when(doctorMapper.toDto(doctor)).thenReturn(doctorDto);
 
