@@ -33,7 +33,7 @@ public class LoggingAspect {
     @Pointcut("within(com.example.smarthealthcareappointmentsystem..*)")
     public void applicationPackagePointcut() {}
 
-    @AfterReturning(pointcut = "prescriptionServicePointcut() && appointmentServicePointcut()")
+    @AfterReturning(pointcut = "prescriptionServicePointcut() || appointmentServicePointcut()")
     public void afterReturning(JoinPoint joinPoint) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();
@@ -51,7 +51,7 @@ public class LoggingAspect {
 
 
     // log info after throwing any exception
-    @AfterThrowing(pointcut = "applicationPackagePointcut() || springBeanPointcut()", throwing = "e")
+    @AfterThrowing(pointcut = "execution(* com.example.smarthealthcareappointmentsystem.service..*(..))", throwing = "e")
     public void logAfterThrowing(JoinPoint joinPoint, Throwable e) {
         log.error("Exception in {}.{}() with message = {} and cause = {}",
                 joinPoint.getSignature().getDeclaringTypeName(),

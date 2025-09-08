@@ -21,4 +21,5 @@ public class MedicalRecord {
     private List<Prescription> prescriptions;
     private List<String> notes;
 
+
 }

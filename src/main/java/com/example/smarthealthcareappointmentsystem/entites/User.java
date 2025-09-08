@@ -3,6 +3,10 @@ package com.example.smarthealthcareappointmentsystem.entites;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
+import jakarta.persistence.Cacheable;
+
 
 @Entity
 @Table(name = "users")
@@ -13,6 +17,8 @@ import lombok.experimental.SuperBuilder;
 @NoArgsConstructor
 @AllArgsConstructor
 @SuperBuilder
+
+
 // user will be a base class of all user holding similar attributes
 public abstract class User {
 
