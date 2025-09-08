@@ -1,0 +1,74 @@
+### Admin login
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "john.doe2@example.com",
+  "password": "Doctor123!"
+}
+
+### Copy the token from response for next requests
+# Example token variable:
+# {{ADMIN_TOKEN}}
+
+###
+
+### Register a new doctor (Admin only)
+POST http://localhost:8080/api/auth/register/doctor
+Content-Type: application/json
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZTJAZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3MzExNzA0LCJleHAiOjE3NTczMTUzMDR9.0CwP5vfHD4N3M-7vMt59fzV7oWoL5kvLiM-CVF8oEu-KhpDJaMVVzceyPBriypMaRAr4stkCYJpvFtec26wx8A
+
+
+{
+  "firstName": "John",
+  "lastName": "Doe",
+  "email": "john.doe2@example.com",
+  "password": "Doctor123!",
+  "phone": "1234567890",
+  "specialty": "Cardiology",
+  "yearsOfExperience": 5,
+  "slots": []
+}
+
+###
+
+### Register a new patient (Admin only)
+POST http://localhost:8080/api/auth/register/patient
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NzI2Njk1NSwiZXhwIjoxNzU3MjcwNTU1fQ.FLMS9wN_oAJDBZAiCojxVFuHHTqi3XAg2-QZxVLCwTQDhxIB_k8ZWgFeJbv4g5R45H6YrGX1Cl_6IAkihI8m8Q
+Content-Type: application/json
+
+{
+  "firstName": "Alice",
+  "lastName": "Smith",
+  "email": "alice2.smith@example.com",
+  "password": "Patient123!"
+}
+
+###
+
+### Attempt to register a doctor without token (should fail)
+POST http://localhost:8080/api/auth/register/doctor
+Content-Type: application/json
+
+{
+  "firstName": "Invalid",
+  "lastName": "User",
+  "email": "invalid@example.com",
+  "password": "Invalid123!"
+}
+
+###
+
+### Attempt to register a patient with a doctor token (should fail)
+# Replace with a doctor token if you have one
+POST http://localhost:8080/api/auth/register/patient
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZTJAZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3MjY4MDE4LCJleHAiOjE3NTcyNzE2MTh9.flbXw8gtTDWMvPYLQEA2y8YrzurDNSWJSOR_cLWZKeCndrEXawLKgZh1c6Jl8Y9dEC1jv3wUpWJHAKdUFD9_Zw
+Content-Type: application/json
+
+{
+  "firstName": "Bob",
+  "lastName": "Brown",
+  "email": "bob.brown@example.com",
+  "password": "Patient123!"
+}
+
