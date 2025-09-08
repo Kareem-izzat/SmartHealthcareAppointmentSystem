@@ -18,7 +18,8 @@ import jakarta.persistence.Cacheable;
 @AllArgsConstructor
 @SuperBuilder
 
-
+@Cacheable
+@Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 // user will be a base class of all user holding similar attributes
 public abstract class User {
 
