@@ -3,7 +3,6 @@ package com.example.smarthealthcareappointmentsystem.entites;
 import jakarta.persistence.*;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-
 import java.util.List;
 
 @Entity
@@ -13,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 
 @SuperBuilder
+
 public class Doctor extends User {
 
     public Doctor() {

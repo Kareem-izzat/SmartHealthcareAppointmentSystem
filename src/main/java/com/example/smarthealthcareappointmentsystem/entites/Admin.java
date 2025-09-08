@@ -1,5 +1,4 @@
 package com.example.smarthealthcareappointmentsystem.entites;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.*;

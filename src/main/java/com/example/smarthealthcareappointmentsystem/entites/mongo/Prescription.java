@@ -1,5 +1,8 @@
 package com.example.smarthealthcareappointmentsystem.entites.mongo;
 
+import jakarta.persistence.Cacheable;
+import org.hibernate.annotations.Cache;
+import org.hibernate.annotations.CacheConcurrencyStrategy;
 import org.springframework.data.annotation.Id;
 
 import lombok.*;
@@ -14,6 +17,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
+
 public class Prescription {
     @Id
     private String id;
