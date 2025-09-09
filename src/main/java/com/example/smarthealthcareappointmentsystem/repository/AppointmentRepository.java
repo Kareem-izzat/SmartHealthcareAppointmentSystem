@@ -10,7 +10,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment,Long> {
     List<Appointment> findBySlot_Doctor_Id(Long doctorId);
 
         // doctor id will be acceses from slot
-    Optional<Appointment> findByIdAndSlot_Doctor_Id(Long appointmentId, Long doctorId);
+        Optional<Appointment> findByIdAndSlot_DoctorId(Long appointmentId, Long doctorId);
     List<Appointment> findByPatientId(Long patientId);
 
 }

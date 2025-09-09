@@ -1,7 +1,9 @@
 
 
 # View profile
-GET http://localhost:8080/api/patient/6
+GET http://localhost:8080/api/patient/11
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYXJlZW1hbHF1dG9iMjAwM0BnbWFpbC5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc1NzQwNTU3OSwiZXhwIjoxNzU3NDA5MTc5fQ.AkoIO4QBFKktGBhW1SqrYwzlwtGVK_uacK6IRyXtkK_M6_e07ftyv-GE88ooMtPG-YmK2L6Y0Ce2GcdhDXic6g
+
 
 ###
 
@@ -23,21 +25,24 @@ Content-Type: application/json
 
 # Get doctors by specialty
 GET http://localhost:8080/api/patient/doctors?specialty=Cardiology
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYXJlZW1hbHF1dG9iMjAwM0BnbWFpbC5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc1NzQwNTU3OSwiZXhwIjoxNzU3NDA5MTc5fQ.AkoIO4QBFKktGBhW1SqrYwzlwtGVK_uacK6IRyXtkK_M6_e07ftyv-GE88ooMtPG-YmK2L6Y0Ce2GcdhDXic6g
 
 ###
 
 # Get available slots for a doctor
-GET http://localhost:8080/api/patient/doctors/4/slots
+GET http://localhost:8080/api/patient/doctors/9/slots
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYXJlZW1hbHF1dG9iMjAwM0BnbWFpbC5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc1NzQxNzYzNywiZXhwIjoxNzU3NDIxMjM3fQ.X5BBaW6JDBU7Cdz2khCtE3BqoxiCxC4lFuMpOa05Z9Acp2SvhDBfSkZaL9Xm5Tatjk8sD6TlX7Heiht-Oz0lbQ
 
 ###
 
 # Book appointment
-POST http://localhost:8080/api/patient/6/appointments
+POST http://localhost:8080/api/patient/11/appointments
 Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYXJlZW1hbHF1dG9iMjAwM0BnbWFpbC5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc1NzQxNzYzNywiZXhwIjoxNzU3NDIxMjM3fQ.X5BBaW6JDBU7Cdz2khCtE3BqoxiCxC4lFuMpOa05Z9Acp2SvhDBfSkZaL9Xm5Tatjk8sD6TlX7Heiht-Oz0lbQ
 
 {
-  "slotId": 1,
-  "patientId": 4
+  "slotId": 4,
+  "patientId": 11
 }
 
 ###
@@ -49,8 +54,8 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYXJlZW1hbHF1dG9iMjAwM0Bnb
 ###
 
 # Cancel appointment
-DELETE http://localhost:8080/api/patient/11/appointments/2
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYXJlZW1hbHF1dG9iMjAwM0BnbWFpbC5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc1NzQwNTU3OSwiZXhwIjoxNzU3NDA5MTc5fQ.AkoIO4QBFKktGBhW1SqrYwzlwtGVK_uacK6IRyXtkK_M6_e07ftyv-GE88ooMtPG-YmK2L6Y0Ce2GcdhDXic6g
+DELETE http://localhost:8080/api/patient/11/appointments/4
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYXJlZW1hbHF1dG9iMjAwM0BnbWFpbC5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc1NzQxNzYzNywiZXhwIjoxNzU3NDIxMjM3fQ.X5BBaW6JDBU7Cdz2khCtE3BqoxiCxC4lFuMpOa05Z9Acp2SvhDBfSkZaL9Xm5Tatjk8sD6TlX7Heiht-Oz0lbQ
 
 ###
 

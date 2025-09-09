@@ -1,5 +1,6 @@
 package com.example.smarthealthcareappointmentsystem.aspect;
 
+import com.example.smarthealthcareappointmentsystem.DTO.request.RequestPrescriptionDto;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -35,16 +36,46 @@ public class LoggingAspect {
 
     @AfterReturning(pointcut = "prescriptionServicePointcut() || appointmentServicePointcut()")
     public void afterReturning(JoinPoint joinPoint) {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        String username = authentication.getName();
         String method = joinPoint.getSignature().getName();
         Object[] args = joinPoint.getArgs();
-        String details = switch (method) {
-            case "bookAppointment" -> "Patient [" + args[0] + "] booked appointment with slot [" + args[1] + "]";
-            case "cancelAppointment" -> "Patient [" + args[0] + "] cancelled appointment [" + args[1] + "]";
-            case "addPrescription" -> "Doctor [" + args[0] + "] added prescription for patient [" + args[1] + "]";
-            default -> "Executed " + method + " by user [" + username + "]";
-        };
+
+        String details;
+
+        switch (method) {
+            case "bookAppointment" ->
+                    details = String.format(
+                            "Booked appointment: patientId=%s, slotId=%s",
+                            args.length > 0 ? args[0] : "N/A",
+                            args.length > 1 ? args[1] : "N/A"
+                    );
+
+            case "cancelAppointment" ->
+                    details = String.format(
+                            "Cancelled appointment: patientId=%s, appointmentId=%s",
+                            args.length > 0 ? args[0] : "N/A",
+                            args.length > 1 ? args[1] : "N/A"
+                    );
+
+            case "addPrescription" -> {
+                if (args.length > 0) {
+                    RequestPrescriptionDto dto = (RequestPrescriptionDto) args[0];
+
+                    details = String.format(
+                            "Added prescription: doctorId=%s, patientId=%s, appointmentId=%s, medicines=%s, notes=%s",
+                            dto.getDoctorId(),
+                            dto.getPatientId(),
+                            dto.getAppointmentId(),
+                            dto.getMedicines(),
+                            dto.getNotes()
+                    );
+                } else {
+                    details = "addPrescription called with no arguments";
+                }
+            }
+
+            default ->
+                    details = String.format("Executed %s with args=%s", method, Arrays.toString(args));
+        }
 
         log.info(details);
     }
