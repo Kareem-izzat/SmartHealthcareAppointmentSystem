@@ -15,6 +15,7 @@ import com.example.smarthealthcareappointmentsystem.mapper.DoctorMapper;
 import com.example.smarthealthcareappointmentsystem.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -34,12 +35,14 @@ public class DoctorServiceImpl implements DoctorService {
 
     @Override
     @Transactional(readOnly = true)
+    @Cacheable(value = "doctors")
     public List<DoctorDto> getAllDoctors() {
         return doctorRepository.findAll().stream()
                 .map(doctorMapper::toDto)
                 .collect(Collectors.toList());
     }
     @Override
+    @CacheEvict(value = {"doctors", "doctorsBySpecialty"}, allEntries = true)
     public DoctorDto updateDoctorById(Long doctorId, RequestDoctorDto doctorDto){
         Doctor doctor = doctorRepository.findById(doctorId)
                 .orElseThrow(() -> new ResourceNotFoundException("Doctor not found with id " + doctorId));
@@ -59,13 +62,14 @@ public class DoctorServiceImpl implements DoctorService {
     }
     @Override
     @Transactional(readOnly = true)
-    @CacheEvict(value = "doctors", key = "#doctorId")
+    @Cacheable(value = "doctors", key = "#doctorId")
     public DoctorDto getDoctorById(Long doctorId) {
         Doctor doctor=doctorRepository.findById(doctorId)
                 .orElseThrow(() -> new ResourceNotFoundException("Doctor not found with id " + doctorId));
         return doctorMapper.toDto(doctor);
     }
     @Override
+    @CacheEvict(value = {"doctors", "doctorsBySpecialty"}, allEntries = true)
     public DoctorDto addDoctor(RequestDoctorDto doctorDto) {
         if (doctorRepository.existsByEmail(doctorDto.getEmail())) {
             throw new BadRequestException("Email is already in use");
@@ -77,6 +81,7 @@ public class DoctorServiceImpl implements DoctorService {
         return doctorMapper.toDto(savedDoctor);
     }
     @Override
+    @CacheEvict(value = {"doctors", "doctorsBySpecialty"}, allEntries = true)
     public void RemoveDoctorById(Long doctorId) {
         if (!doctorRepository.existsById(doctorId)) {
             throw new ResourceNotFoundException("Doctor not found with id " + doctorId);
@@ -85,7 +90,7 @@ public class DoctorServiceImpl implements DoctorService {
     }
     @Override
     @Transactional(readOnly = true)
-    @CacheEvict(value = "doctorsBySpecialty", key = "#specialty")
+    @Cacheable(value = "doctorsBySpecialty", key = "#specialty")
     public List<DoctorDto> searchDoctorsBySpecialty(String specialty) {
         return doctorRepository.findBySpecialty(specialty).stream()
                 .map(doctorMapper::toDto)

@@ -43,17 +43,21 @@ Content-Type: application/json
 ###
 
 # Get all appointments for a patient
-GET http://localhost:8080/api/patient/6/appointments
+GET http://localhost:8080/api/patient/11/appointments
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYXJlZW1hbHF1dG9iMjAwM0BnbWFpbC5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc1NzQwNTU3OSwiZXhwIjoxNzU3NDA5MTc5fQ.AkoIO4QBFKktGBhW1SqrYwzlwtGVK_uacK6IRyXtkK_M6_e07ftyv-GE88ooMtPG-YmK2L6Y0Ce2GcdhDXic6g
 
 ###
 
 # Cancel appointment
-DELETE http://localhost:8080/api/patient/6/appointments/1
+DELETE http://localhost:8080/api/patient/11/appointments/2
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYXJlZW1hbHF1dG9iMjAwM0BnbWFpbC5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc1NzQwNTU3OSwiZXhwIjoxNzU3NDA5MTc5fQ.AkoIO4QBFKktGBhW1SqrYwzlwtGVK_uacK6IRyXtkK_M6_e07ftyv-GE88ooMtPG-YmK2L6Y0Ce2GcdhDXic6g
 
 ###
 
 # Get prescriptions for a patient
-GET http://localhost:8080/api/patient/6/prescriptions
+GET http://localhost:8080/api/patient/11/prescriptions
+Authorization: Bearer yJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYXJlZW1hbHF1dG9iMjAwM0BnbWFpbC5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc1NzQwNTM4NywiZXhwIjoxNzU3NDA4OTg3fQ.Z9uQLpDx_njUk2nxfAbpHmH73TAXRpLid6CcZIJQH56hwP9P52RhXFWVNwe6zRrS61fWCqZmiW_nC_UznhV1hQ
+
 
 ###
 

@@ -2,7 +2,7 @@
 
 # Get all appointments for a doctor
 GET http://localhost:8080/api/doctor/9/appointments
-Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZTJAZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3MzIzMDMzLCJleHAiOjE3NTczMjY2MzN9.NOZtY_b3HiPu1FYDStPvXOuaz51k0rK0SBO861i2kNlHcxuzai3laMRSplTB_n_1A4cLpmPgUOo9rDnl5tD_tg
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZTJAZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NDAxMjQxLCJleHAiOjE3NTc0MDQ4NDF9.WkE6RtqyXWQaxqTq1l9wVjnpY0Q1Fq36MyZ7jMsZ9-fReICNomCQWa_cO09sInUq0WicxbDTJrXm4fjDn58Avg
 ###
 
 # Get appointment by ID
@@ -18,21 +18,24 @@ PUT http://localhost:8080/api/doctor/4/appointments/1/complete
 ###
 
 # Add prescription
-POST http://localhost:8080/api/doctor/4/prescriptions
+POST http://localhost:8080/api/doctor/9/prescriptions
 Content-Type: application/json
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZTJAZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NDAxMjQxLCJleHAiOjE3NTc0MDQ4NDF9.WkE6RtqyXWQaxqTq1l9wVjnpY0Q1Fq36MyZ7jMsZ9-fReICNomCQWa_cO09sInUq0WicxbDTJrXm4fjDn58Avg
 
 {
-  "patientId": 6,
-  "doctorId": 4,
-  "appointmentId": 1,
-  "medicines": ["Paracetamol 500mg", "Ibuprofen 200mg"],
+  "patientId": 11,
+  "doctorId": 9,
+  "appointmentId": 2,
+  "medicines": ["Paracetamol 400", "Ibuprofen 200mg"],
   "notes": "Take medicines after meals"
 }
 
 ###
 
 # Get all prescriptions for a doctor
-GET http://localhost:8080/api/doctor/4/prescriptions
+GET http://localhost:8080/api/doctor/9/prescriptions
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZTJAZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NDAxMjQxLCJleHAiOjE3NTc0MDQ4NDF9.WkE6RtqyXWQaxqTq1l9wVjnpY0Q1Fq36MyZ7jMsZ9-fReICNomCQWa_cO09sInUq0WicxbDTJrXm4fjDn58Avg
+
 
 ###
 
