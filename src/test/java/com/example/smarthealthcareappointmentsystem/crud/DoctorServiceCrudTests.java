@@ -113,7 +113,7 @@ class DoctorServiceCrudTests {
 
         DoctorDto result = doctorService.getDoctorById(1L);
 
-        assertEquals("John", result.getFirstName());
+        assertEquals("kareem", result.getFirstName());
         verify(doctorRepository).findById(1L);
     }
 

@@ -14,6 +14,7 @@ import com.example.smarthealthcareappointmentsystem.mapper.DoctorMapper;
 
 import com.example.smarthealthcareappointmentsystem.repository.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -58,6 +59,7 @@ public class DoctorServiceImpl implements DoctorService {
     }
     @Override
     @Transactional(readOnly = true)
+    @CacheEvict(value = "doctors", key = "#doctorId")
     public DoctorDto getDoctorById(Long doctorId) {
         Doctor doctor=doctorRepository.findById(doctorId)
                 .orElseThrow(() -> new ResourceNotFoundException("Doctor not found with id " + doctorId));
@@ -83,6 +85,7 @@ public class DoctorServiceImpl implements DoctorService {
     }
     @Override
     @Transactional(readOnly = true)
+    @CacheEvict(value = "doctorsBySpecialty", key = "#specialty")
     public List<DoctorDto> searchDoctorsBySpecialty(String specialty) {
         return doctorRepository.findBySpecialty(specialty).stream()
                 .map(doctorMapper::toDto)
