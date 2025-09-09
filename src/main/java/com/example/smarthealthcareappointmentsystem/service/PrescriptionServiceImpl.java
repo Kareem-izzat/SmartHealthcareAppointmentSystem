@@ -3,9 +3,11 @@ package com.example.smarthealthcareappointmentsystem.service;
 import com.example.smarthealthcareappointmentsystem.DTO.PrescriptionDto;
 import com.example.smarthealthcareappointmentsystem.DTO.request.RequestPrescriptionDto;
 import com.example.smarthealthcareappointmentsystem.entites.Appointment;
+import com.example.smarthealthcareappointmentsystem.entites.AppointmentStatus;
 import com.example.smarthealthcareappointmentsystem.entites.Doctor;
 import com.example.smarthealthcareappointmentsystem.entites.Patient;
 import com.example.smarthealthcareappointmentsystem.entites.mongo.Prescription;
+import com.example.smarthealthcareappointmentsystem.exception.BadRequestException;
 import com.example.smarthealthcareappointmentsystem.exception.ResourceNotFoundException;
 import com.example.smarthealthcareappointmentsystem.mapper.mongo.PrescriptionMapper;
 import com.example.smarthealthcareappointmentsystem.repository.*;
@@ -64,6 +66,10 @@ public class PrescriptionServiceImpl implements PrescriptionService {
                 .orElseThrow(() -> new ResourceNotFoundException(
                         "Appointment not found with id: " + dto.getAppointmentId() + " for doctorId: " + doctor.getId()
                 ));
+        if (appointment.getStatus() == AppointmentStatus.CANCELLED) {
+            throw new BadRequestException("Cannot add prescription to a canceled appointment");
+        }
+
 
 
         Prescription prescription = prescriptionMapper.toEntity(dto);

@@ -12,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -62,6 +63,15 @@ public class AppointmentServiceImpl implements AppointmentService {
         if (!slot.isAvailable()) {
             throw new BadRequestException("Slot is already booked");
         }
+        // check if slot is in the past
+        if (slot.getStartTime().isBefore(LocalDateTime.now())) {
+            throw new BadRequestException("Cannot book a slot in the past");
+        }
+        boolean hasConflict = appointmentRepository.existsByPatientIdAndSlotStartTime(patientId, slot.getStartTime());
+        if (hasConflict) {
+            throw new BadRequestException("Patient already has an appointment at this time");
+        }
+
 
 
 
