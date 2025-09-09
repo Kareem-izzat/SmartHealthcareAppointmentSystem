@@ -37,14 +37,14 @@ public class AppointmentServiceImpl implements AppointmentService {
     @Override
     @Transactional(readOnly = true)
     public AppointmentDto getAppointmentById(Long doctorId, Long appointmentId) {
-        Appointment appointment = appointmentRepository.findByIdAndSlot_Doctor_Id(appointmentId, doctorId)
+        Appointment appointment = appointmentRepository.findByIdAndSlot_DoctorId(appointmentId, doctorId)
                 .orElseThrow(() -> new ResourceNotFoundException("Appointment not found for doctorId: " + doctorId));
         return appointmentMapper.toDto(appointment);
     }
 
     @Override
     public AppointmentDto markAppointmentAsCompleted(Long doctorId, Long appointmentId) {
-        Appointment appointment = appointmentRepository.findByIdAndSlot_Doctor_Id(appointmentId, doctorId)
+        Appointment appointment = appointmentRepository.findByIdAndSlot_DoctorId(appointmentId, doctorId)
                 .orElseThrow(() -> new ResourceNotFoundException("Appointment not found for doctorId: " + doctorId));
         appointment.setStatus(AppointmentStatus.COMPLETED);
         appointmentRepository.save(appointment);

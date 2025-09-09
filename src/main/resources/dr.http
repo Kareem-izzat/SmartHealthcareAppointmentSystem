@@ -2,7 +2,7 @@
 
 # Get all appointments for a doctor
 GET http://localhost:8080/api/doctor/9/appointments
-Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZTJAZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3MzIzMDMzLCJleHAiOjE3NTczMjY2MzN9.NOZtY_b3HiPu1FYDStPvXOuaz51k0rK0SBO861i2kNlHcxuzai3laMRSplTB_n_1A4cLpmPgUOo9rDnl5tD_tg
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZTJAZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NDA2NjU1LCJleHAiOjE3NTc0MTAyNTV9.dFovtYYPdFiV5ze0pt8WtdoraSKI-YNeacnHXJ4YeKILEWC1h6siuTzH9t6Xvmg1lwxmWZq-BjW7IKkEDNQViQ
 ###
 
 # Get appointment by ID
@@ -18,21 +18,24 @@ PUT http://localhost:8080/api/doctor/4/appointments/1/complete
 ###
 
 # Add prescription
-POST http://localhost:8080/api/doctor/4/prescriptions
+POST http://localhost:8080/api/doctor/9/prescriptions
 Content-Type: application/json
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZTJAZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NDE1NjM2LCJleHAiOjE3NTc0MTkyMzZ9.QDY3h5NT9mQ3P_MJ_L6bRPSN7iux9UMM0nz_GIdK1knY7wwqY5ejdWoN96Gp3ClTwDKbeQLFsB5UOV4od6mtYQ
 
 {
   "patientId": 6,
-  "doctorId": 4,
-  "appointmentId": 1,
-  "medicines": ["Paracetamol 500mg", "Ibuprofen 200mg"],
+  "doctorId": 9,
+  "appointmentId": 2,
+  "medicines": ["kareeeeeeeeeeeeem", "Ibuprofen 200mg"],
   "notes": "Take medicines after meals"
 }
 
 ###
 
 # Get all prescriptions for a doctor
-GET http://localhost:8080/api/doctor/4/prescriptions
+GET http://localhost:8080/api/doctor/9/prescriptions
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZTJAZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NDAxMjQxLCJleHAiOjE3NTc0MDQ4NDF9.WkE6RtqyXWQaxqTq1l9wVjnpY0Q1Fq36MyZ7jMsZ9-fReICNomCQWa_cO09sInUq0WicxbDTJrXm4fjDn58Avg
+
 
 ###
 
@@ -42,19 +45,21 @@ GET http://localhost:8080/api/doctor/4/prescriptions/patient/6
 ###
 
 # Create slot
-POST http://localhost:8080/api/doctor/4/slots
+POST http://localhost:8080/api/doctor/9/slots
+Authorization: Bearer  eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZTJAZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NDE3ODU1LCJleHAiOjE3NTc0MjE0NTV9.80ebiXTIiFKp1TT0CcFfFGhHy2srTHG9P6N6qUaHr58TCZrG7nLza98fmvIWtIU9ke2NbojD1D0tLD1gLIjqZA
 Content-Type: application/json
 
 {
-  "startTime": "2025-09-07T09:00:00",
-  "endTime": "2025-09-07T09:30:00",
+  "startTime": "2025-09-08T10:00:00",
+  "endTime": "2025-09-08T11:30:00",
   "available": true
 }
 
 ###
 
 # Get all slots for a doctor
-GET http://localhost:8080/api/doctor/4/slots
+GET http://localhost:8080/api/doctor/9/slots
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZTJAZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NDA2NjU1LCJleHAiOjE3NTc0MTAyNTV9.dFovtYYPdFiV5ze0pt8WtdoraSKI-YNeacnHXJ4YeKILEWC1h6siuTzH9t6Xvmg1lwxmWZq-BjW7IKkEDNQViQ
 
 ###
 
