@@ -24,7 +24,8 @@ public class Doctor extends User {
 
     @OneToMany(
             mappedBy = "doctor",
-            cascade = CascadeType.ALL
+            cascade = {CascadeType.PERSIST, CascadeType.MERGE},
+            fetch = FetchType.LAZY
     )
     private List<Slot> slots;
 }
