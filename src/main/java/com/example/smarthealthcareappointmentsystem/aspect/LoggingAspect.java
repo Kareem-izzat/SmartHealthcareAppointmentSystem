@@ -73,6 +73,23 @@ public class LoggingAspect {
                 }
             }
 
+            case "updatePrescription" -> {
+                if (args.length > 0) {
+                    RequestPrescriptionDto dto = (RequestPrescriptionDto) args[0];
+
+                    details = String.format(
+                            "Updated prescription: doctorId=%s, patientId=%s, appointmentId=%s, medicines=%s, notes=%s",
+                            dto.getDoctorId(),
+                            dto.getPatientId(),
+                            dto.getAppointmentId(),
+                            dto.getMedicines(),
+                            dto.getNotes()
+                    );
+                } else {
+                    details = "updatePrescription called with no arguments";
+                }
+            }
+
             default ->
                     details = String.format("Executed %s with args=%s", method, Arrays.toString(args));
         }
