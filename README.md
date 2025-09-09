@@ -66,5 +66,6 @@ A modern Spring Boot 3 application designed to streamline hospital management, a
 ### Setup
 1. Clone the repository:  
    ```bash
-   git clone https://github.com/SmartHealthcareAppointmentSystem/smart-healthcare-system.git
-   cd smart-healthcare-system
+   git clone https://github.com/Kareem-izzat/SmartHealthcareAppointmentSystem.git
+   cd SmartHealthcareAppointmentSystem
+
