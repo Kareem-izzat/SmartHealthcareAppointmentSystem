@@ -1,13 +1,13 @@
 
 
 # Get all appointments for a doctor
-GET http://localhost:8080/api/doctor/9/appointments?page=0&size=5
-Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZTJAZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NDg2MDc5LCJleHAiOjE3NTc0ODk2Nzl9.8dF2Nl4aGRx_G7DfTfQiQrHb10RvDQeIe_gKYTp3KEEBmPmMVYeiW9W6BIxwVhvnm0bDGJa9zrGxKBXDXneD-Q
+GET http://localhost:8080/api/doctor/31/appointments?page=0&size=5
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbXIuemVkYW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NTMzMDczLCJleHAiOjE3NTc1MzY2NzN9.t2F09g8Hsc6coK6IkjPT1hvVL-14u0OKHw8TG__pbLs6d_fsgFqS_KgFPIwoxNXiZBmejRvXSFKrHJBkP0k7Ag
 ###
 
 # Get appointment by ID
-GET http://localhost:8080/api/doctor/1/appointments/1
-Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZTJAZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3MzExNzA0LCJleHAiOjE3NTczMTUzMDR9.0CwP5vfHD4N3M-7vMt59fzV7oWoL5kvLiM-CVF8oEu-KhpDJaMVVzceyPBriypMaRAr4stkCYJpvFtec26wx8A
+GET http://localhost:8080/api/doctor/31/appointments/6+
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbXIuemVkYW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NTMzMDczLCJleHAiOjE3NTc1MzY2NzN9.t2F09g8Hsc6coK6IkjPT1hvVL-14u0OKHw8TG__pbLs6d_fsgFqS_KgFPIwoxNXiZBmejRvXSFKrHJBkP0k7Ag
 
 
 ###
@@ -18,14 +18,14 @@ PUT http://localhost:8080/api/doctor/4/appointments/1/complete
 ###
 
 # Add prescription
-POST http://localhost:8080/api/doctor/9/prescriptions
+POST http://localhost:8080/api/doctor/31/prescriptions
 Content-Type: application/json
-Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZTJAZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NDE1NjM2LCJleHAiOjE3NTc0MTkyMzZ9.QDY3h5NT9mQ3P_MJ_L6bRPSN7iux9UMM0nz_GIdK1knY7wwqY5ejdWoN96Gp3ClTwDKbeQLFsB5UOV4od6mtYQ
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbXIuemVkYW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NTMzMDczLCJleHAiOjE3NTc1MzY2NzN9.t2F09g8Hsc6coK6IkjPT1hvVL-14u0OKHw8TG__pbLs6d_fsgFqS_KgFPIwoxNXiZBmejRvXSFKrHJBkP0k7Ag
 
 {
-  "patientId": 6,
-  "doctorId": 9,
-  "appointmentId": 2,
+  "patientId": 36,
+  "doctorId": 31,
+  "appointmentId": 6,
   "medicines": ["kareeeeeeeeeeeeem", "Ibuprofen 200mg"],
   "notes": "Take medicines after meals"
 }
@@ -33,8 +33,8 @@ Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZTJAZXhhbXBsZS5
 ###
 
 # Get all prescriptions for a doctor
-GET http://localhost:8080/api/doctor/9/prescriptions?page=0&size=5&sort=date,desc
-Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZTJAZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NDg2MDc5LCJleHAiOjE3NTc0ODk2Nzl9.8dF2Nl4aGRx_G7DfTfQiQrHb10RvDQeIe_gKYTp3KEEBmPmMVYeiW9W6BIxwVhvnm0bDGJa9zrGxKBXDXneD-Q
+GET http://localhost:8080/api/doctor/31/prescriptions?page=0&size=5&sort=date,desc
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbXIuemVkYW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NTMzMDczLCJleHAiOjE3NTc1MzY2NzN9.t2F09g8Hsc6coK6IkjPT1hvVL-14u0OKHw8TG__pbLs6d_fsgFqS_KgFPIwoxNXiZBmejRvXSFKrHJBkP0k7Ag
 
 
 ###
@@ -46,21 +46,21 @@ Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZTJAZXhhbXBsZS5
 ###
 
 # Create slot
-POST http://localhost:8080/api/doctor/9/slots
-Authorization: Bearer  eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZTJAZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NDE3ODU1LCJleHAiOjE3NTc0MjE0NTV9.80ebiXTIiFKp1TT0CcFfFGhHy2srTHG9P6N6qUaHr58TCZrG7nLza98fmvIWtIU9ke2NbojD1D0tLD1gLIjqZA
+POST http://localhost:8080/api/doctor/31/slots
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbXIuemVkYW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NTMzMDczLCJleHAiOjE3NTc1MzY2NzN9.t2F09g8Hsc6coK6IkjPT1hvVL-14u0OKHw8TG__pbLs6d_fsgFqS_KgFPIwoxNXiZBmejRvXSFKrHJBkP0k7Ag
 Content-Type: application/json
 
 {
-  "startTime": "2025-09-08T10:00:00",
-  "endTime": "2025-09-08T11:30:00",
+  "startTime": "2025-09-13T10:00:00",
+  "endTime": "2025-09-13T11:30:00",
   "available": true
 }
 
 ###
 
 # Get all slots for a doctor
-GET http://localhost:8080/api/doctor/9/slots?page=0&size=5&sort=startTime,asc
-Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZTJAZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NDg2MDc5LCJleHAiOjE3NTc0ODk2Nzl9.8dF2Nl4aGRx_G7DfTfQiQrHb10RvDQeIe_gKYTp3KEEBmPmMVYeiW9W6BIxwVhvnm0bDGJa9zrGxKBXDXneD-Q
+GET http://localhost:8080/api/doctor/31/slots?page=0&size=5&sort=startTime,asc
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbXIuemVkYW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NTMzMDczLCJleHAiOjE3NTc1MzY2NzN9.t2F09g8Hsc6coK6IkjPT1hvVL-14u0OKHw8TG__pbLs6d_fsgFqS_KgFPIwoxNXiZBmejRvXSFKrHJBkP0k7Ag
 
 ###
 
