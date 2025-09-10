@@ -3,25 +3,27 @@
 # Get all doctors
 # Get all doctors with pagination
 GET http://localhost:8080/api/admin/doctors?page=0&size=2&sort=lastName,asc
-Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NzQ4NDMzMCwiZXhwIjoxNzU3NDg3OTMwfQ.zc14tm1tHsGy59rEH6Rr4WCEh1Vff7YKPnECLFbbB4SWjlBId1f9VeeGFI6t9cvT8q6rW9Wv7nFIFHinZCXmsg
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NzUzMjE1MCwiZXhwIjoxNzU3NTM1NzUwfQ.OtmykzaQgyuX3enRVetToq_WOV5B21II5S80x9ogxR4EYuKDonM5wP0xXNvirDd0Iqktci7CLczquFYsx2rrpQ
 Content-Type: application/json
 
 ###
 
 # Get doctor by ID
-GET http://localhost:8080/api/admin/doctors/1
+GET http://localhost:8080/api/admin/doctors/31
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NzUzMjE1MCwiZXhwIjoxNzU3NTM1NzUwfQ.OtmykzaQgyuX3enRVetToq_WOV5B21II5S80x9ogxR4EYuKDonM5wP0xXNvirDd0Iqktci7CLczquFYsx2rrpQ
 Content-Type: application/json
 
 ###
 
 # Create doctor
 POST http://localhost:8080/api/admin/doctors
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NzUzMjE1MCwiZXhwIjoxNzU3NTM1NzUwfQ.OtmykzaQgyuX3enRVetToq_WOV5B21II5S80x9ogxR4EYuKDonM5wP0xXNvirDd0Iqktci7CLczquFYsx2rrpQ
 Content-Type: application/json
 
 {
-  "firstName": "John",
-  "lastName": "Doe",
-  "email": "john.doe@example.com",
+  "firstName": "francis",
+  "lastName": "miadi",
+  "email": "jfm@example.com",
   "password": "Doctor123!",
   "phone": "123456789",
   "specialty": "Cardiology",
@@ -32,13 +34,14 @@ Content-Type: application/json
 ###
 
 # Update doctor
-PUT http://localhost:8080/api/admin/doctors/1
+PUT http://localhost:8080/api/admin/doctors/42
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NzUzMjE1MCwiZXhwIjoxNzU3NTM1NzUwfQ.OtmykzaQgyuX3enRVetToq_WOV5B21II5S80x9ogxR4EYuKDonM5wP0xXNvirDd0Iqktci7CLczquFYsx2rrpQ
 Content-Type: application/json
 
 {
-  "firstName": "John",
-  "lastName": "Doe",
-  "email": "john.doe@example.com",
+  "firstName": "francis",
+  "lastName": "miadiii",
+  "email": "jfm@example.com",
   "password": "Doctor123!",
   "phone": "987654321",
   "specialty": "Cardiology",
@@ -49,31 +52,35 @@ Content-Type: application/json
 ###
 
 # Delete doctor
-DELETE http://localhost:8080/api/admin/doctors/1
+DELETE http://localhost:8080/api/admin/doctors/42
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NzUzMjE1MCwiZXhwIjoxNzU3NTM1NzUwfQ.OtmykzaQgyuX3enRVetToq_WOV5B21II5S80x9ogxR4EYuKDonM5wP0xXNvirDd0Iqktci7CLczquFYsx2rrpQ
+
 
 ###
 
 # Get all patients
 GET http://localhost:8080/api/admin/patients?page=0&size=5&sort=firstName,desc
-Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NzQ4NDMzMCwiZXhwIjoxNzU3NDg3OTMwfQ.zc14tm1tHsGy59rEH6Rr4WCEh1Vff7YKPnECLFbbB4SWjlBId1f9VeeGFI6t9cvT8q6rW9Wv7nFIFHinZCXmsg
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NzUzMjE1MCwiZXhwIjoxNzU3NTM1NzUwfQ.OtmykzaQgyuX3enRVetToq_WOV5B21II5S80x9ogxR4EYuKDonM5wP0xXNvirDd0Iqktci7CLczquFYsx2rrpQ
 
 
 ###
 
 # Get patient by ID
-GET http://localhost:8080/api/admin/patients/6
+GET http://localhost:8080/api/admin/patients/36
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NzUzMjE1MCwiZXhwIjoxNzU3NTM1NzUwfQ.OtmykzaQgyuX3enRVetToq_WOV5B21II5S80x9ogxR4EYuKDonM5wP0xXNvirDd0Iqktci7CLczquFYsx2rrpQ
 Content-Type: application/json
 
 ###
 
 # Create patient
 POST http://localhost:8080/api/admin/patients
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NzUzMjE1MCwiZXhwIjoxNzU3NTM1NzUwfQ.OtmykzaQgyuX3enRVetToq_WOV5B21II5S80x9ogxR4EYuKDonM5wP0xXNvirDd0Iqktci7CLczquFYsx2rrpQ
 Content-Type: application/json
 
 {
-  "firstName": "Alice",
-  "lastName": "Brown",
-  "email": "alice.brown@example.com",
+  "firstName": "z",
+  "lastName": "z",
+  "email": "zzzz@example.com",
   "password": "Patient123!",
   "phone": "555123456",
   "dateOfBirth": "1990-05-20",
@@ -83,21 +90,24 @@ Content-Type: application/json
 ###
 
 # Update patient
-PUT http://localhost:8080/api/admin/patients/6
+PUT http://localhost:8080/api/admin/patients/43
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NzUzMjE1MCwiZXhwIjoxNzU3NTM1NzUwfQ.OtmykzaQgyuX3enRVetToq_WOV5B21II5S80x9ogxR4EYuKDonM5wP0xXNvirDd0Iqktci7CLczquFYsx2rrpQ
 Content-Type: application/json
 
 {
-  "firstName": "Alice",
-  "lastName": "Brown",
-  "email": "alice.brown@example.com",
+  "firstName": "zzzzzzz",
+  "lastName": "z",
+  "email": "zzzz@example.com",
   "password": "Patient123!",
-  "phone": "555987654",
+  "phone": "555123456",
   "dateOfBirth": "1990-05-20",
-  "medicalHistory": "Allergic to penicillin"
+  "medicalHistory": "No known allergies"
 }
 
 ###
 
 # Delete patient
-DELETE http://localhost:8080/api/admin/patients/5
+DELETE http://localhost:8080/api/admin/patients/43
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NzUzMjE1MCwiZXhwIjoxNzU3NTM1NzUwfQ.OtmykzaQgyuX3enRVetToq_WOV5B21II5S80x9ogxR4EYuKDonM5wP0xXNvirDd0Iqktci7CLczquFYsx2rrpQ
+
 
