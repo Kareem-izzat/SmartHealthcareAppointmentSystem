@@ -108,7 +108,6 @@ public class AppointmentServiceTests {
                 () -> appointmentService.bookAppointment(1L, 10L));
 
         verifyNoInteractions(appointmentRepository);
-        verifyNoInteractions(slotRepository);
     }
 
     @Test

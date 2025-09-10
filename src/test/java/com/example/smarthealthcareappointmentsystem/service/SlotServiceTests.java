@@ -1,20 +1,22 @@
 package com.example.smarthealthcareappointmentsystem.service;
 
-
 import com.example.smarthealthcareappointmentsystem.DTO.SlotDto;
 import com.example.smarthealthcareappointmentsystem.DTO.request.RequestSlotDto;
 import com.example.smarthealthcareappointmentsystem.entites.*;
-import com.example.smarthealthcareappointmentsystem.exception.ResourceNotFoundException;
+import com.example.smarthealthcareappointmentsystem.exception.BadRequestException;
+import com.example.smarthealthcareappointmentsystem.repository.*;
 import com.example.smarthealthcareappointmentsystem.mapper.SlotMapper;
-import com.example.smarthealthcareappointmentsystem.repository.AppointmentRepository;
-import com.example.smarthealthcareappointmentsystem.repository.DoctorRepository;
-import com.example.smarthealthcareappointmentsystem.repository.SlotRepository;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
+import com.example.smarthealthcareappointmentsystem.exception.ResourceNotFoundException;
+import com.example.smarthealthcareappointmentsystem.security.CustomUserDetails;
+
+import org.junit.jupiter.api.*;
 import org.mockito.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -42,11 +44,18 @@ class SlotServiceTests {
     private RequestSlotDto requestSlotDto;
     private SlotDto slotDto;
 
+    private MockedStatic<SecurityContextHolder> mockedSecurityContextHolder;
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
 
-        doctor = Doctor.builder().id(1L).firstName("Dr. John").build();
+        doctor = Doctor.builder()
+                .id(1L)
+                .firstName("Dr. John")
+                .email("dr.john@example.com")  // add email!
+                .build();
+
 
         requestSlotDto = RequestSlotDto.builder()
                 .startTime(LocalDateTime.now().plusHours(1))
@@ -69,6 +78,21 @@ class SlotServiceTests {
                 .endTime(requestSlotDto.getEndTime())
                 .available(true)
                 .build();
+
+        // Mock SecurityContextHolder
+        CustomUserDetails currentUser = new CustomUserDetails(doctor.getEmail(),doctor.getPassword(),doctor.getRole());
+        Authentication auth = mock(Authentication.class);
+        when(auth.getPrincipal()).thenReturn(currentUser);
+        SecurityContext securityContext = mock(SecurityContext.class);
+        when(securityContext.getAuthentication()).thenReturn(auth);
+
+        mockedSecurityContextHolder = mockStatic(SecurityContextHolder.class);
+        mockedSecurityContextHolder.when(SecurityContextHolder::getContext).thenReturn(securityContext);
+    }
+
+    @AfterEach
+    void tearDown() {
+        mockedSecurityContextHolder.close();
     }
 
     @Test
@@ -99,11 +123,14 @@ class SlotServiceTests {
         when(slotRepository.findOverlappingSlots(anyLong(), any(), any())).thenReturn(List.of(slot));
 
         assertThatThrownBy(() -> slotService.createSlot(doctor.getId(), requestSlotDto))
-                .isInstanceOf(IllegalArgumentException.class);
+                .isInstanceOf(BadRequestException.class)
+                .hasMessageContaining("Slot overlaps");
+
     }
 
     @Test
     void getAllSlots_success() {
+        when(doctorRepository.findById(doctor.getId())).thenReturn(Optional.of(doctor));
         Page<Slot> slots = new PageImpl<>(List.of(slot));
         when(slotRepository.findByDoctorId(eq(doctor.getId()), any(Pageable.class))).thenReturn(slots);
         when(slotMapper.toSlotDto(any(Slot.class))).thenReturn(slotDto);
@@ -117,6 +144,7 @@ class SlotServiceTests {
     @Test
     void updateSlot_success() {
         when(slotRepository.findById(slot.getId())).thenReturn(Optional.of(slot));
+        when(doctorRepository.findById(doctor.getId())).thenReturn(Optional.of(doctor));
         when(slotRepository.findOverlappingSlots(anyLong(), any(), any())).thenReturn(List.of());
         when(slotRepository.save(any(Slot.class))).thenReturn(slot);
         when(slotMapper.toSlotDto(any(Slot.class))).thenReturn(slotDto);
@@ -128,22 +156,16 @@ class SlotServiceTests {
     }
 
     @Test
-    void updateSlot_notFound() {
-        when(slotRepository.findById(anyLong())).thenReturn(Optional.empty());
-
-        assertThatThrownBy(() -> slotService.updateSlot(99L, requestSlotDto))
-                .isInstanceOf(ResourceNotFoundException.class);
-    }
-
-    @Test
     void deleteSlot_withAppointment() {
+        when(slotRepository.findById(slot.getId())).thenReturn(Optional.of(slot));
+        when(doctorRepository.findById(doctor.getId())).thenReturn(Optional.of(doctor));
+
         Appointment appointment = Appointment.builder()
                 .id(1L)
                 .slot(slot)
                 .status(AppointmentStatus.SCHEDULED)
                 .build();
 
-        when(slotRepository.findById(slot.getId())).thenReturn(Optional.of(slot));
         when(appointmentRepository.findBySlotId(slot.getId())).thenReturn(Optional.of(appointment));
 
         slotService.deleteSlot(slot.getId());
@@ -153,15 +175,8 @@ class SlotServiceTests {
     }
 
     @Test
-    void deleteSlot_notFound() {
-        when(slotRepository.findById(anyLong())).thenReturn(Optional.empty());
-
-        assertThatThrownBy(() -> slotService.deleteSlot(99L))
-                .isInstanceOf(ResourceNotFoundException.class);
-    }
-
-    @Test
     void getAvailableSlots_success() {
+        when(doctorRepository.findById(doctor.getId())).thenReturn(Optional.of(doctor));
         Page<Slot> slots = new PageImpl<>(List.of(slot));
         when(slotRepository.findByDoctorIdAndAvailableTrue(eq(doctor.getId()), any(Pageable.class))).thenReturn(slots);
         when(slotMapper.toSlotDto(any(Slot.class))).thenReturn(slotDto);

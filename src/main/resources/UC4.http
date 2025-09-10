@@ -3,18 +3,18 @@ POST http://localhost:8080/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "patient@example.com",
+  "email": "eve.smith@example.com",
   "password": "Patient123!"
 }
 
 ### View patient profile
-GET http://localhost:8080/api/patient/{{PATIENT_ID}}
-Authorization: Bearer {{PATIENT_TOKEN}}
+GET http://localhost:8080/api/patient/36
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJldmUuc21pdGhAZXhhbXBsZS5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc1NzUyMzM3MCwiZXhwIjoxNzU3NTI2OTcwfQ.0sq2O_OTJo5oa0_hn4beRtHuKFg_jeON2N3qK7-DfDX6_OKYRvGfBYsAwzUJvEdlZiV7MfDZaTXWS2Gk2-K8fA
 
-### Get medical records (prescriptions, lab reports)
-GET http://localhost:8080/api/patient/{{PATIENT_ID}}/medical-record
-Authorization: Bearer {{PATIENT_TOKEN}}
+### Get medical records
+GET http://localhost:8080/api/patient/36/medical-record
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJldmUuc21pdGhAZXhhbXBsZS5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc1NzUyMzM3MCwiZXhwIjoxNzU3NTI2OTcwfQ.0sq2O_OTJo5oa0_hn4beRtHuKFg_jeON2N3qK7-DfDX6_OKYRvGfBYsAwzUJvEdlZiV7MfDZaTXWS2Gk2-K8fA
 
 ### Get prescriptions
-GET http://localhost:8080/api/patient/{{PATIENT_ID}}/prescriptions?page=0&size=5&sort=date,desc
-Authorization: Bearer {{PATIENT_TOKEN}}
+GET http://localhost:8080/api/patient/36/prescriptions?page=0&size=5&sort=date,desc
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJldmUuc21pdGhAZXhhbXBsZS5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc1NzUyMzM3MCwiZXhwIjoxNzU3NTI2OTcwfQ.0sq2O_OTJo5oa0_hn4beRtHuKFg_jeON2N3qK7-DfDX6_OKYRvGfBYsAwzUJvEdlZiV7MfDZaTXWS2Gk2-K8fA

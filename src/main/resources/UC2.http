@@ -3,31 +3,31 @@ POST http://localhost:8080/api/auth/login
 Content-Type: application/json
 
 {
-  "email": "doctor@example.com",
+  "email": "amr.zedan@example.com",
   "password": "Doctor123!"
 }
 
 ### Get today's appointments for doctor
-GET http://localhost:8080/api/doctor/{{DOCTOR_ID}}/appointments?page=0&size=5
-Authorization: Bearer {{DOCTOR_TOKEN}}
+GET http://localhost:8080/api/doctor/31/appointments?page=0&size=5
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbXIuemVkYW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NTIyOTg0LCJleHAiOjE3NTc1MjY1ODR9.cLMHMQCr34Ots5XB1Xupy6hqRLgoxH1F3jw9F4p-jN0HL3t_y8YoWrMmnFM35XhooYpsGbqeFTTUaJYpK629vg
 
 ### Add prescription for patient
-POST http://localhost:8080/api/doctor/{{DOCTOR_ID}}/prescriptions
+POST http://localhost:8080/api/doctor/31/prescriptions
 Content-Type: application/json
-Authorization: Bearer {{DOCTOR_TOKEN}}
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbXIuemVkYW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NTIyOTg0LCJleHAiOjE3NTc1MjY1ODR9.cLMHMQCr34Ots5XB1Xupy6hqRLgoxH1F3jw9F4p-jN0HL3t_y8YoWrMmnFM35XhooYpsGbqeFTTUaJYpK629vg
 
 {
-  "patientId": {{PATIENT_ID}},
-  "doctorId": {{DOCTOR_ID}},
-  "appointmentId": {{APPOINTMENT_ID}},
+  "patientId": 36,
+  "doctorId": 31,
+  "appointmentId": 6,
   "medicines": ["Medicine 1", "Medicine 2"],
   "notes": "Take medicines after meals"
 }
 
 ### Verify prescriptions for doctor
-GET http://localhost:8080/api/doctor/{{DOCTOR_ID}}/prescriptions?page=0&size=5&sort=date,desc
-Authorization: Bearer {{DOCTOR_TOKEN}}
+GET http://localhost:8080/api/doctor/31/prescriptions?page=0&size=5&sort=date,desc
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbXIuemVkYW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NTIyOTg0LCJleHAiOjE3NTc1MjY1ODR9.cLMHMQCr34Ots5XB1Xupy6hqRLgoxH1F3jw9F4p-jN0HL3t_y8YoWrMmnFM35XhooYpsGbqeFTTUaJYpK629vg
 
 ### Verify prescriptions for patient
-GET http://localhost:8080/api/patient/{{PATIENT_ID}}/prescriptions?page=0&size=5&sort=date,desc
-Authorization: Bearer {{PATIENT_TOKEN}}
+GET http://localhost:8080/api/patient/36/prescriptions?page=0&size=5&sort=date,desc
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbXIuemVkYW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NTIyOTg0LCJleHAiOjE3NTc1MjY1ODR9.cLMHMQCr34Ots5XB1Xupy6hqRLgoxH1F3jw9F4p-jN0HL3t_y8YoWrMmnFM35XhooYpsGbqeFTTUaJYpK629vg

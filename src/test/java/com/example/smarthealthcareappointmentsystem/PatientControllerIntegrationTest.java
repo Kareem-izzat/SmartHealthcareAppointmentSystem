@@ -58,7 +58,6 @@ class PatientControllerIntegrationTest {
 
     private Patient patient;
     private Doctor doctor;
-    private Slot slot;
     private String patientToken;
 
     @BeforeEach
@@ -99,7 +98,7 @@ class PatientControllerIntegrationTest {
                 .build();
         doctorRepository.save(doctor);
 
-        slot = Slot.builder()
+        Slot slot = Slot.builder()
                 .doctor(doctor)
                 .startTime(LocalDateTime.now().plusHours(1))
                 .endTime(LocalDateTime.now().plusHours(2))
