@@ -13,7 +13,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/patient")
@@ -83,9 +82,11 @@ public class patientController {
         return ResponseEntity.ok(appointmentService.cancelAppointment(patientId, appointmentId));
     }
     @GetMapping("/{patientId}/prescriptions")
-    public ResponseEntity<List<PrescriptionDto>> getPrescriptions(
-            @PathVariable Long patientId) {
-        List<PrescriptionDto> prescriptions = prescriptionService.getPrescriptionsByPatient(patientId);
+    public ResponseEntity<Page<PrescriptionDto>> getPrescriptions(
+            @PathVariable Long patientId,
+            @PageableDefault Pageable pageable) {
+
+        Page<PrescriptionDto> prescriptions = prescriptionService.getPrescriptionsByPatient(patientId, pageable);
         return ResponseEntity.ok(prescriptions);
     }
     @GetMapping("/{patientId}/medical-record")

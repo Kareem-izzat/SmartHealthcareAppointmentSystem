@@ -10,10 +10,10 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/doctor")
@@ -64,17 +64,23 @@ public class DoctorController {
     }
 
     @GetMapping("/{doctorId}/prescriptions")
-    public ResponseEntity<List<PrescriptionDto>> getPrescriptionsByDoctor(@PathVariable Long doctorId) {
-        return ResponseEntity.ok(prescriptionService.getPrescriptionsByDoctor(doctorId));
+    public ResponseEntity<Page<PrescriptionDto>> getPrescriptionsByDoctor(
+            @PathVariable Long doctorId,
+            @PageableDefault Pageable pageable) {
+
+        Page<PrescriptionDto> prescriptions = prescriptionService.getPrescriptionsByDoctor(doctorId, pageable);
+        return ResponseEntity.ok(prescriptions);
     }
 
     @GetMapping("/{doctorId}/prescriptions/patient/{patientId}")
-    public ResponseEntity<List<PrescriptionDto>> getPrescriptionsByPatient(
+    public ResponseEntity<Page<PrescriptionDto>> getPrescriptionsByPatient(
             @PathVariable Long doctorId,
-            @PathVariable Long patientId) {
-        return ResponseEntity.ok(prescriptionService.getPrescriptionsByPatient(patientId));
-    }
+            @PathVariable Long patientId,
+            @PageableDefault Pageable pageable) {
 
+        Page<PrescriptionDto> prescriptions = prescriptionService.getPrescriptionsByPatient(patientId, pageable);
+        return ResponseEntity.ok(prescriptions);
+    }
 
 
     @PostMapping("/{doctorId}/slots")

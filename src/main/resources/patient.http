@@ -60,8 +60,8 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYXJlZW1hbHF1dG9iMjAwM0Bnb
 ###
 
 # Get prescriptions for a patient
-GET http://localhost:8080/api/patient/11/prescriptions
-Authorization: Bearer yJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYXJlZW1hbHF1dG9iMjAwM0BnbWFpbC5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc1NzQwNTM4NywiZXhwIjoxNzU3NDA4OTg3fQ.Z9uQLpDx_njUk2nxfAbpHmH73TAXRpLid6CcZIJQH56hwP9P52RhXFWVNwe6zRrS61fWCqZmiW_nC_UznhV1hQ
+GET http://localhost:8080/api/patient/11/prescriptions?page=0&size=5&sort=date,desc
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYXJlZW1hbHF1dG9iMjAwM0BnbWFpbC5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc1NzQ4NDUzOSwiZXhwIjoxNzU3NDg4MTM5fQ.q5e1j7hLgexTyeXdRrAY-TUZl0EONY2SCyO1pyrw8Ov7c5wpe_zs39DUp7khxHlsBsIP6iau9CsBGHvDk6dh_w
 
 
 ###

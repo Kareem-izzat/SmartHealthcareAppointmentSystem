@@ -33,14 +33,15 @@ Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZTJAZXhhbXBsZS5
 ###
 
 # Get all prescriptions for a doctor
-GET http://localhost:8080/api/doctor/9/prescriptions
-Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZTJAZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NDAxMjQxLCJleHAiOjE3NTc0MDQ4NDF9.WkE6RtqyXWQaxqTq1l9wVjnpY0Q1Fq36MyZ7jMsZ9-fReICNomCQWa_cO09sInUq0WicxbDTJrXm4fjDn58Avg
+GET http://localhost:8080/api/doctor/9/prescriptions?page=0&size=5&sort=date,desc
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZTJAZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NDg2MDc5LCJleHAiOjE3NTc0ODk2Nzl9.8dF2Nl4aGRx_G7DfTfQiQrHb10RvDQeIe_gKYTp3KEEBmPmMVYeiW9W6BIxwVhvnm0bDGJa9zrGxKBXDXneD-Q
 
 
 ###
 
 # Get prescriptions for a patient
-GET http://localhost:8080/api/doctor/4/prescriptions/patient/6
+GET http://localhost:8080/api/doctor/9/prescriptions/patient/11?page=0&size=5&sort=date,desc
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZTJAZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NDg2MDc5LCJleHAiOjE3NTc0ODk2Nzl9.8dF2Nl4aGRx_G7DfTfQiQrHb10RvDQeIe_gKYTp3KEEBmPmMVYeiW9W6BIxwVhvnm0bDGJa9zrGxKBXDXneD-Q
 
 ###
 
