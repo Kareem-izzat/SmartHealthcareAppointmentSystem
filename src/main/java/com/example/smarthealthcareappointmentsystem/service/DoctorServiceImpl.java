@@ -16,6 +16,8 @@ import com.example.smarthealthcareappointmentsystem.repository.*;
 import lombok.RequiredArgsConstructor;
 import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -38,11 +40,11 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     @Transactional(readOnly = true)
     @Cacheable(value = "doctors")
-    public List<DoctorDto> getAllDoctors() {
-        return doctorRepository.findAll().stream()
-                .map(doctorMapper::toDto)
-                .collect(Collectors.toList());
+    public Page<DoctorDto> getAllDoctors(Pageable pageable) {
+        return doctorRepository.findAll(pageable)
+                .map(doctorMapper::toDto);
     }
+
     @Override
     @CacheEvict(value = {"doctors", "doctorsBySpecialty"}, allEntries = true)
     public DoctorDto updateDoctorById(Long doctorId, RequestDoctorDto doctorDto){
@@ -102,10 +104,9 @@ public class DoctorServiceImpl implements DoctorService {
     @Override
     @Transactional(readOnly = true)
     @Cacheable(value = "doctorsBySpecialty", key = "#specialty")
-    public List<DoctorDto> searchDoctorsBySpecialty(String specialty) {
-        return doctorRepository.findBySpecialty(specialty).stream()
-                .map(doctorMapper::toDto)
-                .collect(Collectors.toList());
+    public Page<DoctorDto> searchDoctorsBySpecialty(String specialty, Pageable pageable) {
+        return doctorRepository.findBySpecialtyIgnoreCase(specialty, pageable)
+                .map(doctorMapper::toDto);
     }
 
 

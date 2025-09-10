@@ -3,12 +3,13 @@ package com.example.smarthealthcareappointmentsystem.service;
 
 import com.example.smarthealthcareappointmentsystem.DTO.*;
 import com.example.smarthealthcareappointmentsystem.DTO.request.RequestPatientDto;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.util.List;
 
 public interface PatientService {
-
-    List<PatientDto> getAllPatients();
+    Page<PatientDto> getAllPatients(Pageable pageable);
     PatientDto getPatientById(Long patientId);
     PatientDto addPatient(RequestPatientDto patientDto);
     PatientDto updatePatient(Long patientId, RequestPatientDto patientDto);

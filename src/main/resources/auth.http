@@ -11,16 +11,16 @@ Content-Type: application/json
 ### Register a new doctor (Admin only)
 POST http://localhost:8080/api/auth/register/doctor
 Content-Type: application/json
-Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZTJAZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3MzExNzA0LCJleHAiOjE3NTczMTUzMDR9.0CwP5vfHD4N3M-7vMt59fzV7oWoL5kvLiM-CVF8oEu-KhpDJaMVVzceyPBriypMaRAr4stkCYJpvFtec26wx8A
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NzQ4NDMzMCwiZXhwIjoxNzU3NDg3OTMwfQ.zc14tm1tHsGy59rEH6Rr4WCEh1Vff7YKPnECLFbbB4SWjlBId1f9VeeGFI6t9cvT8q6rW9Wv7nFIFHinZCXmsg
 
 
 {
   "firstName": "John",
   "lastName": "Doe",
-  "email": "john.doe2@example.com",
+  "email": "john.doe3@example.com",
   "password": "Doctor123!",
   "phone": "1234567890",
-  "specialty": "Cardiology",
+  "specialty": "women",
   "yearsOfExperience": 5,
   "slots": []
 }

@@ -10,12 +10,12 @@ import com.example.smarthealthcareappointmentsystem.exception.ResourceNotFoundEx
 import com.example.smarthealthcareappointmentsystem.mapper.PatientMapper;
 import com.example.smarthealthcareappointmentsystem.repository.*;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Transactional
@@ -25,12 +25,12 @@ public class PatientServiceImpl implements PatientService {
     private final PatientMapper patientMapper;
     private final PasswordEncoder passwordEncoder;
 
+
     @Override
     @Transactional(readOnly = true)
-    public List<PatientDto> getAllPatients() {
-        return patientRepository.findAll().stream()
-                .map(patientMapper::toDto)
-                .collect(Collectors.toList());
+    public Page<PatientDto> getAllPatients(Pageable pageable) {
+        return patientRepository.findAll(pageable)
+                .map(patientMapper::toDto);
     }
     @Override
     public PatientDto updatePatient(Long patientId, RequestPatientDto patientDto){
