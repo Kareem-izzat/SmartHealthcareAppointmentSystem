@@ -1,0 +1,30 @@
+### Patient Login
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "patient@example.com",
+  "password": "Patient123!"
+}
+
+### Search for doctors by specialty
+GET http://localhost:8080/api/patient/doctors?specialty=Cardiology&page=0&size=5&sort=yearsOfExperience,desc
+Authorization: Bearer {{PATIENT_TOKEN}}
+
+### Get available slots for selected doctor
+GET http://localhost:8080/api/patient/doctors/{{DOCTOR_ID}}/slots?page=0&size=5
+Authorization: Bearer {{PATIENT_TOKEN}}
+
+### Book appointment
+POST http://localhost:8080/api/patient/{{PATIENT_ID}}/appointments
+Content-Type: application/json
+Authorization: Bearer {{PATIENT_TOKEN}}
+
+{
+  "slotId": {{SLOT_ID}},
+  "patientId": {{PATIENT_ID}}
+}
+
+### Verify booked appointments
+GET http://localhost:8080/api/patient/{{PATIENT_ID}}/appointments?page=0&size=5&sort=slot.startTime,desc
+Authorization: Bearer {{PATIENT_TOKEN}}

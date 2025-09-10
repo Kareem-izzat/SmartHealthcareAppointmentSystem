@@ -1,0 +1,20 @@
+### Patient Login
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "patient@example.com",
+  "password": "Patient123!"
+}
+
+### View patient profile
+GET http://localhost:8080/api/patient/{{PATIENT_ID}}
+Authorization: Bearer {{PATIENT_TOKEN}}
+
+### Get medical records (prescriptions, lab reports)
+GET http://localhost:8080/api/patient/{{PATIENT_ID}}/medical-record
+Authorization: Bearer {{PATIENT_TOKEN}}
+
+### Get prescriptions
+GET http://localhost:8080/api/patient/{{PATIENT_ID}}/prescriptions?page=0&size=5&sort=date,desc
+Authorization: Bearer {{PATIENT_TOKEN}}

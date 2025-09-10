@@ -16,8 +16,8 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.MockitoAnnotations;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
@@ -25,7 +25,7 @@ import java.util.Optional;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class PrescriptionServiceImplTest {
+class PrescriptionServiceTests {
 
     @Mock
     private PrescriptionRepository prescriptionRepository;
@@ -52,55 +52,51 @@ class PrescriptionServiceImplTest {
 
     @BeforeEach
     void setUp() {
-        MockitoAnnotations.openMocks(this);
 
         patient = Patient.builder()
-                .id(1L)
                 .firstName("Kareem")
                 .lastName("Qutob")
+                .email("kareem@example.com")
+                .phone("123456789")
+                .password("password123")
+                .role(Role.PATIENT)
+                .dateOfBirth(LocalDate.of(1995, 5, 20))
                 .build();
+        patientRepository.save(patient);
+
 
         doctor = Doctor.builder()
-                .id(2L)
-                .firstName("Kareem")
-                .lastName("Qutob")
+                .firstName("Dr")
+                .lastName("Smith")
+                .email("drsmith@example.com")
+                .phone("987654321")
+                .password("password123")
+                .role(Role.DOCTOR)
+                .specialty("Cardiology")
+                .yearsOfExperience(10)
+                .build();
+        doctorRepository.save(doctor);
+
+        // Create slot and appointment
+        Slot slot = Slot.builder()
+                .doctor(doctor)
+                .startTime(LocalDateTime.now().plusDays(1))
+                .endTime(LocalDateTime.now().plusDays(1).plusHours(1))
+                .available(true)
                 .build();
 
-        Slot slot = Slot.builder().id(5L).build();
         appointment = Appointment.builder()
-                .id(3L)
-                .slot(slot)
                 .patient(patient)
+                .slot(slot)
                 .status(AppointmentStatus.SCHEDULED)
                 .build();
+        appointmentRepository.save(appointment);
 
+        // Create request DTO
         requestDto = RequestPrescriptionDto.builder()
-                .patientId(1L)
-                .doctorId(2L)
-                .appointmentId(3L)
-                .medicines(List.of("Med1", "Med2"))
-                .notes("Take twice daily")
-                .build();
-
-        prescriptionEntity = Prescription.builder()
-                .id("abc123")
-                .patientId(1L)
-                .patientName("Kareem Qutob")
-                .doctorId(2L)
-                .doctorName("Kareem Qutob")
-                .appointmentId(3L)
-                .date(LocalDateTime.now())
-                .medicines(List.of("Med1", "Med2"))
-                .notes("Take twice daily")
-                .build();
-
-        prescriptionDto = PrescriptionDto.builder()
-                .patientId(1L)
-                .patientName("Kareem Qutob")
-                .doctorId(2L)
-                .doctorName("Kareem Qutob")
-                .appointmentId(3L)
-                .date(LocalDateTime.now())
+                .patientId(patient.getId())
+                .doctorId(doctor.getId())
+                .appointmentId(appointment.getId())
                 .medicines(List.of("Med1", "Med2"))
                 .notes("Take twice daily")
                 .build();

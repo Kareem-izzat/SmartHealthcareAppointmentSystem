@@ -1,0 +1,33 @@
+### Doctor Login
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "doctor@example.com",
+  "password": "Doctor123!"
+}
+
+### Get today's appointments for doctor
+GET http://localhost:8080/api/doctor/{{DOCTOR_ID}}/appointments?page=0&size=5
+Authorization: Bearer {{DOCTOR_TOKEN}}
+
+### Add prescription for patient
+POST http://localhost:8080/api/doctor/{{DOCTOR_ID}}/prescriptions
+Content-Type: application/json
+Authorization: Bearer {{DOCTOR_TOKEN}}
+
+{
+  "patientId": {{PATIENT_ID}},
+  "doctorId": {{DOCTOR_ID}},
+  "appointmentId": {{APPOINTMENT_ID}},
+  "medicines": ["Medicine 1", "Medicine 2"],
+  "notes": "Take medicines after meals"
+}
+
+### Verify prescriptions for doctor
+GET http://localhost:8080/api/doctor/{{DOCTOR_ID}}/prescriptions?page=0&size=5&sort=date,desc
+Authorization: Bearer {{DOCTOR_TOKEN}}
+
+### Verify prescriptions for patient
+GET http://localhost:8080/api/patient/{{PATIENT_ID}}/prescriptions?page=0&size=5&sort=date,desc
+Authorization: Bearer {{PATIENT_TOKEN}}
