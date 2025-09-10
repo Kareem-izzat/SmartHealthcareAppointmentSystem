@@ -1,4 +1,4 @@
-package com.example.smarthealthcareappointmentsystem.crud;
+package com.example.smarthealthcareappointmentsystem.service;
 
 import com.example.smarthealthcareappointmentsystem.DTO.DoctorDto;
 import com.example.smarthealthcareappointmentsystem.DTO.request.RequestDoctorDto;
@@ -9,7 +9,6 @@ import com.example.smarthealthcareappointmentsystem.exception.ResourceNotFoundEx
 import com.example.smarthealthcareappointmentsystem.mapper.DoctorMapper;
 import com.example.smarthealthcareappointmentsystem.repository.AppointmentRepository;
 import com.example.smarthealthcareappointmentsystem.repository.DoctorRepository;
-import com.example.smarthealthcareappointmentsystem.service.DoctorServiceImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
