@@ -1,0 +1,140 @@
+### Admin login (get token)
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "Admin123!"
+}
+
+
+
+### Create Doctors
+POST http://localhost:8080/api/auth/register/doctor
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NzUwOTQ5NywiZXhwIjoxNzU3NTEzMDk3fQ.-tiVrlUWdPbM8g2MXVPd7Rmnoify5u43WsEM8xOCTexiaf_9M9w0Z8Hpf5WEc8MCY6SmhGGmmkpPRkVDX6Kb_g
+
+{
+  "firstName": "amr",
+  "lastName": "zedan",
+  "email": "amr.zedan@example.com",
+  "password": "Doctor123!",
+  "phone": "111111111",
+  "specialty": "Cardiology",
+  "yearsOfExperience": 8,
+  "slots": []
+}
+###
+POST http://localhost:8080/api/auth/register/doctor
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NzUwOTQ5NywiZXhwIjoxNzU3NTEzMDk3fQ.-tiVrlUWdPbM8g2MXVPd7Rmnoify5u43WsEM8xOCTexiaf_9M9w0Z8Hpf5WEc8MCY6SmhGGmmkpPRkVDX6Kb_g
+
+{
+  "firstName": "Bob",
+  "lastName": "White",
+  "email": "bob.white@example.com",
+  "password": "Doctor123!",
+  "phone": "222222222",
+  "specialty": "Dermatology",
+  "yearsOfExperience": 5,
+  "slots": []
+}
+###
+POST http://localhost:8080/api/auth/register/doctor
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NzUwOTQ5NywiZXhwIjoxNzU3NTEzMDk3fQ.-tiVrlUWdPbM8g2MXVPd7Rmnoify5u43WsEM8xOCTexiaf_9M9w0Z8Hpf5WEc8MCY6SmhGGmmkpPRkVDX6Kb_g
+
+{
+  "firstName": "kareem",
+  "lastName": "qutob",
+  "email": "kareem.qutob@example.com",
+  "password": "Doctor123!",
+  "phone": "333333333",
+  "specialty": "Neurology",
+  "yearsOfExperience": 12,
+  "slots": []
+}
+
+### Create Patients
+POST http://localhost:8080/api/auth/register/patient
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NzUwOTQ5NywiZXhwIjoxNzU3NTEzMDk3fQ.-tiVrlUWdPbM8g2MXVPd7Rmnoify5u43WsEM8xOCTexiaf_9M9w0Z8Hpf5WEc8MCY6SmhGGmmkpPRkVDX6Kb_g
+
+{
+  "firstName": "kareem",
+  "lastName": "qutob",
+  "email": "kareem.qutob2@example.com",
+  "password": "Patient123!"
+}
+###
+POST http://localhost:8080/api/auth/register/patient
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NzUwOTQ5NywiZXhwIjoxNzU3NTEzMDk3fQ.-tiVrlUWdPbM8g2MXVPd7Rmnoify5u43WsEM8xOCTexiaf_9M9w0Z8Hpf5WEc8MCY6SmhGGmmkpPRkVDX6Kb_g
+
+{
+  "firstName": "Eve",
+  "lastName": "Smith",
+  "email": "eve.smith@example.com",
+  "password": "Patient123!"
+}
+###
+POST http://localhost:8080/api/auth/register/patient
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NzUyMTY1MiwiZXhwIjoxNzU3NTI1MjUyfQ.1x5RW9XWqniLVRePG4d20-GuxYDpoyPajdvGJ22MQnRPp21bcAtC7s-UZRm8i0BStVH_VPw22D8fzQA88z1YUQ
+
+{
+  "firstName": "Frank",
+  "lastName": "Taylor",
+  "email": "frank.taylor@example.com",
+  "password": "Patient123!"
+}
+
+###
+POST http://localhost:8080/api/doctor/31/slots
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbXIuemVkYW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NTIxODg5LCJleHAiOjE3NTc1MjU0ODl9.gydxfDdpmdjH6V9InMNVJ_4poaXUcarwVbVDVc-gRxRSG0Wg98G-7yUH18IjLu9tcmgw0dZZIS5Hwodc-GszRQ
+
+{
+  "startTime": "2025-09-12T09:00:00",
+  "endTime": "2025-09-12T09:30:00",
+  "available": true
+}
+###
+POST http://localhost:8080/api/doctor/30/slots
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbXIuemVkYW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NTIxODg5LCJleHAiOjE3NTc1MjU0ODl9.gydxfDdpmdjH6V9InMNVJ_4poaXUcarwVbVDVc-gRxRSG0Wg98G-7yUH18IjLu9tcmgw0dZZIS5Hwodc-GszRQ
+
+{
+  "startTime": "2025-09-11T10:00:00",
+  "endTime": "2025-09-11T10:30:00",
+  "available": true
+}
+###
+POST http://localhost:8080/api/doctor/1/slots
+Content-Type: application/json
+Authorization: Bearer {{DOCTOR_1_TOKEN}}
+
+{
+  "startTime": "2025-09-12T14:00:00",
+  "endTime": "2025-09-12T14:30:00",
+  "available": true
+}
+
+### Create Slots for Doctor 2 (Bob White)
+POST http://localhost:8080/api/doctor/2/slots
+Content-Type: application/json
+
+{
+  "startTime": "2025-09-11T09:15:00",
+  "endTime": "2025-09-11T09:45:00",
+  "available": true
+}
+###
+POST http://localhost:8080/api/doctor/2/slots
+Content-Type: application/json
+
+{
+  "startTime": "2025-09-12T11:00:00",
+  "endTime": "2025-09-12T11:30:00",
+  "available": true
+}
