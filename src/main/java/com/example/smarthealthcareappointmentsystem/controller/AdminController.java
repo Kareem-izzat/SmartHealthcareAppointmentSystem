@@ -8,10 +8,12 @@ import com.example.smarthealthcareappointmentsystem.service.DoctorService;
 import com.example.smarthealthcareappointmentsystem.service.PatientService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/admin")
@@ -22,9 +24,9 @@ public class AdminController {
     private final PatientService patientService;
 
     @GetMapping("/doctors")
-    public ResponseEntity<List<DoctorDto>> getDoctors() {
-
-        return ResponseEntity.ok(doctorService.getAllDoctors());
+    public ResponseEntity<Page<DoctorDto>> getDoctors(
+            @PageableDefault(sort = "lastName") Pageable pageable) {
+        return ResponseEntity.ok(doctorService.getAllDoctors(pageable));
     }
     @GetMapping("/doctors/{id}")
     public ResponseEntity<DoctorDto> getDoctorById(@PathVariable Long id) {
@@ -46,8 +48,9 @@ public class AdminController {
 
     //---------------------------------------------------- patient
     @GetMapping("/patients")
-    public ResponseEntity<List<PatientDto>> getPatients() {
-        return ResponseEntity.ok(patientService.getAllPatients());
+    public ResponseEntity<Page<PatientDto>> getPatients(
+            @PageableDefault( sort = "lastName") Pageable pageable) {
+        return ResponseEntity.ok(patientService.getAllPatients(pageable));
     }
     @GetMapping("/patients/{id}")
     public ResponseEntity<PatientDto> getPatientById(@PathVariable Long id) {

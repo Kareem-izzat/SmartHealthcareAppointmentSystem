@@ -1,7 +1,9 @@
 
 
 # Get all doctors
-GET http://localhost:8080/api/admin/doctors
+# Get all doctors with pagination
+GET http://localhost:8080/api/admin/doctors?page=0&size=2&sort=lastName,asc
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NzQ4NDMzMCwiZXhwIjoxNzU3NDg3OTMwfQ.zc14tm1tHsGy59rEH6Rr4WCEh1Vff7YKPnECLFbbB4SWjlBId1f9VeeGFI6t9cvT8q6rW9Wv7nFIFHinZCXmsg
 Content-Type: application/json
 
 ###
@@ -52,8 +54,9 @@ DELETE http://localhost:8080/api/admin/doctors/1
 ###
 
 # Get all patients
-GET http://localhost:8080/api/admin/patients
-Content-Type: application/json
+GET http://localhost:8080/api/admin/patients?page=0&size=5&sort=firstName,desc
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NzQ4NDMzMCwiZXhwIjoxNzU3NDg3OTMwfQ.zc14tm1tHsGy59rEH6Rr4WCEh1Vff7YKPnECLFbbB4SWjlBId1f9VeeGFI6t9cvT8q6rW9Wv7nFIFHinZCXmsg
+
 
 ###
 

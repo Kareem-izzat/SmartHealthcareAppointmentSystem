@@ -8,10 +8,12 @@ import com.example.smarthealthcareappointmentsystem.DTO.request.RequestSlotDto;
 import com.example.smarthealthcareappointmentsystem.service.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("/api/doctor")
@@ -28,9 +30,14 @@ public class DoctorController {
 
 
     @GetMapping("/{doctorId}/appointments")
-    public ResponseEntity<List<AppointmentDto>> getAppointments(@PathVariable Long doctorId) {
-        return ResponseEntity.ok(appointmentService.getAppointments(doctorId));
+    public ResponseEntity<Page<AppointmentDto>> getAppointments(
+            @PathVariable Long doctorId,
+            Pageable pageable
+    ) {
+        Page<AppointmentDto> appointments = appointmentService.getAppointments(doctorId, pageable);
+        return ResponseEntity.ok(appointments);
     }
+
 
     @GetMapping("/{doctorId}/appointments/{appointmentId}")
     public ResponseEntity<AppointmentDto> getAppointmentById(
@@ -57,17 +64,23 @@ public class DoctorController {
     }
 
     @GetMapping("/{doctorId}/prescriptions")
-    public ResponseEntity<List<PrescriptionDto>> getPrescriptionsByDoctor(@PathVariable Long doctorId) {
-        return ResponseEntity.ok(prescriptionService.getPrescriptionsByDoctor(doctorId));
+    public ResponseEntity<Page<PrescriptionDto>> getPrescriptionsByDoctor(
+            @PathVariable Long doctorId,
+            @PageableDefault Pageable pageable) {
+
+        Page<PrescriptionDto> prescriptions = prescriptionService.getPrescriptionsByDoctor(doctorId, pageable);
+        return ResponseEntity.ok(prescriptions);
     }
 
     @GetMapping("/{doctorId}/prescriptions/patient/{patientId}")
-    public ResponseEntity<List<PrescriptionDto>> getPrescriptionsByPatient(
+    public ResponseEntity<Page<PrescriptionDto>> getPrescriptionsByPatient(
             @PathVariable Long doctorId,
-            @PathVariable Long patientId) {
-        return ResponseEntity.ok(prescriptionService.getPrescriptionsByPatient(patientId));
-    }
+            @PathVariable Long patientId,
+            @PageableDefault Pageable pageable) {
 
+        Page<PrescriptionDto> prescriptions = prescriptionService.getPrescriptionsByPatient(patientId, pageable);
+        return ResponseEntity.ok(prescriptions);
+    }
 
 
     @PostMapping("/{doctorId}/slots")
@@ -78,9 +91,13 @@ public class DoctorController {
     }
 
     @GetMapping("/{doctorId}/slots")
-    public ResponseEntity<List<SlotDto>> getAllSlots(@PathVariable Long doctorId) {
-        return ResponseEntity.ok(slotService.getAllSlots(doctorId));
+    public ResponseEntity<Page<SlotDto>> getAllSlots(
+            @PathVariable Long doctorId,
+            Pageable pageable) {
+        Page<SlotDto> slots = slotService.getAllSlots(doctorId, pageable);
+        return ResponseEntity.ok(slots);
     }
+
 
     @PutMapping("/{doctorId}/slots/{slotId}")
     public ResponseEntity<SlotDto> updateSlot(

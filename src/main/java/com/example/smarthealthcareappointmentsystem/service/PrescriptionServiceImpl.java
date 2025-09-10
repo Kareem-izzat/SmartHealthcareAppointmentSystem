@@ -13,12 +13,13 @@ import com.example.smarthealthcareappointmentsystem.mapper.mongo.PrescriptionMap
 import com.example.smarthealthcareappointmentsystem.repository.*;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
-import java.util.List;
-import java.util.stream.Collectors;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -32,23 +33,25 @@ public class PrescriptionServiceImpl implements PrescriptionService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<PrescriptionDto> getPrescriptionsByDoctor(Long doctorId) {
-        Doctor doctor = doctorRepository.findById(doctorId).orElseThrow(()-> new ResourceNotFoundException("Doctor not found with id" + doctorId));
-        return prescriptionRepository.findByDoctorId(doctorId).stream()
-                .map(prescriptionMapper::toDto)
-                .collect(Collectors.toList());
+    public Page<PrescriptionDto> getPrescriptionsByDoctor(Long doctorId, Pageable pageable) {
+        doctorRepository.findById(doctorId)
+                .orElseThrow(() -> new ResourceNotFoundException("Doctor not found with id " + doctorId));
+
+        return prescriptionRepository.findByDoctorId(doctorId, pageable)
+                .map(prescriptionMapper::toDto);
     }
+
 
     @Override
     @Transactional(readOnly = true)
-    public List<PrescriptionDto> getPrescriptionsByPatient(Long patientId) {
-        Patient patient = patientRepository.findById(patientId)
+    public Page<PrescriptionDto> getPrescriptionsByPatient(Long patientId, Pageable pageable) {
+        patientRepository.findById(patientId)
                 .orElseThrow(() -> new ResourceNotFoundException("Patient not found with id " + patientId));
 
-        return prescriptionRepository.findByPatientId(patientId).stream()
-                .map(prescriptionMapper::toDto)
-                .collect(Collectors.toList());
+        return prescriptionRepository.findByPatientId(patientId, pageable)
+                .map(prescriptionMapper::toDto);
     }
+
 
     @Override
     public PrescriptionDto addPrescription(RequestPrescriptionDto dto) {

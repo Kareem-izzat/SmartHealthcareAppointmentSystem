@@ -24,14 +24,14 @@ Content-Type: application/json
 ###
 
 # Get doctors by specialty
-GET http://localhost:8080/api/patient/doctors?specialty=Cardiology
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYXJlZW1hbHF1dG9iMjAwM0BnbWFpbC5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc1NzQwNTU3OSwiZXhwIjoxNzU3NDA5MTc5fQ.AkoIO4QBFKktGBhW1SqrYwzlwtGVK_uacK6IRyXtkK_M6_e07ftyv-GE88ooMtPG-YmK2L6Y0Ce2GcdhDXic6g
+GET http://localhost:8080/api/patient/doctors?specialty=Cardiology&page=0&size=5&sort=yearsOfExperience,desc
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYXJlZW1hbHF1dG9iMjAwM0BnbWFpbC5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc1NzQ4NDUzOSwiZXhwIjoxNzU3NDg4MTM5fQ.q5e1j7hLgexTyeXdRrAY-TUZl0EONY2SCyO1pyrw8Ov7c5wpe_zs39DUp7khxHlsBsIP6iau9CsBGHvDk6dh_w
 
 ###
 
 # Get available slots for a doctor
-GET http://localhost:8080/api/patient/doctors/9/slots
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYXJlZW1hbHF1dG9iMjAwM0BnbWFpbC5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc1NzQxNzYzNywiZXhwIjoxNzU3NDIxMjM3fQ.X5BBaW6JDBU7Cdz2khCtE3BqoxiCxC4lFuMpOa05Z9Acp2SvhDBfSkZaL9Xm5Tatjk8sD6TlX7Heiht-Oz0lbQ
+GET http://localhost:8080/api/patient/doctors/11/slots?page=0&size=5
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYXJlZW1hbHF1dG9iMjAwM0BnbWFpbC5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc1NzQ4NDUzOSwiZXhwIjoxNzU3NDg4MTM5fQ.q5e1j7hLgexTyeXdRrAY-TUZl0EONY2SCyO1pyrw8Ov7c5wpe_zs39DUp7khxHlsBsIP6iau9CsBGHvDk6dh_w
 
 ###
 
@@ -48,8 +48,8 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYXJlZW1hbHF1dG9iMjAwM0Bnb
 ###
 
 # Get all appointments for a patient
-GET http://localhost:8080/api/patient/11/appointments
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYXJlZW1hbHF1dG9iMjAwM0BnbWFpbC5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc1NzQwNTU3OSwiZXhwIjoxNzU3NDA5MTc5fQ.AkoIO4QBFKktGBhW1SqrYwzlwtGVK_uacK6IRyXtkK_M6_e07ftyv-GE88ooMtPG-YmK2L6Y0Ce2GcdhDXic6g
+GET http://localhost:8080/api/patient/11/appointments?page=0&size=1&sort=slot.startTime,desc
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYXJlZW1hbHF1dG9iMjAwM0BnbWFpbC5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc1NzQ4NDUzOSwiZXhwIjoxNzU3NDg4MTM5fQ.q5e1j7hLgexTyeXdRrAY-TUZl0EONY2SCyO1pyrw8Ov7c5wpe_zs39DUp7khxHlsBsIP6iau9CsBGHvDk6dh_w
 
 ###
 
@@ -60,8 +60,8 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYXJlZW1hbHF1dG9iMjAwM0Bnb
 ###
 
 # Get prescriptions for a patient
-GET http://localhost:8080/api/patient/11/prescriptions
-Authorization: Bearer yJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYXJlZW1hbHF1dG9iMjAwM0BnbWFpbC5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc1NzQwNTM4NywiZXhwIjoxNzU3NDA4OTg3fQ.Z9uQLpDx_njUk2nxfAbpHmH73TAXRpLid6CcZIJQH56hwP9P52RhXFWVNwe6zRrS61fWCqZmiW_nC_UznhV1hQ
+GET http://localhost:8080/api/patient/11/prescriptions?page=0&size=5&sort=date,desc
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYXJlZW1hbHF1dG9iMjAwM0BnbWFpbC5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc1NzQ4NDUzOSwiZXhwIjoxNzU3NDg4MTM5fQ.q5e1j7hLgexTyeXdRrAY-TUZl0EONY2SCyO1pyrw8Ov7c5wpe_zs39DUp7khxHlsBsIP6iau9CsBGHvDk6dh_w
 
 
 ###
