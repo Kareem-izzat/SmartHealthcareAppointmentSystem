@@ -1,6 +1,5 @@
 package com.example.smarthealthcareappointmentsystem.crud;
 
-
 import com.example.smarthealthcareappointmentsystem.DTO.PatientDto;
 import com.example.smarthealthcareappointmentsystem.DTO.request.RequestPatientDto;
 import com.example.smarthealthcareappointmentsystem.entites.Patient;
@@ -21,14 +20,12 @@ import java.time.LocalDate;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.*;
-import static org.mockito.Mockito.when;
 
-public class PatientServiceCrudTest {
+class PatientServiceCrudTest {
+
     @Mock
     private PatientRepository patientRepository;
 
@@ -44,10 +41,10 @@ public class PatientServiceCrudTest {
     private Patient patient;
     private PatientDto patientDto;
     private RequestPatientDto requestPatientDto;
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
-
 
         patient = Patient.builder()
                 .id(1L)
@@ -61,7 +58,6 @@ public class PatientServiceCrudTest {
                 .role(Role.PATIENT)
                 .build();
 
-
         patientDto = PatientDto.builder()
                 .id(1L)
                 .firstName("kareem")
@@ -71,7 +67,6 @@ public class PatientServiceCrudTest {
                 .dateOfBirth(LocalDate.parse("2025-09-07"))
                 .medicalHistory("no previous history")
                 .build();
-
 
         requestPatientDto = RequestPatientDto.builder()
                 .firstName("kareem")
@@ -105,7 +100,6 @@ public class PatientServiceCrudTest {
         assertThrows(BadRequestException.class, () -> patientService.addPatient(requestPatientDto));
     }
 
-
     @Test
     void testGetPatientById() {
         when(patientRepository.findById(1L)).thenReturn(Optional.of(patient));
@@ -122,7 +116,6 @@ public class PatientServiceCrudTest {
         when(patientRepository.findById(1L)).thenReturn(Optional.empty());
         assertThrows(ResourceNotFoundException.class, () -> patientService.getPatientById(1L));
     }
-
 
     @Test
     void testUpdatePatientById() {
@@ -144,7 +137,6 @@ public class PatientServiceCrudTest {
         assertThrows(ResourceNotFoundException.class, () -> patientService.updatePatient(1L, requestPatientDto));
     }
 
-
     @Test
     void testRemovePatientById() {
         when(patientRepository.existsById(1L)).thenReturn(true);
@@ -159,7 +151,4 @@ public class PatientServiceCrudTest {
         when(patientRepository.existsById(1L)).thenReturn(false);
         assertThrows(ResourceNotFoundException.class, () -> patientService.removePatient(1L));
     }
-
-
-
 }

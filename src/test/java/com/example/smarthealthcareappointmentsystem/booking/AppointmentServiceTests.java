@@ -18,6 +18,7 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
+import java.time.LocalDateTime;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -46,6 +47,7 @@ public class AppointmentServiceTests {
     private Appointment appointment;
     private AppointmentDto appointmentDto;
 
+
     @BeforeEach
     void setUp() {
         MockitoAnnotations.openMocks(this);
@@ -57,6 +59,8 @@ public class AppointmentServiceTests {
         slot = new Slot();
         slot.setId(10L);
         slot.setAvailable(true);
+        slot.setStartTime(LocalDateTime.now().plusHours(1));
+        slot.setEndTime(LocalDateTime.now().plusHours(2));
 
         appointment = new Appointment();
         appointment.setId(100L);
@@ -79,36 +83,44 @@ public class AppointmentServiceTests {
 
         assertNotNull(result);
         assertEquals(100L, result.getId());
-        assertFalse(slot.isAvailable()); // it should not be avaialbe
+        assertFalse(slot.isAvailable()); // slot should be marked unavailable
         verify(slotRepository, times(1)).save(slot);
         verify(appointmentRepository, times(1)).save(any(Appointment.class));
     }
+
     @Test
-    void testBookAppointmentPatientNotFoundThrowsResourseNotFoundException() {
+    void testBookAppointmentPatientNotFoundThrowsResourceNotFoundException() {
         when(patientRepository.findById(1L)).thenReturn(Optional.empty());
 
         assertThrows(ResourceNotFoundException.class,
                 () -> appointmentService.bookAppointment(1L, 10L));
-        verifyNoInteractions(slotRepository, appointmentRepository);
+
+        verifyNoInteractions(slotRepository);
+        verifyNoInteractions(appointmentRepository);
     }
+
     @Test
-    void testBookAppointmentSlotNotFoundThrowsResourseNotFoundException() {
+    void testBookAppointmentSlotNotFoundThrowsResourceNotFoundException() {
         when(patientRepository.findById(1L)).thenReturn(Optional.of(patient));
         when(slotRepository.findById(10L)).thenReturn(Optional.empty());
 
         assertThrows(ResourceNotFoundException.class,
                 () -> appointmentService.bookAppointment(1L, 10L));
+
         verifyNoInteractions(appointmentRepository);
+        verifyNoInteractions(slotRepository);
     }
+
     @Test
     void testBookAppointmentSlotAlreadyBooked() {
-        slot.setAvailable(false); // already booked slot
+        slot.setAvailable(false); // already booked
         when(patientRepository.findById(1L)).thenReturn(Optional.of(patient));
         when(slotRepository.findById(10L)).thenReturn(Optional.of(slot));
 
         assertThrows(BadRequestException.class,
                 () -> appointmentService.bookAppointment(1L, 10L));
-        verify(appointmentRepository, never()).save(any());
-    }
 
+        verify(appointmentRepository, never()).save(any());
+        verify(slotRepository, never()).save(any());
+    }
 }
