@@ -20,6 +20,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,6 +32,7 @@ public class DoctorServiceImpl implements DoctorService {
     private final DoctorMapper doctorMapper;
     private final DoctorRepository doctorRepository;
     private final PasswordEncoder passwordEncoder;
+    private final AppointmentRepository appointmentRepository;
 
 
     @Override
@@ -85,6 +87,15 @@ public class DoctorServiceImpl implements DoctorService {
     public void RemoveDoctorById(Long doctorId) {
         if (!doctorRepository.existsById(doctorId)) {
             throw new ResourceNotFoundException("Doctor not found with id " + doctorId);
+        }
+        List<Appointment> futureAppointments = appointmentRepository.findBySlot_Doctor_IdAndSlot_StartTimeAfter(
+                doctorId, LocalDateTime.now()
+        );
+        // cancel any future appointment for doctor
+        for (Appointment appointment : futureAppointments) {
+            appointment.setStatus(AppointmentStatus.CANCELLED);
+            appointmentRepository.save(appointment);
+
         }
         doctorRepository.deleteById(doctorId);
     }
