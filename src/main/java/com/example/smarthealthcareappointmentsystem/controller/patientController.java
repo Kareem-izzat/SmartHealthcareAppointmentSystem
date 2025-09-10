@@ -47,10 +47,13 @@ public class patientController {
         return ResponseEntity.ok(doctorService.searchDoctorsBySpecialty(specialty, pageable));
     }
     @GetMapping("/doctors/{doctorId}/slots")
-    public ResponseEntity<List<SlotDto>> getAvailableSlots(@PathVariable Long doctorId) {
-
-        return ResponseEntity.ok(slotService.getAvailableSlots(doctorId));
+    public ResponseEntity<Page<SlotDto>> getAvailableSlots(
+            @PathVariable Long doctorId,
+            Pageable pageable) {
+        Page<SlotDto> slots = slotService.getAvailableSlots(doctorId, pageable);
+        return ResponseEntity.ok(slots);
     }
+
     @PostMapping("/{patientId}/appointments")
     public ResponseEntity<AppointmentDto> bookAppointment(
             @PathVariable Long patientId,

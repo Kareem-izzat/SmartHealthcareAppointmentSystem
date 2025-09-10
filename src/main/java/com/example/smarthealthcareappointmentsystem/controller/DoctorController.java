@@ -85,9 +85,13 @@ public class DoctorController {
     }
 
     @GetMapping("/{doctorId}/slots")
-    public ResponseEntity<List<SlotDto>> getAllSlots(@PathVariable Long doctorId) {
-        return ResponseEntity.ok(slotService.getAllSlots(doctorId));
+    public ResponseEntity<Page<SlotDto>> getAllSlots(
+            @PathVariable Long doctorId,
+            Pageable pageable) {
+        Page<SlotDto> slots = slotService.getAllSlots(doctorId, pageable);
+        return ResponseEntity.ok(slots);
     }
+
 
     @PutMapping("/{doctorId}/slots/{slotId}")
     public ResponseEntity<SlotDto> updateSlot(

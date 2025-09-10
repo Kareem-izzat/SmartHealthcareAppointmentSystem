@@ -30,8 +30,8 @@ Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYXJlZW1hbHF1dG9iMjAwM0Bnb
 ###
 
 # Get available slots for a doctor
-GET http://localhost:8080/api/patient/doctors/9/slots
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYXJlZW1hbHF1dG9iMjAwM0BnbWFpbC5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc1NzQxNzYzNywiZXhwIjoxNzU3NDIxMjM3fQ.X5BBaW6JDBU7Cdz2khCtE3BqoxiCxC4lFuMpOa05Z9Acp2SvhDBfSkZaL9Xm5Tatjk8sD6TlX7Heiht-Oz0lbQ
+GET http://localhost:8080/api/patient/doctors/11/slots?page=0&size=5
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJrYXJlZW1hbHF1dG9iMjAwM0BnbWFpbC5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc1NzQ4NDUzOSwiZXhwIjoxNzU3NDg4MTM5fQ.q5e1j7hLgexTyeXdRrAY-TUZl0EONY2SCyO1pyrw8Ov7c5wpe_zs39DUp7khxHlsBsIP6iau9CsBGHvDk6dh_w
 
 ###
 

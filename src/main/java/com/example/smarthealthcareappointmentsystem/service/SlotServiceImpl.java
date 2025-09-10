@@ -13,6 +13,8 @@ import com.example.smarthealthcareappointmentsystem.repository.AppointmentReposi
 import com.example.smarthealthcareappointmentsystem.repository.DoctorRepository;
 import com.example.smarthealthcareappointmentsystem.repository.SlotRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -57,11 +59,9 @@ public class SlotServiceImpl implements  SlotService {
     }
     @Override
     @Transactional(readOnly = true)
-    public List<SlotDto> getAllSlots(Long doctorId) {
-        return slotRepository.findByDoctorId(doctorId)
-                .stream()
-                .map(slotMapper::toSlotDto)
-                .collect(Collectors.toList());
+    public Page<SlotDto> getAllSlots(Long doctorId, Pageable pageable) {
+        return slotRepository.findByDoctorId(doctorId, pageable)
+                .map(slotMapper::toSlotDto);
     }
     @Override
     public SlotDto updateSlot(Long slotId, RequestSlotDto requestSlotDto) {
@@ -107,10 +107,9 @@ public class SlotServiceImpl implements  SlotService {
     }
     @Override
     @Transactional(readOnly = true)
-    public List<SlotDto> getAvailableSlots(Long doctorId) {
-        return slotRepository.findByDoctorId(doctorId).stream()
-                .filter(Slot::isAvailable)
-                .map(slotMapper::toSlotDto)
-                .toList();
+    public Page<SlotDto> getAvailableSlots(Long doctorId, Pageable pageable) {
+        return slotRepository.findByDoctorIdAndAvailableTrue(doctorId, pageable)
+                .map(slotMapper::toSlotDto);
     }
+
 }
