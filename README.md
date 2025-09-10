@@ -4,7 +4,8 @@ A modern Spring Boot 3 application designed to streamline hospital management, a
 ## Features
 
 ### Authentication & Authorization
-- Secure login with **JWT** 
+- Secure login with **JWT**
+- Paged Endpoints
 - Role-based access:
   - **Admin:** Manage doctors and patients.  
   - **Doctor:** Handle appointments and prescriptions.  
