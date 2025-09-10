@@ -1,8 +1,8 @@
 
 
 # Get all appointments for a doctor
-GET http://localhost:8080/api/doctor/9/appointments
-Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZTJAZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NDA2NjU1LCJleHAiOjE3NTc0MTAyNTV9.dFovtYYPdFiV5ze0pt8WtdoraSKI-YNeacnHXJ4YeKILEWC1h6siuTzH9t6Xvmg1lwxmWZq-BjW7IKkEDNQViQ
+GET http://localhost:8080/api/doctor/9/appointments?page=0&size=5
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZTJAZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NDg2MDc5LCJleHAiOjE3NTc0ODk2Nzl9.8dF2Nl4aGRx_G7DfTfQiQrHb10RvDQeIe_gKYTp3KEEBmPmMVYeiW9W6BIxwVhvnm0bDGJa9zrGxKBXDXneD-Q
 ###
 
 # Get appointment by ID

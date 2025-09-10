@@ -8,6 +8,8 @@ import com.example.smarthealthcareappointmentsystem.DTO.request.RequestSlotDto;
 import com.example.smarthealthcareappointmentsystem.service.*;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,9 +30,14 @@ public class DoctorController {
 
 
     @GetMapping("/{doctorId}/appointments")
-    public ResponseEntity<List<AppointmentDto>> getAppointments(@PathVariable Long doctorId) {
-        return ResponseEntity.ok(appointmentService.getAppointments(doctorId));
+    public ResponseEntity<Page<AppointmentDto>> getAppointments(
+            @PathVariable Long doctorId,
+            Pageable pageable
+    ) {
+        Page<AppointmentDto> appointments = appointmentService.getAppointments(doctorId, pageable);
+        return ResponseEntity.ok(appointments);
     }
+
 
     @GetMapping("/{doctorId}/appointments/{appointmentId}")
     public ResponseEntity<AppointmentDto> getAppointmentById(

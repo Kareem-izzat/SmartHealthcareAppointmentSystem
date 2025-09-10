@@ -9,6 +9,8 @@ import com.example.smarthealthcareappointmentsystem.repository.AppointmentReposi
 import com.example.smarthealthcareappointmentsystem.repository.PatientRepository;
 import com.example.smarthealthcareappointmentsystem.repository.SlotRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -29,10 +31,9 @@ public class AppointmentServiceImpl implements AppointmentService {
 
     @Override
     @Transactional(readOnly = true)
-    public List<AppointmentDto> getAppointments(Long doctorId) {
-        return appointmentRepository.findBySlot_Doctor_Id(doctorId).stream()
-                .map(appointmentMapper::toDto)
-                .collect(Collectors.toList());
+    public Page<AppointmentDto> getAppointments(Long doctorId, Pageable pageable) {
+        return appointmentRepository.findBySlot_Doctor_Id(doctorId, pageable)
+                .map(appointmentMapper::toDto);
     }
 
     @Override
@@ -89,16 +90,14 @@ public class AppointmentServiceImpl implements AppointmentService {
     }
     @Override
     @Transactional(readOnly = true)
-    public List<AppointmentDto> getPatientAppointments(Long patientId) {
-        // check existance
-        Patient patient = patientRepository.findById(patientId)
+    public Page<AppointmentDto> getPatientAppointments(Long patientId, Pageable pageable) {
+        patientRepository.findById(patientId)
                 .orElseThrow(() -> new ResourceNotFoundException("Patient not found with id " + patientId));
 
-        return appointmentRepository.findByPatientId(patient.getId())
-                .stream()
-                .map(appointmentMapper::toDto)
-                .collect(Collectors.toList());
+        return appointmentRepository.findByPatientId(patientId, pageable)
+                .map(appointmentMapper::toDto);
     }
+
     public AppointmentDto cancelAppointment(Long patientId, Long appointmentId) {
         Appointment appointment = appointmentRepository.findById(appointmentId)
                 .orElseThrow(() -> new ResourceNotFoundException("Appointment not found with id " + appointmentId));

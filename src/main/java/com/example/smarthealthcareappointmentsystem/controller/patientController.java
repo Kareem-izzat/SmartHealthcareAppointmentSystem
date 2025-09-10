@@ -65,11 +65,14 @@ public class patientController {
     }
 
     @GetMapping("/{patientId}/appointments")
-    public ResponseEntity<List<AppointmentDto>> getAppointmentsByPatient(
-            @PathVariable Long patientId) {
-        List<AppointmentDto> appointments = appointmentService.getPatientAppointments(patientId);
+    public ResponseEntity<Page<AppointmentDto>> getAppointmentsByPatient(
+            @PathVariable Long patientId,
+            Pageable pageable
+    ) {
+        Page<AppointmentDto> appointments = appointmentService.getPatientAppointments(patientId, pageable);
         return ResponseEntity.ok(appointments);
     }
+
     @DeleteMapping("/{patientId}/appointments/{appointmentId}")
     public ResponseEntity<AppointmentDto> cancelAppointment(
             @PathVariable Long patientId,
