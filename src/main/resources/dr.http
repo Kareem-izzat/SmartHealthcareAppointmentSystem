@@ -18,15 +18,15 @@ PUT http://localhost:8080/api/doctor/4/appointments/1/complete
 ###
 
 # Add prescription
-POST http://localhost:8080/api/doctor/31/prescriptions
+POST http://localhost:8080/api/doctor/44/prescriptions
 Content-Type: application/json
-Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbXIuemVkYW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NTMzMDczLCJleHAiOjE3NTc1MzY2NzN9.t2F09g8Hsc6coK6IkjPT1hvVL-14u0OKHw8TG__pbLs6d_fsgFqS_KgFPIwoxNXiZBmejRvXSFKrHJBkP0k7Ag
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkb2N0b3IxQGV4YW1wbGUuY29tIiwicm9sZSI6IkRPQ1RPUiIsImlhdCI6MTc1NzgzNjg5NCwiZXhwIjoxNzU3ODQwNDk0fQ.EeDua6Yrr31LlC8OEcTv1diEhLI-QJu-y4CF9OF0pQyOcY82ejA0AEB_h6NUiFQnC4mUgehBVAkbLq03cyYwHA
 
 {
-  "patientId": 36,
-  "doctorId": 31,
-  "appointmentId": 6,
-  "medicines": ["kareeeeeeeeeeeeem", "Ibuprofen 200mg"],
+  "patientId": 46,
+  "doctorId": 44,
+  "appointmentId": 9,
+  "medicines": ["hi", "Ibuprofen 200mg"],
   "notes": "Take medicines after meals"
 }
 
@@ -46,13 +46,13 @@ Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJqb2huLmRvZTJAZXhhbXBsZS5
 ###
 
 # Create slot
-POST http://localhost:8080/api/doctor/31/slots
-Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhbXIuemVkYW5AZXhhbXBsZS5jb20iLCJyb2xlIjoiRE9DVE9SIiwiaWF0IjoxNzU3NTMzMDczLCJleHAiOjE3NTc1MzY2NzN9.t2F09g8Hsc6coK6IkjPT1hvVL-14u0OKHw8TG__pbLs6d_fsgFqS_KgFPIwoxNXiZBmejRvXSFKrHJBkP0k7Ag
+POST http://localhost:8080/api/doctor/44/slots
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJkb2N0b3IxQGV4YW1wbGUuY29tIiwicm9sZSI6IkRPQ1RPUiIsImlhdCI6MTc1NzgzNjA3NCwiZXhwIjoxNzU3ODM5Njc0fQ.6DVbORbV5o0YA73Y6AIX_xTl4h7Tfb-t6CrcuEnac7j7cOK6IUZUuNQgKmUz0HNs__uC0gI0Ovb8qCIp-zzyEA
 Content-Type: application/json
 
 {
-  "startTime": "2025-09-13T10:00:00",
-  "endTime": "2025-09-13T11:30:00",
+  "startTime": "2025-09-15T10:30:00",
+  "endTime": "2025-09-15T11:30:00",
   "available": true
 }
 

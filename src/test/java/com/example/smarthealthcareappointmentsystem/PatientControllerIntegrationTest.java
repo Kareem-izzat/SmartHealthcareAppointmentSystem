@@ -29,7 +29,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-@AutoConfigureTestDatabase//(replace = AutoConfigureTestDatabase.Replace.ANY) // Use H2
+@AutoConfigureTestDatabase
 class PatientControllerIntegrationTest {
 
     @Autowired
