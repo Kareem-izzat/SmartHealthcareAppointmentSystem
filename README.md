@@ -64,9 +64,32 @@ A modern Spring Boot 3 application designed to streamline hospital management, a
 - PostgreSQL 
 - MongoDB  
 
-### Setup
+## Setup
 1. Clone the repository:  
    ```bash
    git clone https://github.com/Kareem-izzat/SmartHealthcareAppointmentSystem.git
    cd SmartHealthcareAppointmentSystem
+### Local Setup
+
+1. **Update `application.properties` (or create a `.env`) with your database credentials**
+2. **Build and run the application:**
+ ```bash
+  mvn clean package -DskipTests
+  java -jar target/SmartHealthcareAppointmentSystem-0.0.1-SNAPSHOT.jar
+  ```
+### Docker Setup
+### Prerequisites
+
+- Docker
+- Docker Compose
+- Update you .env file with your database credentials 
+### steps
+1.**Build the backend Docker image**
+```bash
+  docker build -t smarthealthcareappointmentsystem-backend .
+  ```
+2.**Tag the image for Docker Hub**
+```bash
+  docker push <your_dockerhub_username>/smart-healthcare-backend:1.0
+  ```
 
