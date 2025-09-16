@@ -29,13 +29,13 @@ Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJ
 
 ### Register a new patient
 POST http://localhost:8080/api/auth/register/patient
-Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NzgzNTkyMCwiZXhwIjoxNzU3ODM5NTIwfQ.UncU-8nly8RR4yqcjJjWD_mgkxdh-Jee8Yx4D6QEdJ9hJAEuPsn0H3_MRv7o1yFSI2Z1MLVmpTHhrLBzlf6Img
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NTgwMTE3MjgsImV4cCI6MTc1ODAxNTMyOH0.6iIqRNRiOTdTl5Hy3Nn1WNe67s2Hd40rIGUXPl4eBpRRu4sj4iemSeH9RjTZNnn7uu0UXq8S2SQUQaDTrqq0Ng
 Content-Type: application/json
 
 {
   "firstName": "p2",
   "lastName": "Smith",
-  "email": "p2@example.com",
+  "email": "p3@example.com",
   "password": "Patient123!"
 }
 

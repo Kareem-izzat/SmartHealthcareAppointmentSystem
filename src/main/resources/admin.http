@@ -60,7 +60,7 @@ Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSI
 
 # Get all patients
 GET http://localhost:8080/api/admin/patients?page=0&size=5&sort=firstName,desc
-Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBleGFtcGxlLmNvbSIsInJvbGUiOiJBRE1JTiIsImlhdCI6MTc1NzUzMjE1MCwiZXhwIjoxNzU3NTM1NzUwfQ.OtmykzaQgyuX3enRVetToq_WOV5B21II5S80x9ogxR4EYuKDonM5wP0xXNvirDd0Iqktci7CLczquFYsx2rrpQ
+Authorization: Bearer   eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJhZG1pbkBhZG1pbi5jb20iLCJyb2xlIjoiQURNSU4iLCJpYXQiOjE3NTgwMjEwNTYsImV4cCI6MTc1ODAyNDY1Nn0.Nvza2zA_MoRC3SeoEARBXz6czXk37ZwgyI5YDGowXi1e7C9T0lG-G91S3IPa9pxhNF08lS-00hcxTnmpnTMgHA
 
 
 ###

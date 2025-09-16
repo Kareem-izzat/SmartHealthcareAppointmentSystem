@@ -17,7 +17,7 @@ public class JwtUtils {
     @Value("${jwt.secret}")
     private String jwtSecret;
 
-    @Value("${jwt.expirationMs}")   // This matches jwt.expirationMs
+    @Value("${jwt.expirationMs}")
     private int jwtExpirationMs;
     public String generateJwtToken(String email, Role role) {
         return Jwts.builder()
