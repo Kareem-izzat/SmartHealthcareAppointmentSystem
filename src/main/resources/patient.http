@@ -24,39 +24,39 @@ Content-Type: application/json
 
 ###
 
-# Get doctors by specialty
-GET http://localhost:8080/api/patient/doctors?specialty=Cardiology&page=0&size=5&sort=yearsOfExperience,desc
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtLmhAZXhhbXBsZS5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc1NzUzNDM1OCwiZXhwIjoxNzU3NTM3OTU4fQ.-hRyH8Wd9gYe1ZCAl3M8L0LkbvE7LDLEIzSw8YkyhMhrZDHtEKrAK7WDl3s6XitvuUyCWOjSh_KX9p816u95kw
+# Get doctors by specialtY
+GET http://localhost:8080/api/patient/doctors?specialty=women&page=0&size=5&sort=yearsOfExperience,desc
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwMUBleGFtcGxlLmNvbSIsInJvbGUiOiJQQVRJRU5UIiwiaWF0IjoxNzU3ODM2MzUxLCJleHAiOjE3NTc4Mzk5NTF9.GSgaJN8XuB6ZJ7YeO57M--Hej7Ro8yqbGVdS2qLlJpZTA7181kZ4IzrC9aAH39qqday6f5AeuskkLrTtGDziNQ
 
 ###
 
 # Get available slots for a doctor
-GET http://localhost:8080/api/patient/doctors/31/slots?page=0&size=5
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtLmhAZXhhbXBsZS5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc1NzUzNDM1OCwiZXhwIjoxNzU3NTM3OTU4fQ.-hRyH8Wd9gYe1ZCAl3M8L0LkbvE7LDLEIzSw8YkyhMhrZDHtEKrAK7WDl3s6XitvuUyCWOjSh_KX9p816u95kw
+GET http://localhost:8080/api/patient/doctors/44/slots?page=0&size=5
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwMUBleGFtcGxlLmNvbSIsInJvbGUiOiJQQVRJRU5UIiwiaWF0IjoxNzU3ODM2MzUxLCJleHAiOjE3NTc4Mzk5NTF9.GSgaJN8XuB6ZJ7YeO57M--Hej7Ro8yqbGVdS2qLlJpZTA7181kZ4IzrC9aAH39qqday6f5AeuskkLrTtGDziNQ
 
 ###
 
 # Book appointment
-POST http://localhost:8080/api/patient/37/appointments
+POST http://localhost:8080/api/patient/46/appointments
 Content-Type: application/json
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtLmhAZXhhbXBsZS5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc1NzUzNDM1OCwiZXhwIjoxNzU3NTM3OTU4fQ.-hRyH8Wd9gYe1ZCAl3M8L0LkbvE7LDLEIzSw8YkyhMhrZDHtEKrAK7WDl3s6XitvuUyCWOjSh_KX9p816u95kw
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwMkBleGFtcGxlLmNvbSIsInJvbGUiOiJQQVRJRU5UIiwiaWF0IjoxNzU3ODM2NTM1LCJleHAiOjE3NTc4NDAxMzV9.nUqDUwyCUeGN8jgX6i20aCv02IZduIJMi5XNpxAhrk58jt_HXW7zuCVQR5VnngeGZp7a5P3yhEyTrFiSlIPgXA
 
 {
-  "slotId": 11,
-  "patientId": 37
+  "slotId": 16,
+  "patientId": 46
 }
 
 ###
 
 # Get all appointments for a patient
-GET http://localhost:8080/api/patient/37/appointments?page=0&size=1&sort=slot.startTime,desc
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtLmhAZXhhbXBsZS5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc1NzUzNDM1OCwiZXhwIjoxNzU3NTM3OTU4fQ.-hRyH8Wd9gYe1ZCAl3M8L0LkbvE7LDLEIzSw8YkyhMhrZDHtEKrAK7WDl3s6XitvuUyCWOjSh_KX9p816u95kw
+GET http://localhost:8080/api/patient/45/appointments?page=0&size=1&sort=slot.startTime,desc
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwMUBleGFtcGxlLmNvbSIsInJvbGUiOiJQQVRJRU5UIiwiaWF0IjoxNzU3ODM2MzUxLCJleHAiOjE3NTc4Mzk5NTF9.GSgaJN8XuB6ZJ7YeO57M--Hej7Ro8yqbGVdS2qLlJpZTA7181kZ4IzrC9aAH39qqday6f5AeuskkLrTtGDziNQ
 
 ###
 
 # Cancel appointment
-DELETE http://localhost:8080/api/patient/37/appointments/7
-Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJtLmhAZXhhbXBsZS5jb20iLCJyb2xlIjoiUEFUSUVOVCIsImlhdCI6MTc1NzUzNDM1OCwiZXhwIjoxNzU3NTM3OTU4fQ.-hRyH8Wd9gYe1ZCAl3M8L0LkbvE7LDLEIzSw8YkyhMhrZDHtEKrAK7WDl3s6XitvuUyCWOjSh_KX9p816u95kw
+DELETE http://localhost:8080/api/patient/45/appointments/8
+Authorization: Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJwMUBleGFtcGxlLmNvbSIsInJvbGUiOiJQQVRJRU5UIiwiaWF0IjoxNzU3ODM2MzUxLCJleHAiOjE3NTc4Mzk5NTF9.GSgaJN8XuB6ZJ7YeO57M--Hej7Ro8yqbGVdS2qLlJpZTA7181kZ4IzrC9aAH39qqday6f5AeuskkLrTtGDziNQ
 
 ###
 
