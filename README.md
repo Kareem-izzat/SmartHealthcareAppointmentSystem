@@ -92,4 +92,11 @@ A modern Spring Boot 3 application designed to streamline hospital management, a
 ```bash
   docker push <your_dockerhub_username>/smart-healthcare-backend:1.0
   ```
-
+3..**Start all services using Docker Compose:**
+```bash
+  docker-compose up -d
+  ```
+4.**to Stop the services**
+```bash
+  docker-compose down 
+  ```
